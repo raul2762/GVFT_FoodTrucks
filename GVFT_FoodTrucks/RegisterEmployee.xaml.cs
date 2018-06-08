@@ -16,20 +16,13 @@ using MahApps.Metro.Controls;
 namespace GVFT_FoodTrucks
 {
     /// <summary>
-    /// Lógica de interacción para Login.xaml
+    /// Lógica de interacción para RegisterEmployee.xaml
     /// </summary>
-    public partial class Login : MetroWindow
+    public partial class RegisterEmployee : MetroWindow
     {
-        public Login()
+        public RegisterEmployee()
         {
             InitializeComponent();
         }
-
-        private void btnSignIn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        
     }
 }
