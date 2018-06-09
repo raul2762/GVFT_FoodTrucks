@@ -8,27 +8,27 @@
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
         TitleCaps="False"
-        Title="RegisterEmployee" Height="387.076" Width="763.771">
+        Title="RegisterEmployee" Height="379.449" Width="755.191" WindowStartupLocation="CenterScreen">
     <Grid Background="#FF2F2F2F">
         <Separator HorizontalAlignment="Left" Height="22" Margin="24,56,0,0" VerticalAlignment="Top" Width="714" Background="#FFFF8000"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="114,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="16" TabIndex="1" MaxLines="1" MaxLength="50"/>
+        <TextBox HorizontalAlignment="Left" Height="31" Margin="114,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="219" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="16" TabIndex="1" MaxLines="1" MaxLength="50" Text="guaroa"/>
         <Label Content="Registro de Empleado" FontSize="25" HorizontalAlignment="Left" Margin="24,21,0,0" VerticalAlignment="Top"/>
         <Label Content="Nombre:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,91,0,0" VerticalAlignment="Top"/>
         <Label Content="Apellido:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,140,0,0" VerticalAlignment="Top"/>
         <Label Content="Cédula:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,187,0,0" VerticalAlignment="Top"/>
         <Label Content="Sueldo:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,241,0,0" VerticalAlignment="Top"/>
         <Label Content="Teléfono:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="29,295,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="116,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="16" MaxLines="1" MaxLength="50" TabIndex="2"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="114,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="16" MaxLines="1" MaxLength="13" TabIndex="3"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="114,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="16" MaxLines="1" MaxLength="7" TabIndex="4"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="114,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="16"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="114,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="217" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="16" MaxLines="1" MaxLength="10" TabIndex="5"/>
+        <TextBox HorizontalAlignment="Left" Height="31" Margin="116,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="219" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="16" MaxLines="1" MaxLength="50" TabIndex="2"/>
+        <TextBox HorizontalAlignment="Left" Height="31" Margin="114,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="219" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="16" MaxLines="1" MaxLength="13" TabIndex="3"/>
+        <TextBox HorizontalAlignment="Left" Height="31" Margin="114,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="219" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="16" MaxLines="1" MaxLength="7" TabIndex="4"/>
+        <TextBox HorizontalAlignment="Left" Height="31" Margin="116,287,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="219" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="16" MaxLines="1" MaxLength="10" TabIndex="5"/>
         <Label Content="Puesto de Trabajo:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="384,99,0,0" VerticalAlignment="Top"/>
         <Label Content="Fecha de Entrada:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="390,148,0,0" VerticalAlignment="Top"/>
         <ComboBox HorizontalAlignment="Left" Margin="551,99,0,0" VerticalAlignment="Top" Width="170" TabIndex="6"/>
         <DatePicker HorizontalAlignment="Left" Margin="551,148,0,0" VerticalAlignment="Top" Width="170" TabIndex="7"/>
-        <Button x:Name="btnAceptar" Template="{DynamicResource PlantillaBtn}" Content="Registrar" FontSize="15" HorizontalAlignment="Left" Margin="617,297,0,0" VerticalAlignment="Top" Width="116" Height="44" Controls:ControlsHelper.ContentCharacterCasing="Normal" TabIndex="9"/>
-        <Button x:Name="btnCancelar" Template="{DynamicResource PlantillaBtn}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="488,297,0,0" VerticalAlignment="Top" Width="116" Height="44" Controls:ControlsHelper.ContentCharacterCasing="Normal" TabIndex="8"/>
+        <Button x:Name="btnAceptar" Template="{DynamicResource PlantillaBtn}" Content="Registrar" FontSize="15" HorizontalAlignment="Left" Margin="612,289,0,0" VerticalAlignment="Top" Width="116" Height="44" Controls:ControlsHelper.ContentCharacterCasing="Normal" TabIndex="9"/>
+        <Button x:Name="btnCancelar" Template="{DynamicResource PlantillaBtn}" Content="Cancelar" FontSize="15" HorizontalAlignment="Left" Margin="483,289,0,0" VerticalAlignment="Top" Width="116" Height="44" Controls:ControlsHelper.ContentCharacterCasing="Normal" TabIndex="8"/>
+        <Image HorizontalAlignment="Left" Height="52" Margin="656,12,0,0" VerticalAlignment="Top" Width="60" Source="img/account-plus.png"/>
 
     </Grid>
     <Window.Resources>
