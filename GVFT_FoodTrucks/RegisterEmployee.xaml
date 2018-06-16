@@ -11,7 +11,7 @@
         Title="RegisterEmployee" Height="379.449" Width="755.191" WindowStartupLocation="CenterScreen">
     <Grid Background="#FF2F2F2F">
         <Separator HorizontalAlignment="Left" Height="22" Margin="24,56,0,0" VerticalAlignment="Top" Width="714" Background="#FFFF8000"/>
-        <TextBox HorizontalAlignment="Left" Height="31" Margin="114,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="219" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="16" TabIndex="1" MaxLines="1" MaxLength="50" Text="guaroa"/>
+        <TextBox HorizontalAlignment="Left" Height="31" Margin="114,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="219" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="16" TabIndex="1" MaxLines="1" MaxLength="50"/>
         <Label Content="Registro de Empleado" FontSize="25" HorizontalAlignment="Left" Margin="24,21,0,0" VerticalAlignment="Top"/>
         <Label Content="Nombre:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,91,0,0" VerticalAlignment="Top"/>
         <Label Content="Apellido:" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,140,0,0" VerticalAlignment="Top"/>

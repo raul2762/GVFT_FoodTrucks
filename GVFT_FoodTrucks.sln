@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GVFT_FoodTrucks", "GVFT_FoodTrucks\GVFT_FoodTrucks.csproj", "{AC2EFED3-5010-4914-9D45-6FC1AF611113}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemControl", "ItemControl\ItemControl.csproj", "{2A9F7675-6640-4F60-A499-B041AE70C506}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AC2EFED3-5010-4914-9D45-6FC1AF611113}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC2EFED3-5010-4914-9D45-6FC1AF611113}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC2EFED3-5010-4914-9D45-6FC1AF611113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A9F7675-6640-4F60-A499-B041AE70C506}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A9F7675-6640-4F60-A499-B041AE70C506}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A9F7675-6640-4F60-A499-B041AE70C506}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A9F7675-6640-4F60-A499-B041AE70C506}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

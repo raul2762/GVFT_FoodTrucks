@@ -1,0 +1,16 @@
+﻿<Controls:MetroWindow x:Class="GVFT_FoodTrucks.Sales"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GVFT_FoodTrucks"
+        mc:Ignorable="d"
+        TitleCaps="False"
+        Title="Sales" Height="790" Width="1488" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Grid Background="#FF2F2F2F">
+
+        <Frame MinHeight="759" MinWidth="1480" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="/GVFT_FoodTrucks;component/Pages/SalesFirst.xaml" NavigationUIVisibility="Hidden"/>
+
+    </Grid>
+</Controls:MetroWindow>

@@ -6,6 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GVFT_FoodTrucks"
         mc:Ignorable="d"
+        ResizeMode="CanMinimize"
+        TitleCaps="False"
         Title="SignUp" Height="484.477" Width="581.622" WindowStartupLocation="CenterScreen">
     <Grid Background="#FF2F2F2F">
         <Separator HorizontalAlignment="Left" Height="22" Margin="24,56,0,0" VerticalAlignment="Top" Width="538" Background="#FFFF8000"/>
