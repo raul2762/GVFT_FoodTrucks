@@ -29,7 +29,7 @@
         <Label Content="Respuesta de seguridad:" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" Margin="33,373,0,0" VerticalAlignment="Top"/>
         <PasswordBox HorizontalAlignment="Left" Margin="33,402,0,0" VerticalAlignment="Top" Width="217" Background="{x:Null}" BorderBrush="#FFFF8000" Foreground="#FFFF8000" BorderThickness="0,0,0,1"/>
         <Button Content="Cancelar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="334,387,0,0" VerticalAlignment="Top" Width="106" Height="41" FontSize="14"/>
-        <Button Content="Registrar" Template="{DynamicResource ResourceKey=PlantillaBtn}" HorizontalAlignment="Left" Margin="445,387,0,0" VerticalAlignment="Top" Width="106" Height="41" FontSize="14"/>
+        <Button Content="Registrar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="445,387,0,0" VerticalAlignment="Top" Width="106" Height="41" FontSize="14"/>
         <Image HorizontalAlignment="Left" Height="52" Margin="491,12,0,0" VerticalAlignment="Top" Width="60" Source="img/account-plus.png"/>
 
     </Grid>

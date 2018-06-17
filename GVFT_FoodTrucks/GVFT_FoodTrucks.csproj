@@ -86,6 +86,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ButtonStyleSales.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DatagridStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -202,6 +206,10 @@
     <Resource Include="img\minus.png" />
     <Resource Include="img\plus.png" />
     <Resource Include="img\printer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\playlist-check.png" />
+    <Resource Include="img\update.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

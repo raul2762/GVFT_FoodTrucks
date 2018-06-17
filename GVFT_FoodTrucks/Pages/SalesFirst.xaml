@@ -51,7 +51,6 @@
                             </ControlTemplate>
                         </ListBox.Template>
                     </ListBox>
-                    <Label Content="Hola Tab 1" Margin="52,36,479,397" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Page 2" Background="{x:Null}" Cursor="Hand">
@@ -61,31 +60,28 @@
             </TabItem>
         </TabControl>
         <Canvas Height="155" Margin="8,0,40,10" VerticalAlignment="Bottom">
-            <Border BorderThickness="1" Height="111" Canvas.Left="286" Canvas.Top="29" Width="134" CornerRadius="10,10,20,20" Background="#FFE67E22" Cursor="Hand">
+            <Border x:Name="BtnRemove" BorderThickness="1" Style="{DynamicResource BtnRemove}" Height="111" Canvas.Left="286" Canvas.Top="29" Width="134" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnRemove_PreviewMouseLeftButtonDown" Cursor="Hand">
                 <Image Margin="15,34,14,5" Source="/GVFT_FoodTrucks;component/img/minus-circle-outline.png" Opacity="0.5"/>
             </Border>
             <Border BorderThickness="1" Height="31" Canvas.Left="286" Canvas.Top="29" Width="134" CornerRadius="10,10,0,0" Background="#FFD35400">
                 <TextBlock TextWrapping="Wrap" Text="Remover item" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
             </Border>
-            <Border BorderThickness="1" Height="111" Canvas.Left="431" Canvas.Top="29" Width="140" CornerRadius="10,10,20,20" Background="#FFE74C3C" Cursor="Hand">
+            <Border x:Name="BtnCancelar" BorderThickness="1" Style="{DynamicResource BtnCancelar}" Height="111" Canvas.Left="431" Canvas.Top="29" Width="140" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnCancelar_PreviewMouseLeftButtonDown" Cursor="Hand">
                 <Image Margin="11,34,13,5" Source="/GVFT_FoodTrucks;component/img/close-circle-outline.png" Opacity="0.5"/>
             </Border>
             <Border BorderThickness="1" Height="31" Canvas.Left="431" Canvas.Top="29" Width="140" CornerRadius="10,10,0,0" Background="#FFC0392B">
                 <TextBlock TextWrapping="Wrap" Text="Cancelar orden" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
             </Border>
-            <Border BorderThickness="1" Height="111" Canvas.Left="615" Canvas.Top="29" Width="187" CornerRadius="10,10,20,20" Background="#FF2ECC71" Cursor="Hand">
-                <TextBlock TextWrapping="Wrap" Text="3,875" FontSize="36" FontWeight="Bold" Foreground="White" Margin="77,43,15,18"/>
+            <Border x:Name="BtnProcess" BorderThickness="1" Style="{DynamicResource BtnProcess}" Height="111" Canvas.Left="753" Canvas.Top="29" Width="187" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnProcess_PreviewMouseLeftButtonDown" Cursor="Hand">
+                <TextBlock TextWrapping="Wrap" Text="3,875" FontSize="36" FontWeight="Bold" Foreground="White" Margin="77,40,15,21"/>
             </Border>
-            <Border BorderThickness="1" Height="31" Canvas.Left="615" Canvas.Top="29" Width="187" CornerRadius="10,10,0,0" Background="#FF27AE60">
-                <TextBlock TextWrapping="Wrap" Text="Procesar orden" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
-            </Border>
-            <Border BorderThickness="1" Height="111" Canvas.Left="10" Canvas.Top="29" Width="129" CornerRadius="10,10,20,20" Background="#FF3498DB" Cursor="Hand">
+            <Border x:Name="BtnAgregar" BorderThickness="1" Style="{DynamicResource BtnAgre}" Height="111" Canvas.Left="10" Canvas.Top="29" Width="129" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnAgregar_PreviewMouseLeftButtonDown" Cursor="Hand">
                 <Image Margin="0,31,0,0" Source="/GVFT_FoodTrucks;component/img/plus.png" Opacity="0.5"/>
             </Border>
             <Border BorderThickness="1" Height="31" Canvas.Left="10" Canvas.Top="29" Width="129" CornerRadius="10,10,0,0" Background="#FF0065B9">
                 <TextBlock TextWrapping="Wrap" Text="Agregar Cant." FontSize="18" Margin="0,0,-1,0" FontWeight="Bold" TextAlignment="Center" Foreground="White"/>
             </Border>
-            <Border BorderThickness="1" Height="111" Canvas.Left="150" Canvas.Top="29" Width="124" CornerRadius="10,10,20,20" Background="#FF3498DB" Cursor="Hand">
+            <Border x:Name="BtnRest" BorderThickness="1" Style="{DynamicResource BtnRest}" Height="111" Canvas.Left="150" Canvas.Top="29" Width="124" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnRest_PreviewMouseLeftButtonDown" Cursor="Hand">
                 <Image Margin="0,31,0,0" Source="/GVFT_FoodTrucks;component/img/minus.png" Opacity="0.5"/>
             </Border>
             <Border BorderThickness="1" Height="31" Canvas.Left="150" Canvas.Top="29" Width="124" CornerRadius="10,10,0,0" Background="#FF0065B9">
@@ -101,11 +97,38 @@
                     </TransformGroup>
                 </Separator.RenderTransform>
             </Separator>
-            <Image Height="62" Canvas.Left="615" Canvas.Top="66" Width="63" Source="/GVFT_FoodTrucks;component/img/currency-usd.png" Cursor="Arrow"/>
+            <Image Height="62" Canvas.Left="755" Canvas.Top="65" Width="63" Source="/GVFT_FoodTrucks;component/img/currency-usd.png" Cursor="Arrow"/>
+            <Border x:Name="BtnInic" BorderThickness="1" Style="{DynamicResource BtnInic}" Height="111" Canvas.Left="602" Canvas.Top="29" Width="137" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnInic_PreviewMouseLeftButtonDown" Cursor="Hand">
+                <Image HorizontalAlignment="Left" Height="63" VerticalAlignment="Top" Width="75" Margin="35,32,0,0" Source="/GVFT_FoodTrucks;component/img/playlist-check.png" Stretch="UniformToFill"/>
+            </Border>
+            <Border BorderThickness="1" Height="31" Canvas.Left="753" Canvas.Top="29" Width="187" CornerRadius="10,10,0,0" Background="#FF27AE60">
+                <TextBlock TextWrapping="Wrap" Text="Procesar orden" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
+            </Border>
+            <Border BorderThickness="1" Height="31" Canvas.Left="602" Canvas.Top="29" Width="137" CornerRadius="10,10,0,0" Background="#FF16A085">
+                <TextBlock TextWrapping="Wrap" Text="Iniciar orden" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
+            </Border>
+            <Border x:Name="BtnImp" BorderThickness="1" Style="{DynamicResource BtnImprimir}" Height="111" Canvas.Left="955" Canvas.Top="29" Width="121" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnImp_PreviewMouseLeftButtonDown" Cursor="Hand">
+                <Image Margin="17,34,15,9" Source="/GVFT_FoodTrucks;component/img/printer.png"/>
+            </Border>
+            <Border BorderThickness="1" Height="31" Canvas.Left="955" Canvas.Top="29" Width="121" CornerRadius="10,10,0,0" Background="#FF7F8C8D">
+                <TextBlock TextWrapping="Wrap" Text="Imprimir" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
+            </Border>
+            <Border x:Name="BtnPendiente" BorderThickness="1" Style="{DynamicResource BtnPendiente}"   Height="111" Canvas.Left="1092" Canvas.Top="29" Width="180" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnPendiente_PreviewMouseLeftButtonDown"  Cursor="Hand">
+                <Image Margin="52,32,45,5" Source="/GVFT_FoodTrucks;component/img/update.png"/>
+            </Border>
+            <Border BorderThickness="1" Height="31" Canvas.Left="1092" Canvas.Top="29" Width="180" CornerRadius="10,10,0,0" Background="#FF2C3E50">
+                <TextBlock TextWrapping="Wrap" Text="Ordenes Pendientes" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
+            </Border>
 
         </Canvas>
 
 
     </Grid>
-
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ButtonStyleSales.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
 </Page>
