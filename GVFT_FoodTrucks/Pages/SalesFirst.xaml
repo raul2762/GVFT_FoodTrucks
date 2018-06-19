@@ -8,12 +8,12 @@
       mc:Ignorable="d"
       Title="SalesFirst"  
       MinHeight="684" 
-      MinWidth="1424" d:DesignHeight="684">
+      MinWidth="1424" d:DesignHeight="684" Loaded="Page_Loaded">
 
     <Grid Background="#FF2F2F2F">
 
         <Image Margin="41,7,0,0" Source="pack://siteoforigin:,,,/img/LogoEdit2.png" Stretch="Fill" HorizontalAlignment="Left" Width="138" Height="140" VerticalAlignment="Top"/>
-        <DataGrid x:Name="DtGridOrden" AlternatingRowBackground="LightGray" Margin="21,149,0,170" MaxWidth="513"  MinWidth="507" HorizontalAlignment="Left" MinHeight="365" VerticalAlignment="Stretch" Background="Black" ColumnHeaderHeight="40" FontSize="14" Foreground="#FFFF8000" Width="515">
+        <DataGrid x:Name="DtGridOrden" IsReadOnly="True"  Margin="21,149,0,170" MaxWidth="539" AutoGenerateColumns="False"  MinWidth="507" HorizontalAlignment="Left" MinHeight="365" VerticalAlignment="Stretch" Background="{x:Null}" ColumnHeaderHeight="40" FontSize="24" Foreground="#FFFF8000" Width="539" Loaded="DtGridOrden_Loaded" FontWeight="Bold" >
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
@@ -24,17 +24,17 @@
                 </Style>
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Descripcion" Width="352"/>
-                <Controls:DataGridNumericUpDownColumn Header="Cant" Minimum="0"/>
-                <Controls:DataGridNumericUpDownColumn Header="Precio" Width="94" Minimum="0" StringFormat="C"/>
+                <DataGridTextColumn Header="Descripcion" Binding="{Binding NombreProducto}" IsReadOnly="True" Width="352"/>
+                <Controls:DataGridNumericUpDownColumn Header="Cant" Binding="{Binding Cantidad}" IsReadOnly="True" FontSize="24" Minimum="0"/>
+                <Controls:DataGridNumericUpDownColumn Header="Precio" Binding="{Binding Precio}" FontSize="24" IsReadOnly="True" Width="120" Minimum="0" StringFormat="C"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TabControl Margin="577,147,84,170"  MinHeight="367" Height="Auto" MinWidth="763" MaxWidth="1289" Width="Auto" Background="{x:Null}" >
+        <TabControl x:Name="TabMenu" Margin="577,147,84,170"  MinHeight="367" Height="Auto" MinWidth="763" MaxWidth="1289" Width="Auto" Background="{x:Null}" >
             <TabItem Header="Page 1" Background="{x:Null}" Cursor="Hand">
                 <Grid>
-                    <ListBox HorizontalAlignment="Left"  VerticalAlignment="Top" Width="765" Height="322" Background="{x:Null}">
-                        <local:MenuItem_UC/>
-                        <local:MenuItem_UC/>
+                    <ListBox x:Name="dockP" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="765" Height="322" SelectionChanged="dockP_SelectionChanged" Background="{x:Null}">
+                        <!--<local:MenuItem_UC/>
+                        <local:MenuItem_UC/>-->
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="{x:Type ListBoxItem}">
                                 <Setter Property="Padding" Value="10"/>
@@ -53,38 +53,33 @@
                     </ListBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Page 2" Background="{x:Null}" Cursor="Hand">
-                <Grid>
-                    <Label Content="Hola Tab 2" HorizontalAlignment="Left" Margin="383,47,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" FontWeight="Bold" Background="{x:Null}"/>
-                </Grid>
-            </TabItem>
         </TabControl>
         <Canvas Height="155" Margin="8,0,40,10" VerticalAlignment="Bottom">
-            <Border x:Name="BtnRemove" BorderThickness="1" Style="{DynamicResource BtnRemove}" Height="111" Canvas.Left="286" Canvas.Top="29" Width="134" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnRemove_PreviewMouseLeftButtonDown" Cursor="Hand">
+            <Border x:Name="BtnRemove" BorderThickness="1" Style="{DynamicResource BtnRemove}" Height="111" Canvas.Left="286" Canvas.Top="29" Width="134" CornerRadius="10,10,20,20" Background="#FFE67E22" PreviewMouseLeftButtonDown="BtnRemove_PreviewMouseLeftButtonDown" Cursor="Hand">
                 <Image Margin="15,34,14,5" Source="/GVFT_FoodTrucks;component/img/minus-circle-outline.png" Opacity="0.5"/>
             </Border>
-            <Border BorderThickness="1" Height="31" Canvas.Left="286" Canvas.Top="29" Width="134" CornerRadius="10,10,0,0" Background="#FFD35400">
+            <Border BorderThickness="1" Style="{DynamicResource BtnRemove}" Height="31" Canvas.Left="286" Canvas.Top="29" Width="134" CornerRadius="10,10,0,0" Background="#FFD35400" Cursor="Hand" PreviewMouseLeftButtonDown="BtnRemove_PreviewMouseLeftButtonDown">
                 <TextBlock TextWrapping="Wrap" Text="Remover item" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
             </Border>
-            <Border x:Name="BtnCancelar" BorderThickness="1" Style="{DynamicResource BtnCancelar}" Height="111" Canvas.Left="431" Canvas.Top="29" Width="140" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnCancelar_PreviewMouseLeftButtonDown" Cursor="Hand">
+            <Border x:Name="BtnCancelar" BorderThickness="1" Style="{DynamicResource BtnCancelar}" Height="111" Canvas.Left="431" Canvas.Top="29" Width="140" CornerRadius="10,10,20,20" Background="#FFE74C3C" PreviewMouseLeftButtonDown="BtnCancelar_PreviewMouseLeftButtonDown" Cursor="Hand">
                 <Image Margin="11,34,13,5" Source="/GVFT_FoodTrucks;component/img/close-circle-outline.png" Opacity="0.5"/>
             </Border>
-            <Border BorderThickness="1" Height="31" Canvas.Left="431" Canvas.Top="29" Width="140" CornerRadius="10,10,0,0" Background="#FFC0392B">
+            <Border BorderThickness="1" Style="{DynamicResource BtnCancelar}" Height="31" Canvas.Left="431" Canvas.Top="29" Width="140" CornerRadius="10,10,0,0" Background="#FFC0392B" Cursor="Hand" PreviewMouseLeftButtonDown="BtnCancelar_PreviewMouseLeftButtonDown">
                 <TextBlock TextWrapping="Wrap" Text="Cancelar orden" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
             </Border>
-            <Border x:Name="BtnProcess" BorderThickness="1" Style="{DynamicResource BtnProcess}" Height="111" Canvas.Left="753" Canvas.Top="29" Width="187" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnProcess_PreviewMouseLeftButtonDown" Cursor="Hand">
-                <TextBlock TextWrapping="Wrap" Text="3,875" FontSize="36" FontWeight="Bold" Foreground="White" Margin="77,40,15,21"/>
+            <Border x:Name="BtnProcess" BorderThickness="1" Style="{DynamicResource BtnProcess}" Height="111" Canvas.Left="753" Canvas.Top="29" Width="187" CornerRadius="10,10,20,20" Background="#FF2ECC71" PreviewMouseLeftButtonDown="BtnProcess_PreviewMouseLeftButtonDown" Cursor="Hand">
+                <TextBlock x:Name="lblTotal" TextWrapping="Wrap" Text="0.00" FontSize="36" FontWeight="Bold" Foreground="White" Margin="77,40,15,21"/>
             </Border>
-            <Border x:Name="BtnAgregar" BorderThickness="1" Style="{DynamicResource BtnAgre}" Height="111" Canvas.Left="10" Canvas.Top="29" Width="129" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnAgregar_PreviewMouseLeftButtonDown" Cursor="Hand">
+            <Border x:Name="BtnAgregar" BorderThickness="1" Style="{DynamicResource BtnRest_Add}" Height="111" Canvas.Left="10" Canvas.Top="29" Width="129" CornerRadius="10,10,20,20" Background="#FF3498DB" PreviewMouseLeftButtonDown="BtnAgregar_PreviewMouseLeftButtonDown" Cursor="Hand">
                 <Image Margin="0,31,0,0" Source="/GVFT_FoodTrucks;component/img/plus.png" Opacity="0.5"/>
             </Border>
-            <Border BorderThickness="1" Height="31" Canvas.Left="10" Canvas.Top="29" Width="129" CornerRadius="10,10,0,0" Background="#FF0065B9">
+            <Border BorderThickness="1" Style="{DynamicResource BtnRest_Add}" Height="31" Canvas.Left="10" Canvas.Top="29" Width="129" CornerRadius="10,10,0,0" Background="#FF0065B9" Cursor="Hand" PreviewMouseLeftButtonDown="BtnAgregar_PreviewMouseLeftButtonDown">
                 <TextBlock TextWrapping="Wrap" Text="Agregar Cant." FontSize="18" Margin="0,0,-1,0" FontWeight="Bold" TextAlignment="Center" Foreground="White"/>
             </Border>
-            <Border x:Name="BtnRest" BorderThickness="1" Style="{DynamicResource BtnRest}" Height="111" Canvas.Left="150" Canvas.Top="29" Width="124" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnRest_PreviewMouseLeftButtonDown" Cursor="Hand">
+            <Border x:Name="BtnRest" BorderThickness="1" Style="{DynamicResource BtnRest_Add}" Height="111" Canvas.Left="150" Canvas.Top="29" Width="124" CornerRadius="10,10,20,20" Background="#FF3498DB" PreviewMouseLeftButtonDown="BtnRest_PreviewMouseLeftButtonDown" Cursor="Hand">
                 <Image Margin="0,31,0,0" Source="/GVFT_FoodTrucks;component/img/minus.png" Opacity="0.5"/>
             </Border>
-            <Border BorderThickness="1" Height="31" Canvas.Left="150" Canvas.Top="29" Width="124" CornerRadius="10,10,0,0" Background="#FF0065B9">
+            <Border BorderThickness="1" Style="{DynamicResource BtnRest_Add}" Height="31" Canvas.Left="150" Canvas.Top="29" Width="124" CornerRadius="10,10,0,0" Background="#FF0065B9" Cursor="Hand" PreviewMouseLeftButtonDown="BtnRest_PreviewMouseLeftButtonDown">
                 <TextBlock TextWrapping="Wrap" Text="Restar Cant." FontSize="18" FontWeight="Bold" TextAlignment="Center" Foreground="#FFFFFCFC"/>
             </Border>
             <Separator Height="48" Canvas.Left="533" Margin="0" Canvas.Top="60" Width="100" RenderTransformOrigin="0.5,0.5" FontSize="16">
@@ -98,25 +93,25 @@
                 </Separator.RenderTransform>
             </Separator>
             <Image Height="62" Canvas.Left="755" Canvas.Top="65" Width="63" Source="/GVFT_FoodTrucks;component/img/currency-usd.png" Cursor="Arrow"/>
-            <Border x:Name="BtnInic" BorderThickness="1" Style="{DynamicResource BtnInic}" Height="111" Canvas.Left="602" Canvas.Top="29" Width="137" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnInic_PreviewMouseLeftButtonDown" Cursor="Hand">
+            <Border x:Name="BtnInic" BorderThickness="1" Style="{DynamicResource BtnInic}" Height="111" Canvas.Left="602" Canvas.Top="29" Width="137" CornerRadius="10,10,20,20" Background="#FF1ABC9C" PreviewMouseLeftButtonDown="BtnInic_PreviewMouseLeftButtonDown" Cursor="Hand">
                 <Image HorizontalAlignment="Left" Height="63" VerticalAlignment="Top" Width="75" Margin="35,32,0,0" Source="/GVFT_FoodTrucks;component/img/playlist-check.png" Stretch="UniformToFill"/>
             </Border>
-            <Border BorderThickness="1" Height="31" Canvas.Left="753" Canvas.Top="29" Width="187" CornerRadius="10,10,0,0" Background="#FF27AE60">
+            <Border BorderThickness="1" Style="{DynamicResource BtnProcess}" Height="31" Canvas.Left="753" Canvas.Top="29" Width="187" CornerRadius="10,10,0,0" Background="#FF27AE60" Cursor="Hand" PreviewMouseLeftButtonDown="BtnProcess_PreviewMouseLeftButtonDown">
                 <TextBlock TextWrapping="Wrap" Text="Procesar orden" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
             </Border>
-            <Border BorderThickness="1" Height="31" Canvas.Left="602" Canvas.Top="29" Width="137" CornerRadius="10,10,0,0" Background="#FF16A085">
+            <Border BorderThickness="1" Style="{DynamicResource BtnInic}" Height="31" Canvas.Left="602" Canvas.Top="29" Width="137" CornerRadius="10,10,0,0" Background="#FF16A085" Cursor="Hand" PreviewMouseLeftButtonDown="BtnInic_PreviewMouseLeftButtonDown">
                 <TextBlock TextWrapping="Wrap" Text="Iniciar orden" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
             </Border>
-            <Border x:Name="BtnImp" BorderThickness="1" Style="{DynamicResource BtnImprimir}" Height="111" Canvas.Left="955" Canvas.Top="29" Width="121" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnImp_PreviewMouseLeftButtonDown" Cursor="Hand">
+            <Border x:Name="BtnImp" BorderThickness="1" Style="{DynamicResource BtnImprimir}" Height="111" Canvas.Left="955" Canvas.Top="29" Width="121" CornerRadius="10,10,20,20" Background="#FF95A5A6" PreviewMouseLeftButtonDown="BtnImp_PreviewMouseLeftButtonDown" Cursor="Hand">
                 <Image Margin="17,34,15,9" Source="/GVFT_FoodTrucks;component/img/printer.png"/>
             </Border>
-            <Border BorderThickness="1" Height="31" Canvas.Left="955" Canvas.Top="29" Width="121" CornerRadius="10,10,0,0" Background="#FF7F8C8D">
+            <Border BorderThickness="1" Style="{DynamicResource BtnImprimir}" Height="31" Canvas.Left="955" Canvas.Top="29" Width="121" CornerRadius="10,10,0,0" Background="#FF7F8C8D" Cursor="Hand" PreviewMouseLeftButtonDown="BtnImp_PreviewMouseLeftButtonDown">
                 <TextBlock TextWrapping="Wrap" Text="Imprimir" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
             </Border>
-            <Border x:Name="BtnPendiente" BorderThickness="1" Style="{DynamicResource BtnPendiente}"   Height="111" Canvas.Left="1092" Canvas.Top="29" Width="180" CornerRadius="10,10,20,20" PreviewMouseLeftButtonDown="BtnPendiente_PreviewMouseLeftButtonDown"  Cursor="Hand">
+            <Border x:Name="BtnPendiente" BorderThickness="1" Style="{DynamicResource BtnPendiente}"   Height="111" Canvas.Left="1092" Canvas.Top="29" Width="180" CornerRadius="10,10,20,20" Background="#FF34495E" PreviewMouseLeftButtonDown="BtnPendiente_PreviewMouseLeftButtonDown"  Cursor="Hand">
                 <Image Margin="52,32,45,5" Source="/GVFT_FoodTrucks;component/img/update.png"/>
             </Border>
-            <Border BorderThickness="1" Height="31" Canvas.Left="1092" Canvas.Top="29" Width="180" CornerRadius="10,10,0,0" Background="#FF2C3E50">
+            <Border BorderThickness="1" Style="{DynamicResource BtnPendiente}" Height="31" Canvas.Left="1092" Canvas.Top="29" Width="180" CornerRadius="10,10,0,0" Background="#FF2C3E50" Cursor="Hand" PreviewMouseLeftButtonDown="BtnPendiente_PreviewMouseLeftButtonDown">
                 <TextBlock TextWrapping="Wrap" Text="Ordenes Pendientes" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
             </Border>
 

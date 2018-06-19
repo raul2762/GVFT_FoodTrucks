@@ -20,9 +20,18 @@ namespace ItemControl
     /// </summary>
     public partial class MenuItem_UC : UserControl
     {
+        public string Nombre { get; set; }
+        public int Precio { get; set; }
         public MenuItem_UC()
         {
             InitializeComponent();
+            
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            lblName.Text = Nombre;
+            lblPrice.Text = Precio.ToString();
         }
     }
 }
