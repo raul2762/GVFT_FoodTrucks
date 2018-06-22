@@ -40,6 +40,8 @@ namespace GVFT_FoodTrucks
     {
         ObservableCollection<Productos> col;
         ObservableCollection<DataRowView> col2;
+        ListBox list = new ListBox();
+        ListBox listBox;
         public SalesFirst()
         {
             InitializeComponent();
@@ -140,26 +142,88 @@ namespace GVFT_FoodTrucks
 
         public void LoadMenuFood()
         {
+
+            List<Categorias> categorias = new List<Categorias>();
+            categorias.Add(new Categorias() { Nombre = "Comidas" });
+            categorias.Add(new Categorias() { Nombre = "Bebidas" });
+            categorias.Add(new Categorias() { Nombre = "Combos" });
             List<MenuItem_UC> menuItems = new List<MenuItem_UC>();
-            menuItems.Add(new MenuItem_UC() { Nombre = "HotDog", Precio = 150 });
-            menuItems.Add(new MenuItem_UC() { Nombre = "Hamburguesa", Precio = 250 });
-            menuItems.Add(new MenuItem_UC() { Nombre = "Yaroa", Precio = 190 });
-            menuItems.Add(new MenuItem_UC() { Nombre = "Refresco", Precio = 60 });
-            //MessageBox.Show(menuItems[0].Nombre);
-            for (int i = 0; i < menuItems.Count; i++)
+            menuItems.Add(new MenuItem_UC() { Nombre = "HotDog", Precio = 150, Categoria = "Comidas" });
+            menuItems.Add(new MenuItem_UC() { Nombre = "Hamburguesa", Precio = 250, Categoria = "Comidas" });
+            menuItems.Add(new MenuItem_UC() { Nombre = "Coca cola", Precio = 60, Categoria = "Bebidas" });
+            menuItems.Add(new MenuItem_UC() { Nombre = "Agua dasani", Precio = 35, Categoria = "Bebidas" });
+            menuItems.Add(new MenuItem_UC() { Nombre = "Cerveza Presidente Peq", Precio = 90, Categoria = "Bebidas" });
+            menuItems.Add(new MenuItem_UC() { Nombre = "Palitos de Mozzarella", Precio = 125, Categoria = "Comidas" });
+            menuItems.Add(new MenuItem_UC() { Nombre = "Papas + Refresco", Precio = 125, Categoria = "Combos" });
+            menuItems.Add(new MenuItem_UC() { Nombre = "Hotdog + papas", Precio = 125, Categoria = "Combos" });
+            // var menuu = new MenuItem_UC();
+            var menuu2 = new MenuItem_UC();
+            //string search = categorias[1].Nombre;
+
+            for (int i = 0; i < categorias.Count; i++)
             {
-                var itemFood = new MenuItem_UC();
-                itemFood.Nombre = menuItems[i].Nombre;
-                itemFood.Precio = menuItems[i].Precio;
-                dockP.Items.Add(itemFood);
+                listBox = addListBox(i);
+                TabMenu.Items.Add(new TabItem() { Header = categorias[i].Nombre, Cursor = Cursors.Hand, Content = listBox });
+                listBox.SelectionChanged += ListBox_SelectionChanged;
+                var item = menuItems.Where(a => a.Categoria == categorias[i].Nombre);
+                foreach (MenuItem_UC nombre in item)
+                {
+                    listBox.Items.Add(nombre);
+                }
             }
 
         }
+
+        class Categorias
+        {
+            public string Nombre { get; set; }
+        }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            TabMenu.Items.Add(new TabItem() { Header = "Page 3" , Cursor = Cursors.Hand});
-            TabMenu.Items.Add(new TabItem() { Header = "Page 4", Cursor = Cursors.Hand });
             LoadMenuFood();
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox box = (ListBox)sender;
+            var item = new MenuItem_UC();
+            item = (MenuItem_UC)box.SelectedItem;
+            var item2 = new Productos(item.Nombre, 1, item.Precio);
+
+            DtGridOrden.Items.Add(item2);
+            CalculateTotal();
+        }
+        /// <summary>
+        /// Metodo para crear un ListBox dinamicamente
+        /// </summary>
+        /// <param name="i">"Parametro de numero para generar nombres dinamicamente"</param>
+        /// <returns>Retorna un ListBox con los estilos predefinidos</returns>
+        ListBox addListBox(int i)
+        {
+            ControlTemplate controlTemplate;
+            var s = new Style(typeof(ListBoxItem));
+            Setter setter = new Setter();
+            setter.Property = ListBoxItem.PaddingProperty;
+            setter.Value = new Thickness(10);
+            s.Setters.Add(setter);
+            controlTemplate = (ControlTemplate)FindResource("ModeloT");
+            ListBox listB = new ListBox();
+            listB.Name = "listBox" + i.ToString();
+            listB.Template = controlTemplate;
+            listB.ItemContainerStyle = s;
+
+            return listB;
+        }
+
+        private void List_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            var item = new MenuItem_UC();
+            item = (MenuItem_UC)list.SelectedItem;
+            var item2 = new Productos(item.Nombre, 1, item.Precio);
+
+            DtGridOrden.Items.Add(item2);
+            CalculateTotal();
         }
 
         public void CalculateTotal()
@@ -209,12 +273,12 @@ namespace GVFT_FoodTrucks
 
         private void dockP_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = new MenuItem_UC();
-            item = (MenuItem_UC)dockP.SelectedItem;
-            var item2 = new Productos(item.Nombre, 1, item.Precio);
+            //var item = new MenuItem_UC();
+            //item = (MenuItem_UC)dockP.SelectedItem;
+            //var item2 = new Productos(item.Nombre, 1, item.Precio);
 
-            DtGridOrden.Items.Add(item2);
-            CalculateTotal();
+            //DtGridOrden.Items.Add(item2);
+            //CalculateTotal();
         }
 
         

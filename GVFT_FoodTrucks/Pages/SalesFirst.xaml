@@ -30,29 +30,16 @@
             </DataGrid.Columns>
         </DataGrid>
         <TabControl x:Name="TabMenu" Margin="577,147,84,170"  MinHeight="367" Height="Auto" MinWidth="763" MaxWidth="1289" Width="Auto" Background="{x:Null}" >
-            <TabItem Header="Page 1" Background="{x:Null}" Cursor="Hand">
-                <Grid>
-                    <ListBox x:Name="dockP" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="765" Height="322" SelectionChanged="dockP_SelectionChanged" Background="{x:Null}">
-                        <!--<local:MenuItem_UC/>
-                        <local:MenuItem_UC/>-->
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="{x:Type ListBoxItem}">
-                                <Setter Property="Padding" Value="10"/>
-
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                        <ListBox.Template>
-
-                            <ControlTemplate>
-                                <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True">
-                                    <WrapPanel IsItemsHost="True"/>
-                                </ScrollViewer>
-
-                            </ControlTemplate>
-                        </ListBox.Template>
+            <!--<TabItem x:Name="TabPage1" Header="Page 1" Background="{x:Null}" Cursor="Hand">
+                
+                    <ListBox x:Name="dockP" Template="{DynamicResource ModeloT}" ItemContainerStyle="{DynamicResource EstiloT}"  HorizontalAlignment="Left"  VerticalAlignment="Top" Width="765" Height="322" SelectionChanged="dockP_SelectionChanged" Background="{x:Null}">
+                        --><!--<local:MenuItem_UC/>
+                        <local:MenuItem_UC/>--><!--
+                        
+                        
                     </ListBox>
-                </Grid>
-            </TabItem>
+                
+            </TabItem>-->
         </TabControl>
         <Canvas Height="155" Margin="8,0,40,10" VerticalAlignment="Bottom">
             <Border x:Name="BtnRemove" BorderThickness="1" Style="{DynamicResource BtnRemove}" Height="111" Canvas.Left="286" Canvas.Top="29" Width="134" CornerRadius="10,10,20,20" Background="#FFE67E22" PreviewMouseLeftButtonDown="BtnRemove_PreviewMouseLeftButtonDown" Cursor="Hand">
@@ -123,6 +110,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ButtonStyleSales.xaml"/>
+                <ResourceDictionary Source="Prueba.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
