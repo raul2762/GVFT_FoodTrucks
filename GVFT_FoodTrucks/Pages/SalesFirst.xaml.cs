@@ -162,6 +162,7 @@ namespace GVFT_FoodTrucks
 
             for (int i = 0; i < categorias.Count; i++)
             {
+                
                 listBox = addListBox(i);
                 TabMenu.Items.Add(new TabItem() { Header = categorias[i].Nombre, Cursor = Cursors.Hand, Content = listBox });
                 listBox.SelectionChanged += ListBox_SelectionChanged;

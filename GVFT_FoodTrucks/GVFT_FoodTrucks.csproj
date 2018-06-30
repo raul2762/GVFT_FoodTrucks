@@ -67,6 +67,9 @@
     <Compile Include="MenuItem.xaml.cs">
       <DependentUpon>MenuItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Admin_area.xaml.cs">
+      <DependentUpon>Admin_area.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterEmployee.xaml.cs">
       <DependentUpon>RegisterEmployee.xaml</DependentUpon>
     </Compile>
@@ -81,6 +84,9 @@
     </Compile>
     <Compile Include="SignUp.xaml.cs">
       <DependentUpon>SignUp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wAdmin_area.xaml.cs">
+      <DependentUpon>wAdmin_area.xaml</DependentUpon>
     </Compile>
     <Page Include="ButtonStyleRM.xaml">
       <SubType>Designer</SubType>
@@ -121,6 +127,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Properties\Admin_area.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RegisterEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -146,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SignUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wAdmin_area.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,6 +228,27 @@
   <ItemGroup>
     <Resource Include="img\playlist-check.png" />
     <Resource Include="img\update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\home-variant.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\inbox-arrow-down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\playlist-edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\square-edit-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\currency-usd2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\file-chart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\account-edit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
