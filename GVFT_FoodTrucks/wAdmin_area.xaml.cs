@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
-
+using GVFT_FoodTrucks.Pages;
 namespace GVFT_FoodTrucks
 {
     /// <summary>
@@ -23,6 +23,36 @@ namespace GVFT_FoodTrucks
         public wAdmin_area()
         {
             InitializeComponent();
+        }
+
+        private void btnAdminUser_Click(object sender, RoutedEventArgs e)
+        {
+            frameView.Navigate(new SignUp());
+        }
+
+        private void btnHome_Click(object sender, RoutedEventArgs e)
+        {
+            frameView.Navigate(new Home());
+        }
+
+        private void btnRegProduct_Click(object sender, RoutedEventArgs e)
+        {
+            frameView.Navigate(new RegProduct());
+        }
+
+        private void btnRegMerchandise_Click(object sender, RoutedEventArgs e)
+        {
+            frameView.Navigate(new RegMerchandise());
+        }
+
+        private void btnRegEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            frameView.Navigate(new RegEmployee());
+        }
+
+        private void btnGenCredit_Click(object sender, RoutedEventArgs e)
+        {
+            frameView.Navigate(new RegCredits());
         }
     }
 }

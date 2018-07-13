@@ -67,11 +67,23 @@
     <Compile Include="MenuItem.xaml.cs">
       <DependentUpon>MenuItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Admin_area.xaml.cs">
-      <DependentUpon>Admin_area.xaml</DependentUpon>
+    <Compile Include="Pages\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RegisterEmployee.xaml.cs">
-      <DependentUpon>RegisterEmployee.xaml</DependentUpon>
+    <Compile Include="Pages\RegCredits.xaml.cs">
+      <DependentUpon>RegCredits.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegEmployee.xaml.cs">
+      <DependentUpon>RegEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegMerchandise.xaml.cs">
+      <DependentUpon>RegMerchandise.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegProduct.xaml.cs">
+      <DependentUpon>RegProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SignUp.xaml.cs">
+      <DependentUpon>SignUp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sales.xaml.cs">
       <DependentUpon>Sales.xaml</DependentUpon>
@@ -82,15 +94,16 @@
     <Compile Include="Pages\SalesPay.xaml.cs">
       <DependentUpon>SalesPay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SignUp.xaml.cs">
-      <DependentUpon>SignUp.xaml</DependentUpon>
-    </Compile>
     <Compile Include="wAdmin_area.xaml.cs">
       <DependentUpon>wAdmin_area.xaml</DependentUpon>
     </Compile>
     <Page Include="ButtonStyleRM.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ButtonStyleRM.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\ButtonStyleSales.xaml">
       <SubType>Designer</SubType>
@@ -123,15 +136,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Prueba.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Properties\Admin_area.xaml">
+    <Page Include="Pages\RegCredits.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RegisterEmployee.xaml">
+    <Page Include="Pages\RegEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RegMerchandise.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RegProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SignUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,10 +181,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SalesPay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SignUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -249,6 +274,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\account-edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\cash-usd.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

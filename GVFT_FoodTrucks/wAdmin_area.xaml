@@ -12,29 +12,29 @@
     <Grid Background="#FF2F2F2F">
         <Controls:Flyout  Position="Left"  Width="300" IsPinned="True" IsOpen="True" Background="#FF404040" CloseButtonVisibility="Hidden" Header="Area Administrativa">
             <Canvas Height="auto">
-                <Button Width="300" Height="50" FontSize="16" BorderThickness="0" Background="{x:Null}" Focusable="False" Cursor="Hand">
+                <Button x:Name="btnHome" Width="300" Height="50" FontSize="16" BorderThickness="0" Background="{x:Null}" Focusable="False" Cursor="Hand" Click="btnHome_Click">
                     <StackPanel Orientation="Horizontal" Width="290">
                         <Image Source="img/home-variant.png" Height="35" Width="69" VerticalAlignment="Top"/>
                         <TextBlock VerticalAlignment="Center" Margin="15,0,0,0" Text="Inicio"/>
                     </StackPanel>
                 </Button>
                 <Separator HorizontalAlignment="Left" Margin="0" Width="250" Canvas.Top="39" Height="31" Canvas.Left="26"/>
-                <Button Width="300" Height="50" FontSize="16" BorderThickness="0" Background="{x:Null}" Focusable="False" Canvas.Top="80" Cursor="Hand">
+                <Button x:Name="btnRegMerchandise" Width="300" Height="50" FontSize="16" BorderThickness="0" Background="{x:Null}" Focusable="False" Canvas.Top="80" Cursor="Hand" Click="btnRegMerchandise_Click">
                     <StackPanel Orientation="Horizontal" Width="290">
                         <Image Source="img/inbox-arrow-down.png" Height="35" Width="69" VerticalAlignment="Top"/>
                         <TextBlock VerticalAlignment="Center" Margin="15,0,0,0" Text="Entrada de mercancías"/>
                     </StackPanel>
                 </Button>
-                <Button Width="300" Height="50" FontSize="16" BorderThickness="0" Background="{x:Null}" Focusable="False" Canvas.Top="138" Cursor="Hand">
+                <Button x:Name="btnRegProduct" Width="300" Height="50" FontSize="16" BorderThickness="0" Background="{x:Null}" Focusable="False" Canvas.Top="138" Cursor="Hand" Click="btnRegProduct_Click">
                     <StackPanel Orientation="Horizontal" Width="290">
                         <Image Source="img/square-edit-outline.png" Height="35" Width="69" VerticalAlignment="Top"/>
                         <TextBlock VerticalAlignment="Center" Margin="15,0,0,0" Text="Registrar producto"/>
                     </StackPanel>
                 </Button>
-                <Button Width="300" Height="50" FontSize="16" BorderThickness="0" Background="{x:Null}" Focusable="False" Canvas.Top="195" Cursor="Hand">
+                <Button x:Name="btnRegEmployee" Width="300" Height="50" FontSize="16" BorderThickness="0" Background="{x:Null}" Focusable="False" Canvas.Top="195" Cursor="Hand" Click="btnRegEmployee_Click">
                     <StackPanel Orientation="Horizontal" Width="290">
                         <Image Source="img/currency-usd2.png" Height="35" Width="69" VerticalAlignment="Top"/>
-                        <TextBlock VerticalAlignment="Center" Margin="15,0,0,0" Text="Nómina empleados"/>
+                        <TextBlock VerticalAlignment="Center" Margin="15,0,0,0" Text="Gestionar empleados"/>
                     </StackPanel>
                 </Button>
                 <Button Width="300" Height="50" FontSize="16" BorderThickness="0" Background="{x:Null}" Focusable="False" Canvas.Top="250" Cursor="Hand">
@@ -43,13 +43,22 @@
                         <TextBlock VerticalAlignment="Center" Margin="15,0,0,0" Text="Reportes"/>
                     </StackPanel>
                 </Button>
-                <Button Width="300" Height="50" FontSize="16" BorderThickness="0" Background="{x:Null}" Focusable="False" Canvas.Top="305" Cursor="Hand">
+                <Button x:Name="btnAdminUser" Width="300" Height="50" FontSize="16" BorderThickness="0" Background="{x:Null}" Focusable="False" Canvas.Top="305" Cursor="Hand" Click="btnAdminUser_Click">
                     <StackPanel Orientation="Horizontal" Width="290">
                         <Image Source="img/account-edit.png" Height="35" Width="69" VerticalAlignment="Top"/>
                         <TextBlock VerticalAlignment="Center" Margin="15,0,0,0" Text="Gestionar usuarios"/>
                     </StackPanel>
                 </Button>
+                <Button x:Name="btnGenCredit" Width="300" Height="50" FontSize="16" BorderThickness="0" Background="{x:Null}" Focusable="False" Canvas.Top="360" Cursor="Hand" Click="btnGenCredit_Click">
+                    <StackPanel Orientation="Horizontal" Width="290">
+                        <Image Source="img/cash-usd.png" Height="35" Width="69" VerticalAlignment="Top"/>
+                        <TextBlock VerticalAlignment="Center" Margin="15,0,0,0" Text="Gestionar créditos"/>
+                    </StackPanel>
+                </Button>
             </Canvas>
         </Controls:Flyout>
+        
+            <Frame x:Name="frameView" Content="Frame" MinHeight="759" Margin="300,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="1180" NavigationUIVisibility="Hidden" Source="/GVFT_FoodTrucks;component/Pages/Home.xaml"/>
+        
     </Grid>
 </Controls:MetroWindow>

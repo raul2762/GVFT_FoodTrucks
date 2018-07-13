@@ -10,17 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls;
 
-namespace GVFT_FoodTrucks
+namespace GVFT_FoodTrucks.Pages
 {
     /// <summary>
-    /// Lógica de interacción para RegisterEmployee.xaml
+    /// Lógica de interacción para RegProduct.xaml
     /// </summary>
-    public partial class RegisterEmployee : MetroWindow
+    public partial class RegProduct : Page
     {
-        public RegisterEmployee()
+        public RegProduct()
         {
             InitializeComponent();
         }

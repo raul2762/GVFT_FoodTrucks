@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GVFT_FoodTrucks.Properties
+namespace GVFT_FoodTrucks.Pages
 {
     /// <summary>
-    /// Lógica de interacción para Admin_area.xaml
+    /// Lógica de interacción para RegCredits.xaml
     /// </summary>
-    public partial class Admin_area : Page
+    public partial class RegCredits : Page
     {
-        public Admin_area()
+        public RegCredits()
         {
             InitializeComponent();
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
