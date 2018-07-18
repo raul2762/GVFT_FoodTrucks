@@ -33,20 +33,43 @@ namespace GVFT_FoodTrucks
             this.Precio = Precioo;
         }
     };
+    class ListaNumeros
+    {
+        public List<string> Numeros { get; set; }
+
+        public ListaNumeros()
+        {
+            Numeros = new List<string>()
+            {
+                "01",
+                "02",
+                "03",
+                "04",
+                "05"
+            };
+        }
+    }
     /// <summary>
     /// Lógica de interacción para SalesFirst.xaml
     /// </summary>
     public partial class SalesFirst : Page
     {
         ObservableCollection<Productos> col;
+        ObservableCollection<ListaNumeros> listaNumeros;
         ObservableCollection<DataRowView> col2;
         ListBox list = new ListBox();
         ListBox listBox;
         public SalesFirst()
         {
             InitializeComponent();
+            DataContext = this;
+            this.listaNumeros = new ObservableCollection<ListaNumeros>();
         }
 
+        public void llenarLista()
+        {
+            listaNumeros.Add(new ListaNumeros {Numeros = new List<string>() { "01","02","03","04","05"} });
+        }
         private void BtnPendiente_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MessageBox.Show("Hola primer MessageBox desde este Sistema :)");
@@ -182,6 +205,16 @@ namespace GVFT_FoodTrucks
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadMenuFood();
+            var listado = new List<string>()
+            {
+                "01",
+                "02",
+                "03",
+                "04",
+                "05"
+            };
+            CboListBox.ItemsSource = listado;
+            CboListBox.SelectedIndex = 0;
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -282,6 +315,26 @@ namespace GVFT_FoodTrucks
             //CalculateTotal();
         }
 
-        
+        private void cboMesa_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+          
+        }
+
+        private void MyCbo_MouseLeave(object sender, MouseEventArgs e)
+        {
+            CboPopup.StaysOpen = false;
+        }
+
+        private void MyCbo_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            CboPopup.IsOpen = true;
+            CboPopup.StaysOpen = true;
+        }
+
+        private void CboListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CboPopup.IsOpen = false;
+            MyCbo.Text = CboListBox.SelectedValue.ToString();
+        }
     }
 }

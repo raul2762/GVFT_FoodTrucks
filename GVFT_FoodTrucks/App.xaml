@@ -2,11 +2,76 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:GVFT_FoodTrucks"
-             StartupUri="wAdmin_area.xaml">
+             StartupUri="Sales.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <SolidColorBrush x:Key="PrimaryBrush" Color="#f39c12" />
             <SolidColorBrush x:Key="PrimaryFont" Color="White" />
+            <!--#region Style Para el TextBox del CboCustom-->
+            <SolidColorBrush x:Key="fondo" Color="Gainsboro" Opacity="0.65"/>
+            <Style x:Key="CboStyleForTextBox" TargetType="{x:Type TextBoxBase}">
+
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="MinHeight" Value="26"/>
+                <Setter Property="AllowDrop" Value="true"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+
+                            <Border Name="Border" Padding="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"  BorderBrush="LightGray" >
+                                <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="Border" Property="Background" Value="{StaticResource DisabledBackgroundBrush}"/>
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBackgroundBrush}"/>
+                                    <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
+                                </Trigger>
+                                <!--<Trigger Property="IsMouseOver" Value="true">
+                                    <Setter TargetName="Border" Property="Background" Value="{StaticResource fondo}"/>
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="DimGray"/>
+                                </Trigger>-->
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" />
+            <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" />
+            <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
+            <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
+            <!--#endregion-->
+            <!--#region Style Para ListBox del CboCustom-->
+            <SolidColorBrush x:Key="fondo2" Color="DeepSkyBlue" Opacity="0.2"/>
+            <SolidColorBrush x:Key="bordeColor" Color="Cyan" Opacity="0.7"/>
+            <Style x:Key="CboItemContainer" TargetType="{x:Type ListBoxItem}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+
+                            <Border x:Name="IconBorder" Padding="2" BorderThickness="1">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+
+                                <Trigger Property="IsSelected" Value="true">
+                                    <Setter TargetName="IconBorder" Property="Background" Value="{StaticResource fondo2}"/>
+                                    <Setter TargetName="IconBorder" Property="BorderBrush" Value="{StaticResource bordeColor}"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter TargetName="IconBorder" Property="Background" Value="{StaticResource fondo2}"/>
+                                    <Setter TargetName="IconBorder" Property="BorderBrush" Value="{StaticResource bordeColor}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--#endregion-->
             <ResourceDictionary.MergedDictionaries>
                 <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
