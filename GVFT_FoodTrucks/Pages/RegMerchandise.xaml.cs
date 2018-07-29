@@ -20,9 +20,11 @@ namespace GVFT_FoodTrucks.Pages
     /// </summary>
     public partial class RegMerchandise : Page
     {
+        
         public RegMerchandise()
         {
             InitializeComponent();
         }
+        
     }
 }

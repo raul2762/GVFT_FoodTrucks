@@ -32,17 +32,21 @@
                     <Label Content="Teléfono:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="405,154,0,0" VerticalAlignment="Top"/>
                     <Label Content="Puesto de Trabajo:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="405,282,0,0" VerticalAlignment="Top"/>
                     <ComboBox HorizontalAlignment="Left" Margin="405,329,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8"/>
+                    <Label Content="Modo de pago:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="405,382,0,0" VerticalAlignment="Top"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="405,429,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Nómina de Empleados" Padding="20,1,0,0">
                 <Grid>
                     <Button Content="Realizar Pago" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9"/>
                     <TextBox HorizontalAlignment="Left" Height="42" Margin="34,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
-                    <Label Content="Monto a Pagar:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,166,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Sueldo:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,166,0,0" VerticalAlignment="Top"/>
                     <Label Content="Empleado:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,40,0,0" VerticalAlignment="Top"/>
                     <ComboBox HorizontalAlignment="Left" Margin="34,87,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8"/>
                     <TextBox HorizontalAlignment="Left" Height="42" Margin="34,334,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Descuento:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,288,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Height="42" Margin="388,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <Label Content="Monto a Pagar:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="388,41,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
         </TabControl>

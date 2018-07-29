@@ -1,6 +1,7 @@
 ﻿<Page
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GVFT_FoodTrucks.Pages"
@@ -19,11 +20,14 @@
     </Page.Resources>
 
     <Grid>
-        <TabControl MinHeight="603" Margin="27,22,22,0" VerticalAlignment="Top" MinWidth="956" Background="{x:Null}">
+        <!-- Poner la opcion MaxWidth en 1051 para trabajar en el espacion real y conveniente del programa para el contenido de los tabitems-->
+        <TabControl MinHeight="603" Margin="27,22,22,0" VerticalAlignment="Top" MinWidth="956" Background="{x:Null}" IsSynchronizedWithCurrentItem="True">
+
             <TabItem Header="Registro de Mercancías" Padding="0,1,0,0">
                 <Grid>
                     <TextBox HorizontalAlignment="Left" Height="42" Margin="34,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Nombre de mercancía:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,32,0,0" VerticalAlignment="Top"/>
+
                     <Button Content="Registrar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9"/>
                 </Grid>
             </TabItem>
@@ -49,7 +53,19 @@
                     <Button Content="Actualizar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="Registro de Suplidor" Padding="20,1,0,0">
+                <Grid>
+                    <TextBox HorizontalAlignment="Left" Height="42" Margin="34,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <Label Content="Nombre de Suplidor:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,47,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Ciudad:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,299,0,0" VerticalAlignment="Top"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="34,346,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8"/>
+                    <Button Content="Registrar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9"/>
+                    <TextBox HorizontalAlignment="Left" Height="42" Margin="34,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <Label Content="Dirección:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,167,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Height="42" Margin="397,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <Label Content="Número de Teléfono:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="397,47,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
         </TabControl>
-
     </Grid>
 </Page>

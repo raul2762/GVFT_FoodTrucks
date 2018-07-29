@@ -37,8 +37,8 @@
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.6.4\lib\net46\MahApps.Metro.dll</HintPath>
+    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net46\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -240,6 +240,10 @@
     <ProjectReference Include="..\ItemControl\ItemControl.csproj">
       <Project>{2a9f7675-6640-4f60-a499-b041ae70c506}</Project>
       <Name>ItemControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Serving_Table\Serving_Table.csproj">
+      <Project>{78fb94cb-7903-4acd-a563-37badca9fa05}</Project>
+      <Name>Serving_Table</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

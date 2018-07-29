@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemControl", "ItemControl\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_GVFT", "Data_GVFT\Data_GVFT.csproj", "{9EEB1B22-8F95-4F5C-A86E-41F1476BE70D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serving_Table", "Serving_Table\Serving_Table.csproj", "{78FB94CB-7903-4ACD-A563-37BADCA9FA05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9EEB1B22-8F95-4F5C-A86E-41F1476BE70D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EEB1B22-8F95-4F5C-A86E-41F1476BE70D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EEB1B22-8F95-4F5C-A86E-41F1476BE70D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78FB94CB-7903-4ACD-A563-37BADCA9FA05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78FB94CB-7903-4ACD-A563-37BADCA9FA05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78FB94CB-7903-4ACD-A563-37BADCA9FA05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78FB94CB-7903-4ACD-A563-37BADCA9FA05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

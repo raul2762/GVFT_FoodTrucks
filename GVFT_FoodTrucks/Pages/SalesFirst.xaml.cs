@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ItemControl;
-
+using Serving_Table;
 namespace GVFT_FoodTrucks
 {
   public  class Productos
@@ -33,22 +33,7 @@ namespace GVFT_FoodTrucks
             this.Precio = Precioo;
         }
     };
-    class ListaNumeros
-    {
-        public List<string> Numeros { get; set; }
-
-        public ListaNumeros()
-        {
-            Numeros = new List<string>()
-            {
-                "01",
-                "02",
-                "03",
-                "04",
-                "05"
-            };
-        }
-    }
+    
     /// <summary>
     /// Lógica de interacción para SalesFirst.xaml
     /// </summary>
@@ -68,11 +53,12 @@ namespace GVFT_FoodTrucks
 
         public void llenarLista()
         {
-            listaNumeros.Add(new ListaNumeros {Numeros = new List<string>() { "01","02","03","04","05"} });
+            listaNumeros.Add(new ListaNumeros {Numeros = "1" });
         }
         private void BtnPendiente_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("Hola primer MessageBox desde este Sistema :)");
+            MessageBox.Show(NtfIcon.Badge.ToString());
+            
         }
 
         private void BtnImp_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -202,18 +188,29 @@ namespace GVFT_FoodTrucks
         {
             public string Nombre { get; set; }
         }
+        class ListaNumeros
+        {
+            public string  Numeros { get; set; }
+        
+        }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadMenuFood();
-            var listado = new List<string>()
-            {
-                "01",
-                "02",
-                "03",
-                "04",
-                "05"
-            };
-            CboListBox.ItemsSource = listado;
+            //var listado2 = new List<ListaNumeros>()
+            //{
+
+            //};
+            //LoadMenuFood();
+            //var listado = new List<ListaNumeros>();
+            //listado.Add(new ListaNumeros { Numeros = "01"});
+            //listado.Add(new ListaNumeros { Numeros = "02" });
+            //listado.Add(new ListaNumeros { Numeros = "03" });
+            //listado.Add(new ListaNumeros { Numeros = "04" });
+            //listado.Add(new ListaNumeros { Numeros = "05" });
+            //GetServTables.GetInstance().ObtenerMesas();
+            CboListBox.ItemsSource = GetServTables.GetInstance().Tables;
+            //CboListBox.DataContext = new ListaNumeros();
+            //CboListBox.DisplayMemberPath = "Numeros";
+            //CboListBox.SelectedValuePath = "Numeros";
             CboListBox.SelectedIndex = 0;
         }
 
