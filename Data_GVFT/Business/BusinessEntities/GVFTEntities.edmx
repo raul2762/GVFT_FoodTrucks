@@ -4,8 +4,501 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DB_SystemFoodTrucksModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+    <Schema Namespace="DB_SystemFoodTrucksModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="Credit" Type="int" />
+        </EntityType>
+        <EntityType Name="Credits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code_credits" Type="varchar" MaxLength="5" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Expire_date" Type="datetime" />
+          <Property Name="Type_credit" Type="int" Nullable="false" />
+          <Property Name="Cant" Type="int" Nullable="false" />
+          <Property Name="Expiry_mode" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Depart_name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Detail_invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_invoice" Type="int" Nullable="false" />
+          <Property Name="Id_product" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="unitPrice" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cedula" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="Department" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="int" Nullable="false" />
+          <Property Name="Entry_date" Type="datetime" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CxC_employee" Type="int" />
+          <Property Name="CxC_discountmode" Type="int" />
+          <Property Name="Pay_mode" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_client" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Id_user" Type="int" />
+          <Property Name="Name_order" Type="varchar" MaxLength="20" />
+          <Property Name="Comment_order" Type="varchar" MaxLength="100" />
+          <Property Name="Comment_paymaent" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameLocation" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Log_date" Type="datetime" />
+          <Property Name="Id_user" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Login_FT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Login_pass" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Roles" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="int" />
+          <Property Name="Registration_date" Type="datetime" />
+          <Property Name="Id_employee" Type="int" Nullable="false" />
+          <Property Name="Question" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Answer" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_login" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Merchandise">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Stock" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Method_of_payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Payment" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mov_CxC_Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_employee" Type="int" Nullable="false" />
+          <Property Name="Amount_charged" Type="int" Nullable="false" />
+          <Property Name="Transaction_date" Type="datetime" Nullable="false" />
+          <Property Name="Transaction_type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Paid_orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Payment_type" Type="int" />
+          <Property Name="Id_order" Type="int" />
+          <Property Name="Id_credit" Type="int" />
+          <Property Name="Percent_discount" Type="nchar" MaxLength="5" />
+          <Property Name="Discount" Type="decimal" Precision="6" Scale="2" />
+        </EntityType>
+        <EntityType Name="Paysheet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_employee" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Payment_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaysheetModePay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PayMode" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pending_Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_product" Type="int" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Id_table" Type="int" />
+          <Property Name="unitPrice" Type="decimal" Precision="6" Scale="2" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_product" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="unitPrice" Type="float" Nullable="false" />
+          <Property Name="Id_category" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="purchase_of_merchandise">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Detail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Date_purchase" Type="datetime" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Id_merchandise" Type="int" Nullable="false" />
+          <Property Name="Id_supplier" Type="int" />
+          <Property Name="Id_user" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles_Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_name" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status_Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Supplier" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Trans_type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type_trans" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type_Credits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="typeCredit" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DEPARTAMENT">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_CATEGORY">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_CLIENT">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="Id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_EMPLOYEE">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Paysheet" Type="Self.Paysheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paysheet">
+              <PropertyRef Name="Id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_EMPLOYEE_CXC">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Mov_CxC_Employees" Type="Self.Mov_CxC_Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mov_CxC_Employees">
+              <PropertyRef Name="Id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_EMPLOYEE_ORDER">
+          <End Role="Login_FT" Type="Self.Login_FT" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login_FT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_INVOICE">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detail_invoice" Type="Self.Detail_invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Detail_invoice">
+              <PropertyRef Name="Id_invoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_METHODPAY">
+          <End Role="Method_of_payment" Type="Self.Method_of_payment" Multiplicity="0..1" />
+          <End Role="Paid_orders" Type="Self.Paid_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Method_of_payment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paid_orders">
+              <PropertyRef Name="Payment_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_ORDER_PAID">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="0..1" />
+          <End Role="Paid_orders" Type="Self.Paid_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paid_orders">
+              <PropertyRef Name="Id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_PRODUCT">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Detail_invoice" Type="Self.Detail_invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Detail_invoice">
+              <PropertyRef Name="Id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_SUPPLIER_BUY">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="purchase_of_merchandise" Type="Self.purchase_of_merchandise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="purchase_of_merchandise">
+              <PropertyRef Name="Id_supplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_USER">
+          <End Role="Login_FT" Type="Self.Login_FT" Multiplicity="1" />
+          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login_FT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_USERPURCHASE">
+          <End Role="Login_FT" Type="Self.Login_FT" Multiplicity="1" />
+          <End Role="purchase_of_merchandise" Type="Self.purchase_of_merchandise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login_FT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="purchase_of_merchandise">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_ID_EMPLOYEE">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Login_FT" Type="Self.Login_FT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Login_FT">
+              <PropertyRef Name="Id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MERCHANDISE">
+          <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="1" />
+          <End Role="purchase_of_merchandise" Type="Self.purchase_of_merchandise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merchandise">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="purchase_of_merchandise">
+              <PropertyRef Name="Id_merchandise" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaysheetMode">
+          <End Role="PaysheetModePay" Type="Self.PaysheetModePay" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaysheetModePay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Pay_mode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaysheetModePay_Paysheet">
+          <End Role="PaysheetModePay" Type="Self.PaysheetModePay" Multiplicity="1" />
+          <End Role="PaysheetModePay1" Type="Self.PaysheetModePay" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PaysheetModePay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaysheetModePay1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pending_Orders_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Pending_Orders" Type="Self.Pending_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pending_Orders">
+              <PropertyRef Name="Id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROLES">
+          <End Role="Roles_Account" Type="Self.Roles_Account" Multiplicity="1" />
+          <End Role="Login_FT" Type="Self.Login_FT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles_Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Login_FT">
+              <PropertyRef Name="Roles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATUS_ACC">
+          <End Role="Status_Account" Type="Self.Status_Account" Multiplicity="0..1" />
+          <End Role="Login_FT" Type="Self.Login_FT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Login_FT">
+              <PropertyRef Name="IsActive" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TYPE_TRANS">
+          <End Role="Trans_type" Type="Self.Trans_type" Multiplicity="1" />
+          <End Role="Mov_CxC_Employees" Type="Self.Mov_CxC_Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trans_type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mov_CxC_Employees">
+              <PropertyRef Name="Transaction_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TYPECREDIT">
+          <End Role="Type_Credits" Type="Self.Type_Credits" Multiplicity="1" />
+          <End Role="Credits" Type="Self.Credits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Credits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Credits">
+              <PropertyRef Name="Type_credit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="RegisterLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
           <Parameter Name="LoginPass" Type="varchar" Mode="In" />
@@ -75,26 +568,6 @@
         <Function Name="SP_AddTransType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TypeTrans" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
         <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -131,6 +604,7 @@
           <Parameter Name="Qty" Type="int" Mode="In" />
           <Parameter Name="IdMerchandise" Type="int" Mode="In" />
           <Parameter Name="IdSupplier" Type="int" Mode="In" />
+          <Parameter Name="IdUser" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_RegisterEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NameEmployee" Type="varchar" Mode="In" />
@@ -140,22 +614,771 @@
           <Parameter Name="Salary" Type="int" Mode="In" />
           <Parameter Name="EntryDate" Type="datetime" Mode="In" />
           <Parameter Name="Phone" Type="varchar" Mode="In" />
-          <Parameter Name="IdUser" Type="int" Mode="In" />
           <Parameter Name="PayMode" Type="int" Mode="In" />
         </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="DB_SystemFoodTrucksModelStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+        <EntityContainer Name="DB_SystemFoodTrucksModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Credits" EntityType="Self.Credits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detail_invoice" EntityType="Self.Detail_invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login_FT" EntityType="Self.Login_FT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Merchandise" EntityType="Self.Merchandise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Method_of_payment" EntityType="Self.Method_of_payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mov_CxC_Employees" EntityType="Self.Mov_CxC_Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paid_orders" EntityType="Self.Paid_orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paysheet" EntityType="Self.Paysheet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaysheetModePay" EntityType="Self.PaysheetModePay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pending_Orders" EntityType="Self.Pending_Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="purchase_of_merchandise" EntityType="Self.purchase_of_merchandise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles_Account" EntityType="Self.Roles_Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status_Account" EntityType="Self.Status_Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trans_type" EntityType="Self.Trans_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_Credits" EntityType="Self.Type_Credits" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DEPARTAMENT" Association="Self.FK_DEPARTAMENT">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_CATEGORY" Association="Self.FK_ID_CATEGORY">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_CLIENT" Association="Self.FK_ID_CLIENT">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_EMPLOYEE" Association="Self.FK_ID_EMPLOYEE">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Paysheet" EntitySet="Paysheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_EMPLOYEE_CXC" Association="Self.FK_ID_EMPLOYEE_CXC">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Mov_CxC_Employees" EntitySet="Mov_CxC_Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_EMPLOYEE_ORDER" Association="Self.FK_ID_EMPLOYEE_ORDER">
+            <End Role="Login_FT" EntitySet="Login_FT" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_INVOICE" Association="Self.FK_ID_INVOICE">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Detail_invoice" EntitySet="Detail_invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_METHODPAY" Association="Self.FK_ID_METHODPAY">
+            <End Role="Method_of_payment" EntitySet="Method_of_payment" />
+            <End Role="Paid_orders" EntitySet="Paid_orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_ORDER_PAID" Association="Self.FK_ID_ORDER_PAID">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Paid_orders" EntitySet="Paid_orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_PRODUCT" Association="Self.FK_ID_PRODUCT">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Detail_invoice" EntitySet="Detail_invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_SUPPLIER_BUY" Association="Self.FK_ID_SUPPLIER_BUY">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="purchase_of_merchandise" EntitySet="purchase_of_merchandise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_USER" Association="Self.FK_ID_USER">
+            <End Role="Login_FT" EntitySet="Login_FT" />
+            <End Role="Log" EntitySet="Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_USERPURCHASE" Association="Self.FK_ID_USERPURCHASE">
+            <End Role="Login_FT" EntitySet="Login_FT" />
+            <End Role="purchase_of_merchandise" EntitySet="purchase_of_merchandise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_ID_EMPLOYEE" Association="Self.FK_Login_ID_EMPLOYEE">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Login_FT" EntitySet="Login_FT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MERCHANDISE" Association="Self.FK_MERCHANDISE">
+            <End Role="Merchandise" EntitySet="Merchandise" />
+            <End Role="purchase_of_merchandise" EntitySet="purchase_of_merchandise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaysheetMode" Association="Self.FK_PaysheetMode">
+            <End Role="PaysheetModePay" EntitySet="PaysheetModePay" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaysheetModePay_Paysheet" Association="Self.FK_PaysheetModePay_Paysheet">
+            <End Role="PaysheetModePay" EntitySet="PaysheetModePay" />
+            <End Role="PaysheetModePay1" EntitySet="PaysheetModePay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pending_Orders_Product" Association="Self.FK_Pending_Orders_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Pending_Orders" EntitySet="Pending_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROLES" Association="Self.FK_ROLES">
+            <End Role="Roles_Account" EntitySet="Roles_Account" />
+            <End Role="Login_FT" EntitySet="Login_FT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATUS_ACC" Association="Self.FK_STATUS_ACC">
+            <End Role="Status_Account" EntitySet="Status_Account" />
+            <End Role="Login_FT" EntitySet="Login_FT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TYPE_TRANS" Association="Self.FK_TYPE_TRANS">
+            <End Role="Trans_type" EntitySet="Trans_type" />
+            <End Role="Mov_CxC_Employees" EntitySet="Mov_CxC_Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TYPECREDIT" Association="Self.FK_TYPECREDIT">
+            <End Role="Type_Credits" EntitySet="Type_Credits" />
+            <End Role="Credits" EntitySet="Credits" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DB_SystemFoodTrucksModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="DB_SystemFoodTrucksEntities" annotation:LazyLoadingEnabled="true" >
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ID_CATEGORY" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Credit" Type="Int32" />
+          <NavigationProperty Name="Invoice" Relationship="Self.FK_ID_CLIENT" FromRole="Client" ToRole="Invoice" />
+          <NavigationProperty Name="Credits" Relationship="Self.FK_ID_CREDIT" FromRole="Client" ToRole="Credits" />
+        </EntityType>
+        <EntityType Name="Credits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code_credits" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Expire_date" Type="DateTime" Precision="3" />
+          <Property Name="Type_credit" Type="Int32" Nullable="false" />
+          <Property Name="Cant" Type="Int32" Nullable="false" />
+          <Property Name="Expiry_mode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_ID_CREDIT" FromRole="Credits" ToRole="Client" />
+          <NavigationProperty Name="Type_Credits" Relationship="DB_SystemFoodTrucksModel.FK_TYPECREDIT" FromRole="Credits" ToRole="Type_Credits" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Depart_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_DEPARTAMENT" FromRole="Departments" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Detail_invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_invoice" Type="Int32" Nullable="false" />
+          <Property Name="Id_product" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="unitPrice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Invoice" Relationship="Self.FK_ID_INVOICE" FromRole="Detail_invoice" ToRole="Invoice" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ID_PRODUCT" FromRole="Detail_invoice" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cedula" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Department" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Int32" Nullable="false" />
+          <Property Name="Entry_date" Type="DateTime" Precision="3" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CxC_employee" Type="Int32" />
+          <Property Name="CxC_discountmode" Type="Int32" />
+          <Property Name="Pay_mode" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK_DEPARTAMENT" FromRole="Employees" ToRole="Departments" />
+          <NavigationProperty Name="Paysheet" Relationship="Self.FK_ID_EMPLOYEE" FromRole="Employees" ToRole="Paysheet" />
+          <NavigationProperty Name="Mov_CxC_Employees" Relationship="Self.FK_ID_EMPLOYEE_CXC" FromRole="Employees" ToRole="Mov_CxC_Employees" />
+          <NavigationProperty Name="Login_FT" Relationship="Self.FK_Login_ID_EMPLOYEE" FromRole="Employees" ToRole="Login_FT" />
+          <NavigationProperty Name="PaysheetModePay" Relationship="Self.FK_PaysheetMode" FromRole="Employees" ToRole="PaysheetModePay" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_client" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Id_user" Type="Int32" />
+          <Property Name="Name_order" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Comment_order" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Comment_paymaent" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_ID_CLIENT" FromRole="Invoice" ToRole="Client" />
+          <NavigationProperty Name="Detail_invoice" Relationship="Self.FK_ID_INVOICE" FromRole="Invoice" ToRole="Detail_invoice" />
+          <NavigationProperty Name="Login_FT" Relationship="Self.FK_ID_EMPLOYEE_ORDER" FromRole="Invoice" ToRole="Login_FT" />
+          <NavigationProperty Name="Paid_orders" Relationship="Self.FK_ID_ORDER_PAID" FromRole="Invoice" ToRole="Paid_orders" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Log_date" Type="DateTime" Precision="3" />
+          <Property Name="Id_user" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Login_FT" Relationship="Self.FK_ID_USER" FromRole="Log" ToRole="Login_FT" />
+        </EntityType>
+        <EntityType Name="Login_FT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login_pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Roles" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Int32" />
+          <Property Name="Registration_date" Type="DateTime" Precision="3" />
+          <Property Name="Id_employee" Type="Int32" Nullable="false" />
+          <Property Name="Question" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Answer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_login" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Login_ID_EMPLOYEE" FromRole="Login_FT" ToRole="Employees" />
+          <NavigationProperty Name="Invoice" Relationship="Self.FK_ID_EMPLOYEE_ORDER" FromRole="Login_FT" ToRole="Invoice" />
+          <NavigationProperty Name="Log" Relationship="Self.FK_ID_USER" FromRole="Login_FT" ToRole="Log" />
+          <NavigationProperty Name="purchase_of_merchandise" Relationship="Self.FK_ID_USERPURCHASE" FromRole="Login_FT" ToRole="purchase_of_merchandise" />
+          <NavigationProperty Name="Roles_Account" Relationship="Self.FK_ROLES" FromRole="Login_FT" ToRole="Roles_Account" />
+          <NavigationProperty Name="Status_Account" Relationship="Self.FK_STATUS_ACC" FromRole="Login_FT" ToRole="Status_Account" />
+        </EntityType>
+        <EntityType Name="Merchandise">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Stock" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="purchase_of_merchandise" Relationship="Self.FK_MERCHANDISE" FromRole="Merchandise" ToRole="purchase_of_merchandise" />
+        </EntityType>
+        <EntityType Name="Method_of_payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Payment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Paid_orders" Relationship="Self.FK_ID_METHODPAY" FromRole="Method_of_payment" ToRole="Paid_orders" />
+        </EntityType>
+        <EntityType Name="Mov_CxC_Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_employee" Type="Int32" Nullable="false" />
+          <Property Name="Amount_charged" Type="Int32" Nullable="false" />
+          <Property Name="Transaction_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Transaction_type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_ID_EMPLOYEE_CXC" FromRole="Mov_CxC_Employees" ToRole="Employees" />
+          <NavigationProperty Name="Trans_type" Relationship="Self.FK_TYPE_TRANS" FromRole="Mov_CxC_Employees" ToRole="Trans_type" />
+        </EntityType>
+        <EntityType Name="Paid_orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Payment_type" Type="Int32" />
+          <Property Name="Id_order" Type="Int32" />
+          <Property Name="Id_credit" Type="Int32" />
+          <Property Name="Percent_discount" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="Discount" Type="Decimal" Precision="6" Scale="2" />
+          <NavigationProperty Name="Invoice" Relationship="Self.FK_ID_ORDER_PAID" FromRole="Paid_orders" ToRole="Invoice" />
+          <NavigationProperty Name="Method_of_payment" Relationship="Self.FK_ID_METHODPAY" FromRole="Paid_orders" ToRole="Method_of_payment" />
+        </EntityType>
+        <EntityType Name="Paysheet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_employee" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Payment_date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_ID_EMPLOYEE" FromRole="Paysheet" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="PaysheetModePay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PayMode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_PaysheetMode" FromRole="PaysheetModePay" ToRole="Employees" />
+          <NavigationProperty Name="PaysheetModePay1" Relationship="Self.FK_PaysheetModePay_Paysheet" FromRole="PaysheetModePay" ToRole="PaysheetModePay1" />
+          <NavigationProperty Name="PaysheetModePay2" Relationship="Self.FK_PaysheetModePay_Paysheet" FromRole="PaysheetModePay1" ToRole="PaysheetModePay" />
+        </EntityType>
+        <EntityType Name="Pending_Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_product" Type="Int32" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Id_table" Type="Int32" />
+          <Property Name="unitPrice" Type="Decimal" Precision="6" Scale="2" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Pending_Orders_Product" FromRole="Pending_Orders" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_product" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="unitPrice" Type="Double" Nullable="false" />
+          <Property Name="Id_category" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_ID_CATEGORY" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Detail_invoice" Relationship="Self.FK_ID_PRODUCT" FromRole="Product" ToRole="Detail_invoice" />
+          <NavigationProperty Name="Pending_Orders" Relationship="Self.FK_Pending_Orders_Product" FromRole="Product" ToRole="Pending_Orders" />
+        </EntityType>
+        <EntityType Name="purchase_of_merchandise">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Detail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Date_purchase" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Id_merchandise" Type="Int32" Nullable="false" />
+          <Property Name="Id_supplier" Type="Int32" />
+          <Property Name="Id_user" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Login_FT" Relationship="Self.FK_ID_USERPURCHASE" FromRole="purchase_of_merchandise" ToRole="Login_FT" />
+          <NavigationProperty Name="Merchandise" Relationship="Self.FK_MERCHANDISE" FromRole="purchase_of_merchandise" ToRole="Merchandise" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_ID_SUPPLIER_BUY" FromRole="purchase_of_merchandise" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="Roles_Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Login_FT" Relationship="Self.FK_ROLES" FromRole="Roles_Account" ToRole="Login_FT" />
+        </EntityType>
+        <EntityType Name="Status_Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Login_FT" Relationship="Self.FK_STATUS_ACC" FromRole="Status_Account" ToRole="Login_FT" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Supplier1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="purchase_of_merchandise" Relationship="Self.FK_ID_SUPPLIER_BUY" FromRole="Supplier" ToRole="purchase_of_merchandise" />
+        </EntityType>
+        <EntityType Name="Trans_type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type_trans" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Mov_CxC_Employees" Relationship="Self.FK_TYPE_TRANS" FromRole="Trans_type" ToRole="Mov_CxC_Employees" />
+        </EntityType>
+        <EntityType Name="Type_Credits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="typeCredit" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Credits" Relationship="DB_SystemFoodTrucksModel.FK_TYPECREDIT" FromRole="Type_Credits" ToRole="Credits" />
+        </EntityType>
+        <Association Name="FK_ID_CATEGORY">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_CLIENT">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="Id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_CREDIT">
+          <End Role="Credits" Type="Self.Credits" Multiplicity="0..1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Credits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="Credit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEPARTAMENT">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_INVOICE">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detail_invoice" Type="Self.Detail_invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Detail_invoice">
+              <PropertyRef Name="Id_invoice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_PRODUCT">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Detail_invoice" Type="Self.Detail_invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Detail_invoice">
+              <PropertyRef Name="Id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_EMPLOYEE">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Paysheet" Type="Self.Paysheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paysheet">
+              <PropertyRef Name="Id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_EMPLOYEE_CXC">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Mov_CxC_Employees" Type="Self.Mov_CxC_Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mov_CxC_Employees">
+              <PropertyRef Name="Id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_ID_EMPLOYEE">
+          <End Type="Self.Employees" Multiplicity="1" Role="Employees" />
+          <End Type="Self.Login_FT" Multiplicity="*" Role="Login_FT" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Login_FT">
+              <PropertyRef Name="Id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaysheetMode">
+          <End Role="PaysheetModePay" Type="Self.PaysheetModePay" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaysheetModePay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Pay_mode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_EMPLOYEE_ORDER">
+          <End Role="Login_FT" Type="Self.Login_FT" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login_FT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_ORDER_PAID">
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="0..1" />
+          <End Role="Paid_orders" Type="Self.Paid_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paid_orders">
+              <PropertyRef Name="Id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_USER">
+          <End Role="Login_FT" Type="Self.Login_FT" Multiplicity="1" />
+          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login_FT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_USERPURCHASE">
+          <End Role="Login_FT" Type="Self.Login_FT" Multiplicity="1" />
+          <End Role="purchase_of_merchandise" Type="Self.purchase_of_merchandise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login_FT">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="purchase_of_merchandise">
+              <PropertyRef Name="Id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROLES">
+          <End Role="Roles_Account" Type="Self.Roles_Account" Multiplicity="1" />
+          <End Role="Login_FT" Type="Self.Login_FT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles_Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Login_FT">
+              <PropertyRef Name="Roles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATUS_ACC">
+          <End Role="Status_Account" Type="Self.Status_Account" Multiplicity="0..1" />
+          <End Role="Login_FT" Type="Self.Login_FT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Login_FT">
+              <PropertyRef Name="IsActive" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MERCHANDISE">
+          <End Role="Merchandise" Type="Self.Merchandise" Multiplicity="1" />
+          <End Role="purchase_of_merchandise" Type="Self.purchase_of_merchandise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Merchandise">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="purchase_of_merchandise">
+              <PropertyRef Name="Id_merchandise" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_METHODPAY">
+          <End Role="Method_of_payment" Type="Self.Method_of_payment" Multiplicity="0..1" />
+          <End Role="Paid_orders" Type="Self.Paid_orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Method_of_payment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Paid_orders">
+              <PropertyRef Name="Payment_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TYPE_TRANS">
+          <End Role="Trans_type" Type="Self.Trans_type" Multiplicity="1" />
+          <End Role="Mov_CxC_Employees" Type="Self.Mov_CxC_Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trans_type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mov_CxC_Employees">
+              <PropertyRef Name="Transaction_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaysheetModePay_Paysheet">
+          <End Role="PaysheetModePay" Type="Self.PaysheetModePay" Multiplicity="1" />
+          <End Role="PaysheetModePay1" Type="Self.PaysheetModePay" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PaysheetModePay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaysheetModePay1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pending_Orders_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Pending_Orders" Type="Self.Pending_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pending_Orders">
+              <PropertyRef Name="Id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ID_SUPPLIER_BUY">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="purchase_of_merchandise" Type="Self.purchase_of_merchandise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="purchase_of_merchandise">
+              <PropertyRef Name="Id_supplier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_SystemFoodTrucksEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Credits" EntityType="Self.Credits" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" />
+          <EntitySet Name="Detail_invoice" EntityType="Self.Detail_invoice" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" />
+          <EntitySet Name="Log" EntityType="Self.Log" />
+          <EntitySet Name="Login_FT" EntityType="Self.Login_FT" />
+          <EntitySet Name="Merchandise" EntityType="Self.Merchandise" />
+          <EntitySet Name="Method_of_payment" EntityType="Self.Method_of_payment" />
+          <EntitySet Name="Mov_CxC_Employees" EntityType="Self.Mov_CxC_Employees" />
+          <EntitySet Name="Paid_orders" EntityType="Self.Paid_orders" />
+          <EntitySet Name="Paysheet" EntityType="Self.Paysheet" />
+          <EntitySet Name="PaysheetModePay" EntityType="Self.PaysheetModePay" />
+          <EntitySet Name="Pending_Orders" EntityType="Self.Pending_Orders" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="purchase_of_merchandise" EntityType="Self.purchase_of_merchandise" />
+          <EntitySet Name="Roles_Account" EntityType="Self.Roles_Account" />
+          <EntitySet Name="Status_Account" EntityType="Self.Status_Account" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" />
+          <EntitySet Name="Trans_type" EntityType="Self.Trans_type" />
+          <EntitySet Name="Type_Credits" EntityType="Self.Type_Credits" />
+          <AssociationSet Name="FK_ID_CATEGORY" Association="Self.FK_ID_CATEGORY">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_CLIENT" Association="Self.FK_ID_CLIENT">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_CREDIT" Association="Self.FK_ID_CREDIT">
+            <End Role="Credits" EntitySet="Credits" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPARTAMENT" Association="Self.FK_DEPARTAMENT">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_INVOICE" Association="Self.FK_ID_INVOICE">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Detail_invoice" EntitySet="Detail_invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_PRODUCT" Association="Self.FK_ID_PRODUCT">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Detail_invoice" EntitySet="Detail_invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_EMPLOYEE" Association="Self.FK_ID_EMPLOYEE">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Paysheet" EntitySet="Paysheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_EMPLOYEE_CXC" Association="Self.FK_ID_EMPLOYEE_CXC">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Mov_CxC_Employees" EntitySet="Mov_CxC_Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_ID_EMPLOYEE" Association="Self.FK_Login_ID_EMPLOYEE">
+            <End EntitySet="Employees" Role="Employees" />
+            <End EntitySet="Login_FT" Role="Login_FT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaysheetMode" Association="Self.FK_PaysheetMode">
+            <End Role="PaysheetModePay" EntitySet="PaysheetModePay" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_EMPLOYEE_ORDER" Association="Self.FK_ID_EMPLOYEE_ORDER">
+            <End Role="Login_FT" EntitySet="Login_FT" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_ORDER_PAID" Association="Self.FK_ID_ORDER_PAID">
+            <End Role="Invoice" EntitySet="Invoice" />
+            <End Role="Paid_orders" EntitySet="Paid_orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_USER" Association="Self.FK_ID_USER">
+            <End Role="Login_FT" EntitySet="Login_FT" />
+            <End Role="Log" EntitySet="Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_USERPURCHASE" Association="Self.FK_ID_USERPURCHASE">
+            <End Role="Login_FT" EntitySet="Login_FT" />
+            <End Role="purchase_of_merchandise" EntitySet="purchase_of_merchandise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROLES" Association="Self.FK_ROLES">
+            <End Role="Roles_Account" EntitySet="Roles_Account" />
+            <End Role="Login_FT" EntitySet="Login_FT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATUS_ACC" Association="Self.FK_STATUS_ACC">
+            <End Role="Status_Account" EntitySet="Status_Account" />
+            <End Role="Login_FT" EntitySet="Login_FT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MERCHANDISE" Association="Self.FK_MERCHANDISE">
+            <End Role="Merchandise" EntitySet="Merchandise" />
+            <End Role="purchase_of_merchandise" EntitySet="purchase_of_merchandise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_METHODPAY" Association="Self.FK_ID_METHODPAY">
+            <End Role="Method_of_payment" EntitySet="Method_of_payment" />
+            <End Role="Paid_orders" EntitySet="Paid_orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TYPE_TRANS" Association="Self.FK_TYPE_TRANS">
+            <End Role="Trans_type" EntitySet="Trans_type" />
+            <End Role="Mov_CxC_Employees" EntitySet="Mov_CxC_Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaysheetModePay_Paysheet" Association="Self.FK_PaysheetModePay_Paysheet">
+            <End Role="PaysheetModePay" EntitySet="PaysheetModePay" />
+            <End Role="PaysheetModePay1" EntitySet="PaysheetModePay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pending_Orders_Product" Association="Self.FK_Pending_Orders_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Pending_Orders" EntitySet="Pending_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ID_SUPPLIER_BUY" Association="Self.FK_ID_SUPPLIER_BUY">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="purchase_of_merchandise" EntitySet="purchase_of_merchandise" />
+          </AssociationSet>
           <FunctionImport Name="RegisterLogin">
             <Parameter Name="Username" Mode="In" Type="String" />
             <Parameter Name="LoginPass" Mode="In" Type="String" />
@@ -183,7 +1406,7 @@
             <Parameter Name="ExpiryMode" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_AddDepartment">
-            <Parameter Name="NameDepart" Mode="In" Type="String" />
+          <Parameter Name="NameDepart" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_AddInvoice">
             <Parameter Name="IdClient" Mode="In" Type="Int32" />
@@ -203,7 +1426,7 @@
             <Parameter Name="Stock" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_AddMethodPay">
-            <Parameter Name="Pay" Mode="In" Type="String" />
+          <Parameter Name="Pay" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_AddProduct">
             <Parameter Name="NameProduct" Mode="In" Type="String" />
@@ -211,10 +1434,10 @@
             <Parameter Name="IdCategory" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_AddRoles">
-            <Parameter Name="RoleName" Mode="In" Type="String" />
+          <Parameter Name="RoleName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_AddStatusAcc">
-            <Parameter Name="StatusName" Mode="In" Type="String" />
+          <Parameter Name="StatusName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_AddSupplier">
             <Parameter Name="SupplierName" Mode="In" Type="String" />
@@ -223,27 +1446,7 @@
             <Parameter Name="Phone" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_AddTransType">
-            <Parameter Name="TypeTrans" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DB_SystemFoodTrucksModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          <Parameter Name="TypeTrans" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DB_SystemFoodTrucksModel.sp_helpdiagrams_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -281,6 +1484,7 @@
             <Parameter Name="Qty" Mode="In" Type="Int32" />
             <Parameter Name="IdMerchandise" Mode="In" Type="Int32" />
             <Parameter Name="IdSupplier" Mode="In" Type="Int32" />
+            <Parameter Name="IdUser" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_RegisterEmployees">
             <Parameter Name="NameEmployee" Mode="In" Type="String" />
@@ -290,20 +1494,14 @@
             <Parameter Name="Salary" Mode="In" Type="Int32" />
             <Parameter Name="EntryDate" Mode="In" Type="DateTime" />
             <Parameter Name="Phone" Mode="In" Type="String" />
-            <Parameter Name="IdUser" Mode="In" Type="Int32" />
             <Parameter Name="PayMode" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
+          <AssociationSet Name="FK_TYPECREDIT" Association="DB_SystemFoodTrucksModel.FK_TYPECREDIT">
+            <End Role="Type_Credits" EntitySet="Type_Credits" />
+            <End Role="Credits" EntitySet="Credits" />
+          </AssociationSet>
+          <EntitySet Name="Location" EntityType="DB_SystemFoodTrucksModel.Location" />
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="sp_helpdiagrams_Result">
           <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
@@ -311,12 +1509,275 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <Association Name="FK_TYPECREDIT">
+          <End Type="DB_SystemFoodTrucksModel.Type_Credits" Role="Type_Credits" Multiplicity="1" />
+          <End Type="DB_SystemFoodTrucksModel.Credits" Role="Credits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Credits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Credits">
+              <PropertyRef Name="Type_credit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DB_SystemFoodTrucksModelStoreContainer" CdmEntityContainer="DB_SystemFoodTrucksEntities" >
+        <EntityContainerMapping StorageEntityContainer="DB_SystemFoodTrucksModelStoreContainer" CdmEntityContainer="DB_SystemFoodTrucksEntities">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Credits">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Credits">
+              <MappingFragment StoreEntitySet="Credits">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code_credits" ColumnName="Code_credits" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Expire_date" ColumnName="Expire_date" />
+                <ScalarProperty Name="Type_credit" ColumnName="Type_credit" />
+                <ScalarProperty Name="Cant" ColumnName="Cant" />
+                <ScalarProperty Name="Expiry_mode" ColumnName="Expiry_mode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Departments">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Depart_name" ColumnName="Depart_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detail_invoice">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Detail_invoice">
+              <MappingFragment StoreEntitySet="Detail_invoice">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_invoice" ColumnName="Id_invoice" />
+                <ScalarProperty Name="Id_product" ColumnName="Id_product" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Last_name" ColumnName="Last_name" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Entry_date" ColumnName="Entry_date" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="CxC_employee" ColumnName="CxC_employee" />
+                <ScalarProperty Name="CxC_discountmode" ColumnName="CxC_discountmode" />
+                <ScalarProperty Name="Pay_mode" ColumnName="Pay_mode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoice">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_client" ColumnName="Id_client" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Name_order" ColumnName="Name_order" />
+                <ScalarProperty Name="Comment_order" ColumnName="Comment_order" />
+                <ScalarProperty Name="Comment_paymaent" ColumnName="Comment_paymaent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Log_date" ColumnName="Log_date" />
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login_FT">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Login_FT">
+              <MappingFragment StoreEntitySet="Login_FT">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login_name" ColumnName="Login_name" />
+                <ScalarProperty Name="Login_pass" ColumnName="Login_pass" />
+                <ScalarProperty Name="Roles" ColumnName="Roles" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Registration_date" ColumnName="Registration_date" />
+                <ScalarProperty Name="Id_employee" ColumnName="Id_employee" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Last_login" ColumnName="Last_login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Merchandise">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Merchandise">
+              <MappingFragment StoreEntitySet="Merchandise">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Method_of_payment">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Method_of_payment">
+              <MappingFragment StoreEntitySet="Method_of_payment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mov_CxC_Employees">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Mov_CxC_Employees">
+              <MappingFragment StoreEntitySet="Mov_CxC_Employees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_employee" ColumnName="Id_employee" />
+                <ScalarProperty Name="Amount_charged" ColumnName="Amount_charged" />
+                <ScalarProperty Name="Transaction_date" ColumnName="Transaction_date" />
+                <ScalarProperty Name="Transaction_type" ColumnName="Transaction_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paid_orders">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Paid_orders">
+              <MappingFragment StoreEntitySet="Paid_orders">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Payment_type" ColumnName="Payment_type" />
+                <ScalarProperty Name="Id_order" ColumnName="Id_order" />
+                <ScalarProperty Name="Id_credit" ColumnName="Id_credit" />
+                <ScalarProperty Name="Percent_discount" ColumnName="Percent_discount" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paysheet">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Paysheet">
+              <MappingFragment StoreEntitySet="Paysheet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_employee" ColumnName="Id_employee" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Payment_date" ColumnName="Payment_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaysheetModePay">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.PaysheetModePay">
+              <MappingFragment StoreEntitySet="PaysheetModePay">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PayMode" ColumnName="PayMode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pending_Orders">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Pending_Orders">
+              <MappingFragment StoreEntitySet="Pending_Orders">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_product" ColumnName="Id_product" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Id_table" ColumnName="Id_table" />
+                <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_product" ColumnName="Name_product" />
+                <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+                <ScalarProperty Name="Id_category" ColumnName="Id_category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="purchase_of_merchandise">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.purchase_of_merchandise">
+              <MappingFragment StoreEntitySet="purchase_of_merchandise">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Date_purchase" ColumnName="Date_purchase" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Id_merchandise" ColumnName="Id_merchandise" />
+                <ScalarProperty Name="Id_supplier" ColumnName="Id_supplier" />
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles_Account">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Roles_Account">
+              <MappingFragment StoreEntitySet="Roles_Account">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Role_name" ColumnName="Role_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status_Account">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Status_Account">
+              <MappingFragment StoreEntitySet="Status_Account">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supplier">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Supplier1" ColumnName="Supplier" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trans_type">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Trans_type">
+              <MappingFragment StoreEntitySet="Trans_type">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type_trans" ColumnName="Type_trans" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_Credits">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Type_Credits">
+              <MappingFragment StoreEntitySet="Type_Credits">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="typeCredit" ColumnName="typeCredit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="RegisterLogin" FunctionName="DB_SystemFoodTrucksModel.Store.RegisterLogin" />
           <FunctionImportMapping FunctionImportName="SP_AddCategory" FunctionName="DB_SystemFoodTrucksModel.Store.SP_AddCategory" />
           <FunctionImportMapping FunctionImportName="SP_AddClient" FunctionName="DB_SystemFoodTrucksModel.Store.SP_AddClient" />
@@ -330,17 +1791,6 @@
           <FunctionImportMapping FunctionImportName="SP_AddStatusAcc" FunctionName="DB_SystemFoodTrucksModel.Store.SP_AddStatusAcc" />
           <FunctionImportMapping FunctionImportName="SP_AddSupplier" FunctionName="DB_SystemFoodTrucksModel.Store.SP_AddSupplier" />
           <FunctionImportMapping FunctionImportName="SP_AddTransType" FunctionName="DB_SystemFoodTrucksModel.Store.SP_AddTransType" />
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="DB_SystemFoodTrucksModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="DB_SystemFoodTrucksModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DB_SystemFoodTrucksModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DB_SystemFoodTrucksModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DB_SystemFoodTrucksModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="DB_SystemFoodTrucksModel.Store.sp_helpdiagrams">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DB_SystemFoodTrucksModel.sp_helpdiagrams_Result">
@@ -358,8 +1808,14 @@
           <FunctionImportMapping FunctionImportName="SP_Paysheet" FunctionName="DB_SystemFoodTrucksModel.Store.SP_Paysheet" />
           <FunctionImportMapping FunctionImportName="SP_PurchaseMerchandise" FunctionName="DB_SystemFoodTrucksModel.Store.SP_PurchaseMerchandise" />
           <FunctionImportMapping FunctionImportName="SP_RegisterEmployees" FunctionName="DB_SystemFoodTrucksModel.Store.SP_RegisterEmployees" />
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DB_SystemFoodTrucksModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DB_SystemFoodTrucksModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Location">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="nameLocation" ColumnName="nameLocation" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -374,7 +1830,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

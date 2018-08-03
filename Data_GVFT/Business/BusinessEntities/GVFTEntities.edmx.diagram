@@ -4,7 +4,55 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fcb70f43de9048b58892b51d93db6ea4" Name="Diagram1" />
+      <Diagram DiagramId="88db5e2578434817bb5e923c93cb8098" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Category" Width="1.5" PointX="8.25" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Client" Width="1.5" PointX="8.25" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Credits" Width="1.5" PointX="6" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Departments" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Detail_invoice" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Employees" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Invoice" Width="1.5" PointX="10.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Log" Width="1.5" PointX="7.5" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Login_FT" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Merchandise" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Method_of_payment" Width="1.5" PointX="13.5" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Mov_CxC_Employees" Width="1.5" PointX="8.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Paid_orders" Width="1.5" PointX="15.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Paysheet" Width="1.5" PointX="5.25" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.PaysheetModePay" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Pending_Orders" Width="1.5" PointX="12.75" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Product" Width="1.5" PointX="10.5" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.purchase_of_merchandise" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Roles_Account" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Status_Account" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Supplier" Width="1.5" PointX="5.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Trans_type" Width="1.5" PointX="6" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Type_Credits" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_CATEGORY" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_CLIENT" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_CREDIT" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_DEPARTAMENT" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_INVOICE" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_PRODUCT" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_EMPLOYEE" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_EMPLOYEE_CXC" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="DB_SystemFoodTrucksModel.FK_Login_ID_EMPLOYEE" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_PaysheetMode" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_EMPLOYEE_ORDER" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_ORDER_PAID" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_USER" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_USERPURCHASE" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ROLES" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_STATUS_ACC" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_MERCHANDISE" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_METHODPAY" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_TYPE_TRANS" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_PaysheetModePay_Paysheet" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_Pending_Orders_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_SUPPLIER_BUY" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_TYPECREDIT" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Location" Width="1.5" PointX="8.375" PointY="0.75" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

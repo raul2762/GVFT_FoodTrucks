@@ -27,6 +27,30 @@ namespace Data_GVFT.Business.BusinessEntities
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Client> Client { get; set; }
+        public virtual DbSet<Credits> Credits { get; set; }
+        public virtual DbSet<Departments> Departments { get; set; }
+        public virtual DbSet<Detail_invoice> Detail_invoice { get; set; }
+        public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<Invoice> Invoice { get; set; }
+        public virtual DbSet<Log> Log { get; set; }
+        public virtual DbSet<Login_FT> Login_FT { get; set; }
+        public virtual DbSet<Merchandise> Merchandise { get; set; }
+        public virtual DbSet<Method_of_payment> Method_of_payment { get; set; }
+        public virtual DbSet<Mov_CxC_Employees> Mov_CxC_Employees { get; set; }
+        public virtual DbSet<Paid_orders> Paid_orders { get; set; }
+        public virtual DbSet<Paysheet> Paysheet { get; set; }
+        public virtual DbSet<PaysheetModePay> PaysheetModePay { get; set; }
+        public virtual DbSet<Pending_Orders> Pending_Orders { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<purchase_of_merchandise> purchase_of_merchandise { get; set; }
+        public virtual DbSet<Roles_Account> Roles_Account { get; set; }
+        public virtual DbSet<Status_Account> Status_Account { get; set; }
+        public virtual DbSet<Supplier> Supplier { get; set; }
+        public virtual DbSet<Trans_type> Trans_type { get; set; }
+        public virtual DbSet<Type_Credits> Type_Credits { get; set; }
+        public virtual DbSet<Location> Location { get; set; }
     
         public virtual int RegisterLogin(string username, string loginPass, Nullable<int> rol, Nullable<int> statusAcc, Nullable<System.DateTime> regDate, Nullable<int> idEmployee, string quest, string amswer)
         {
@@ -257,74 +281,6 @@ namespace Data_GVFT.Business.BusinessEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_AddTransType", typeTransParameter);
         }
     
-        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
-        }
-    
         public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
         {
             var diagramnameParameter = diagramname != null ?
@@ -418,7 +374,7 @@ namespace Data_GVFT.Business.BusinessEntities
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Paysheet", idEmployeeParameter, amountParameter, paymentDateParameter);
         }
     
-        public virtual int SP_PurchaseMerchandise(string detail, Nullable<int> amount, Nullable<System.DateTime> datePurchase, Nullable<int> qty, Nullable<int> idMerchandise, Nullable<int> idSupplier)
+        public virtual int SP_PurchaseMerchandise(string detail, Nullable<int> amount, Nullable<System.DateTime> datePurchase, Nullable<int> qty, Nullable<int> idMerchandise, Nullable<int> idSupplier, Nullable<int> idUser)
         {
             var detailParameter = detail != null ?
                 new ObjectParameter("Detail", detail) :
@@ -444,10 +400,14 @@ namespace Data_GVFT.Business.BusinessEntities
                 new ObjectParameter("IdSupplier", idSupplier) :
                 new ObjectParameter("IdSupplier", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_PurchaseMerchandise", detailParameter, amountParameter, datePurchaseParameter, qtyParameter, idMerchandiseParameter, idSupplierParameter);
+            var idUserParameter = idUser.HasValue ?
+                new ObjectParameter("IdUser", idUser) :
+                new ObjectParameter("IdUser", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_PurchaseMerchandise", detailParameter, amountParameter, datePurchaseParameter, qtyParameter, idMerchandiseParameter, idSupplierParameter, idUserParameter);
         }
     
-        public virtual int SP_RegisterEmployees(string nameEmployee, string lastName, string cedula, Nullable<int> department, Nullable<int> salary, Nullable<System.DateTime> entryDate, string phone, Nullable<int> idUser, Nullable<int> payMode)
+        public virtual int SP_RegisterEmployees(string nameEmployee, string lastName, string cedula, Nullable<int> department, Nullable<int> salary, Nullable<System.DateTime> entryDate, string phone, Nullable<int> payMode)
         {
             var nameEmployeeParameter = nameEmployee != null ?
                 new ObjectParameter("NameEmployee", nameEmployee) :
@@ -477,37 +437,11 @@ namespace Data_GVFT.Business.BusinessEntities
                 new ObjectParameter("Phone", phone) :
                 new ObjectParameter("Phone", typeof(string));
     
-            var idUserParameter = idUser.HasValue ?
-                new ObjectParameter("IdUser", idUser) :
-                new ObjectParameter("IdUser", typeof(int));
-    
             var payModeParameter = payMode.HasValue ?
                 new ObjectParameter("PayMode", payMode) :
                 new ObjectParameter("PayMode", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_RegisterEmployees", nameEmployeeParameter, lastNameParameter, cedulaParameter, departmentParameter, salaryParameter, entryDateParameter, phoneParameter, idUserParameter, payModeParameter);
-        }
-    
-        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var new_diagramnameParameter = new_diagramname != null ?
-                new ObjectParameter("new_diagramname", new_diagramname) :
-                new ObjectParameter("new_diagramname", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
-        }
-    
-        public virtual int sp_upgraddiagrams()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_RegisterEmployees", nameEmployeeParameter, lastNameParameter, cedulaParameter, departmentParameter, salaryParameter, entryDateParameter, phoneParameter, payModeParameter);
         }
     }
 }

@@ -9,7 +9,7 @@
       mc:Ignorable="d" 
       MinHeight="684"
       MinWidth="1100"
-      Title="RegMerchandise">
+      Title="RegMerchandise" Loaded="Page_Loaded">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -25,44 +25,53 @@
 
             <TabItem Header="Registro de Mercancías" Padding="0,1,0,0">
                 <Grid>
-                    <TextBox HorizontalAlignment="Left" Height="42" Margin="34,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <TextBox x:Name="txtMerch" HorizontalAlignment="Left" Height="42" Margin="34,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Nombre de mercancía:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,32,0,0" VerticalAlignment="Top"/>
 
-                    <Button Content="Registrar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9"/>
+                    <Button x:Name="btnRegMerch" Content="Registrar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9" Click="btnRegMerch_Click"/>
+                    <DataGrid x:Name="DtGridMerch" HorizontalAlignment="Left" Height="420" Margin="404,96,0,0" VerticalAlignment="Top" ColumnHeaderHeight="50" Width="434" FontSize="18" FontWeight="Bold" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" IsReadOnly="True" Width="60"/>
+                            <DataGridTextColumn Header="Mercancia" IsReadOnly="True" Width="300"/>
+                            <DataGridTextColumn Header="Stock" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Header="Compra de Mercancías" Padding="20,1,0,0">
                 <Grid>
-                    <Button Content="Registrar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9"/>
-                    <TextBox HorizontalAlignment="Left" Height="160" Margin="396,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="100" mah:TextBoxHelper.Watermark="Este campo es opcional"/>
+                    <Button x:Name="btnPurchase" Content="Registrar compra" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9" Click="btnPurchase_Click"/>
+                    <TextBox x:Name="txtDetail" HorizontalAlignment="Left" Height="160" Margin="396,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="100" mah:TextBoxHelper.Watermark="Este campo es opcional"/>
                     <Label Content="Detalle:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="396,28,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="42" Margin="34,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <TextBox x:Name="txtCant" HorizontalAlignment="Left" Height="42" Margin="34,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Cantidad:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,274,0,0" VerticalAlignment="Top"/>
                     <Label Content="Mercancía:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,27,0,0" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="34,74,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8"/>
+                    <ComboBox x:Name="cboMerch" HorizontalAlignment="Left" Margin="34,74,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8" FontSize="20" FontWeight="Bold"/>
                     <Label Content="Suplidor:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,145,0,0" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="34,192,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8"/>
+                    <ComboBox x:Name="cboSuppl" HorizontalAlignment="Left" Margin="34,192,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8" FontSize="20" FontWeight="Bold"/>
+                    <TextBox x:Name="txtCostPur" HorizontalAlignment="Left" Height="42" Margin="396,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <Label Content="Costo de compra:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="396,274,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Actualización de Mercancías" Padding="20,1,0,0">
                 <Grid>
-                    <TextBox HorizontalAlignment="Left" Height="42" Margin="34,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <TextBox x:Name="txtMerchUpdate" HorizontalAlignment="Left" Height="42" Margin="34,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Nombre de Mercancía:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,148,0,0" VerticalAlignment="Top"/>
                     <Label Content="Mercancía:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,27,0,0" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="34,74,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8"/>
-                    <Button Content="Actualizar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9"/>
+                    <ComboBox x:Name="cboMerchUpdate" SelectedValuePath="Name" HorizontalAlignment="Left" Margin="34,74,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8" SelectionChanged="cboMerchUpdate_SelectionChanged" FontSize="20" FontWeight="Bold"/>
+                    <Button x:Name="btnMerchUpdate" Content="Actualizar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9" Click="btnMerchUpdate_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Registro de Suplidor" Padding="20,1,0,0">
                 <Grid>
-                    <TextBox HorizontalAlignment="Left" Height="42" Margin="34,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <TextBox x:Name="txtNameSuppl" HorizontalAlignment="Left" Height="42" Margin="34,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Nombre de Suplidor:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,47,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Ciudad:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,299,0,0" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="34,346,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8"/>
-                    <Button Content="Registrar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9"/>
-                    <TextBox HorizontalAlignment="Left" Height="42" Margin="34,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <Label Content="Localidad:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,299,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cboLocation" HorizontalAlignment="Left" Margin="34,346,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8" FontWeight="Bold" FontSize="20"/>
+                    <Button x:Name="btnRegSuppl" Content="Registrar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9" Click="btnRegSuppl_Click"/>
+                    <TextBox x:Name="txtAddrSuppl" HorizontalAlignment="Left" Height="42" Margin="34,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Dirección:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,167,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="42" Margin="397,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <TextBox x:Name="txtPhoneSuppl" HorizontalAlignment="Left" Height="42" Margin="397,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Número de Teléfono:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="397,47,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>

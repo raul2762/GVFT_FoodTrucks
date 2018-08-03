@@ -10,10 +10,16 @@
 namespace Data_GVFT.Business.BusinessEntities
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class Pending_Orders
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> Id_product { get; set; }
+        public Nullable<int> Qty { get; set; }
+        public Nullable<int> Id_table { get; set; }
+        public Nullable<decimal> unitPrice { get; set; }
+    
+        public virtual Product Product { get; set; }
     }
 }

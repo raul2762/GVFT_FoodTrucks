@@ -20,6 +20,7 @@ namespace GVFT_FoodTrucks
     /// </summary>
     public partial class wAdmin_area : MetroWindow
     {
+        public int IdUser { get; set; }
         public wAdmin_area()
         {
             InitializeComponent();

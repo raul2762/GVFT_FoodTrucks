@@ -1,0 +1,114 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Data_GVFT.Business.BusinessEntities;
+using System.Data.Entity;
+
+namespace Data_GVFT.Business.BusinessLogic
+{
+   public class MerLogic
+    {
+        private static MerLogic instance;
+        public static MerLogic GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new MerLogic();
+            }
+            return instance;
+        }
+
+        public void RegisterMerch(String nameMerch, int stock)
+        {
+            using (var en = new DB_SystemFoodTrucksEntities())
+            {
+                en.SP_AddMerchandise(nameMerch, stock);
+            }
+        }
+
+        public void RegisterPofMerch(String detail, int amount, DateTime datePurchase, int qty, int idMerch, int idSuppl, int idUser)
+        {
+            using (var en = new DB_SystemFoodTrucksEntities())
+            {
+                en.SP_PurchaseMerchandise(detail, amount, datePurchase, qty, idMerch, idSuppl,idUser);
+            }
+        }
+        public void RegisterSupplier(String nameSuppl, String addrs, String city,String phone)
+        {
+            using (var en = new DB_SystemFoodTrucksEntities())
+            {
+                en.SP_AddSupplier(nameSuppl, addrs, city, phone);
+            }
+        }
+        public void UpdateMerch(Merchandise merchandise_)
+        {
+            using (var en = new DB_SystemFoodTrucksEntities())
+            {
+                var merch_bd = en.Merchandise.FirstOrDefault(x => x.Id == merchandise_.Id);
+                en.Entry(merch_bd).State = EntityState.Modified;
+                en.Entry(merch_bd).CurrentValues.SetValues(merchandise_);
+                en.SaveChanges();
+            }
+        }
+
+        public class GetMerchandise
+        {
+            public string Name { get; set; }
+        }
+        public List<GetMerchandise> GetMerchandiseList()
+        {
+            using (var en = new DB_SystemFoodTrucksEntities())
+            {
+                var query = from p in en.Merchandise
+                            select new GetMerchandise() { Name = p.Name };
+                return query.ToList();
+            }
+        }
+
+        public class GetSupplier
+        {
+            public string Name { get; set; }
+        }
+        public List<GetSupplier> GetSupplierList()
+        {
+            using (var en = new DB_SystemFoodTrucksEntities())
+            {
+                var query = from p in en.Supplier
+                            select new GetSupplier() { Name = p.Supplier1 };
+                return query.ToList();
+            }
+        }
+
+        public class GetLocation
+        {
+            public string Name { get; set; }
+        }
+        public List<GetLocation> GetLocationsList()
+        {
+            using (var en = new DB_SystemFoodTrucksEntities())
+            {
+                var query = from p in en.Location
+                            select new GetLocation() { Name = p.nameLocation };
+                return query.ToList();
+            }
+        }
+
+        public class GetMerch
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public int Stock { get; set; }
+        }
+        public List<Merchandise> GerMerchList()
+        {
+            using (var en = new DB_SystemFoodTrucksEntities())
+            {
+                var query = from p in en.Merchandise
+                            select new Merchandise() { Id = p.Id, Name = p.Name, Stock = p.Stock };
+                return query.ToList();
+            }
+        }
+    }
+}

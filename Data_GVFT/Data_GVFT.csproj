@@ -58,6 +58,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\BusinessEntities\Category.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Client.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Credits.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Departments.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Detail_invoice.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Employees.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Business\BusinessEntities\GVFTEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -73,40 +91,90 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GVFTEntities.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Business\BusinessEntities\sp_helpdiagramdefinition_Result.cs">
+    <Compile Include="Business\BusinessEntities\Invoice.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Location.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Log.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Login_FT.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Merchandise.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Method_of_payment.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Mov_CxC_Employees.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Paid_orders.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Paysheet.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\PaysheetModePay.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Pending_Orders.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Product.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\purchase_of_merchandise.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Roles_Account.cs">
       <DependentUpon>GVFTEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Business\BusinessEntities\sp_helpdiagrams_Result.cs">
       <DependentUpon>GVFTEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Business\BusinessEntities\Status_Account.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Supplier.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Trans_type.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessEntities\Type_Credits.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BusinessLogic\LoginBL.cs" />
+    <Compile Include="Business\BusinessLogic\MerLogic.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Business\BusinessLogic\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Business\BusinessEntities\GVFTEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GVFTEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="App.Config" />
-    <None Include="Business\BusinessEntities\GVFTEntities.edmx.diagram">
-      <DependentUpon>GVFTEntities.edmx</DependentUpon>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Business\BusinessEntities\GVFTEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>GVFTEntities.Context.cs</LastGenOutput>
       <DependentUpon>GVFTEntities.edmx</DependentUpon>
+      <LastGenOutput>GVFTEntities.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Business\BusinessEntities\GVFTEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GVFTEntities.edmx</DependentUpon>
       <LastGenOutput>GVFTEntities.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="Business\BusinessEntities\GVFTEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GVFTEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Business\BusinessEntities\GVFTEntities.edmx.diagram">
+      <DependentUpon>GVFTEntities.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

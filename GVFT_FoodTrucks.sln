@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_GVFT", "Data_GVFT\Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serving_Table", "Serving_Table\Serving_Table.csproj", "{78FB94CB-7903-4ACD-A563-37BADCA9FA05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GVFT_FoodTrucksTest", "GVFT_FoodTrucksTest\GVFT_FoodTrucksTest.csproj", "{579C82C2-E513-42B6-A611-5A6EA76B48DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{78FB94CB-7903-4ACD-A563-37BADCA9FA05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78FB94CB-7903-4ACD-A563-37BADCA9FA05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78FB94CB-7903-4ACD-A563-37BADCA9FA05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{579C82C2-E513-42B6-A611-5A6EA76B48DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{579C82C2-E513-42B6-A611-5A6EA76B48DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{579C82C2-E513-42B6-A611-5A6EA76B48DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{579C82C2-E513-42B6-A611-5A6EA76B48DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
