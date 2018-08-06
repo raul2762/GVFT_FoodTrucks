@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       MinHeight="684"
       MinWidth="1100"
-      Title="RegProduct">
+      Title="RegProduct" Loaded="Page_Loaded">
     <Page.Resources>
         <ControlTemplate TargetType="{x:Type Button}" x:Key="PlantillaBtn">
             <Border x:Name="bdr_main" CornerRadius="5" Margin="4" BorderThickness="1" BorderBrush="{x:Null}" Background="#FFFF8000">
@@ -22,30 +22,113 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+        <Storyboard x:Key="efectValidationbdr">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)" RepeatBehavior="Forever" Storyboard.TargetName="bdrValidation">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="bdrValidation">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-16"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="16"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="bdrValidation_Copy">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-16"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="16"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)" RepeatBehavior="Forever" Storyboard.TargetName="bdrValidation_Copy">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0.3"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="bdrValidation_Copy1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-16"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="16"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)" RepeatBehavior="Forever" Storyboard.TargetName="bdrValidation_Copy1">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0.3"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Page.Resources>
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource efectValidationbdr}"/>
+        </EventTrigger>
+    </Page.Triggers>
 
     <Grid>
         <TabControl MinHeight="603" Margin="27,22,22,0" VerticalAlignment="Top" MinWidth="956" Background="{x:Null}">
             <TabItem Header="Registrar producto" Padding="0,1,0,0">
                 <Grid>
-                    <TextBox HorizontalAlignment="Left" Height="42" Margin="34,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <TextBox x:Name="txtProduct" HorizontalAlignment="Left" Height="42" Margin="34,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50" TextChanged="txtProduct_TextChanged"/>
+                    <Border x:Name="bdrValidation" Height="40" Width="40" Background="Red" CornerRadius="30,30,30,30" RenderTransformOrigin="0.5,0.5" Margin="354,78,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                        <Border.Effect>
+                            <DropShadowEffect Color="Red" Direction="0" BlurRadius="30" Opacity="0.3" ShadowDepth="0"/>
+                        </Border.Effect>
+                        <TextBlock Text="!" FontSize="35" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
                     <Label Content="Nombre de producto:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,32,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="42" Margin="34,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Height="42" Margin="34,198,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50" TextChanged="txtPrice_TextChanged"/>
                     <Label Content="Precio:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,152,0,0" VerticalAlignment="Top"/>
                     <Label Content="Categoria:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,266,0,0" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="34,328,0,0" VerticalAlignment="Top" Width="217" Foreground="#FFFF8000" Height="42" TabIndex="8"/>
-                    <Button Content="Registrar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9"/>
+                    <ComboBox x:Name="cboCategory" HorizontalAlignment="Left" Margin="34,328,0,0" VerticalAlignment="Top" Width="217" Foreground="#FFFF8000" Height="42" TabIndex="8" FontSize="20" FontWeight="Bold" SelectionChanged="cboCategory_SelectionChanged"/>
+                    <Button x:Name="btnRegProduct" Content="Registrar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9" Click="btnRegProduct_Click"/>
+                    <Border x:Name="bdrValidation_Copy" Height="40" Width="40" Background="Red" CornerRadius="30,30,30,30" RenderTransformOrigin="0.5,0.5" Margin="354,200,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                        <Border.Effect>
+                            <DropShadowEffect Color="Red" Direction="0" BlurRadius="30" Opacity="0.3" ShadowDepth="0"/>
+                        </Border.Effect>
+                        <TextBlock Text="!" FontSize="35" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                    <Border x:Name="bdrValidation_Copy1" Height="40" Width="40" Background="Red" CornerRadius="30,30,30,30" RenderTransformOrigin="0.5,0.5" Margin="273,330,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                        <Border.Effect>
+                            <DropShadowEffect Color="Red" Direction="0" BlurRadius="30" Opacity="0.3" ShadowDepth="0"/>
+                        </Border.Effect>
+                        <TextBlock Text="!" FontSize="35" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
                 </Grid>
             </TabItem>
             <TabItem Header="Modificar producto" Padding="20,1,0,0">
                 <Grid>
-                    <TextBox HorizontalAlignment="Left" Height="42" Margin="34,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <TextBox x:Name="txtProductUpdate" HorizontalAlignment="Left" Height="42" Margin="34,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Nombre de producto:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,170,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="42" Margin="34,336,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <TextBox x:Name="txtPriceUpdate" HorizontalAlignment="Left" Height="42" Margin="34,336,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Precio:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,290,0,0" VerticalAlignment="Top"/>
                     <Label Content="Seleccione un producto:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,31,0,0" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="34,93,0,0" VerticalAlignment="Top" Width="281" Foreground="#FFFF8000" Height="42" TabIndex="8"/>
-                    <Button Content="Actualizar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9"/>
+                    <ComboBox x:Name="cboProduct" SelectedValuePath="Name" HorizontalAlignment="Left" Margin="34,93,0,0" VerticalAlignment="Top" Width="281" Foreground="#FFFF8000" Height="42" TabIndex="8" FontSize="20" FontWeight="Bold" SelectionChanged="cboProduct_SelectionChanged"/>
+                    <Button x:Name="btnUpdatProduct" Content="Actualizar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9" Click="btnUpdatProduct_Click"/>
+                    <ComboBox x:Name="cboCategoryUpdate" HorizontalAlignment="Left" Margin="373,93,0,0" VerticalAlignment="Top" Width="217" Foreground="#FFFF8000" Height="42" TabIndex="8" FontSize="20" FontWeight="Bold"/>
+                    <Label Content="Categoria:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="373,31,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
         </TabControl>

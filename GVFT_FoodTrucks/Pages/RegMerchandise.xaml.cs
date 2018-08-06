@@ -34,7 +34,7 @@ namespace GVFT_FoodTrucks.Pages
             try
             {
                 MerLogic.GetInstance().RegisterMerch(txtMerch.Text, 0);
-                MessageBoxRM.Show("Mercancia registrada correctamente!", "Registrada!", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
+                MessageBoxRM.Show("Mercancia registrada correctamente!", "Registro de Mercancia", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
                 txtMerch.Clear();
                 RechargeAllCboS();
             }
@@ -54,7 +54,7 @@ namespace GVFT_FoodTrucks.Pages
                 int Qty = Convert.ToInt32(txtCant.Text);
                 int IdUser = LoginBL.GetInstance().IdUser;
                 MerLogic.GetInstance().RegisterPofMerch(txtDetail.Text, Amount, DateTime.Now.Date, Qty, IdMerch, IdSuppl, IdUser);
-                MessageBoxRM.Show("Suplidor registrado correctamente!", "Registrado!", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
+                MessageBoxRM.Show("Compra registrada correctamente!", "Registro de compras", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
                 txtDetail.Clear();
                 txtCant.Clear();
                 txtCostPur.Clear();
@@ -78,7 +78,7 @@ namespace GVFT_FoodTrucks.Pages
                     Name = txtMerchUpdate.Text
                 };
                 MerLogic.GetInstance().UpdateMerch(updateMerch);
-                MessageBoxRM.Show("Mercancia actualizada correctamente!", "Actualizada!", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
+                MessageBoxRM.Show("Mercancia actualizada correctamente!", "Actualizacion de Mercancia", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
                 cboMerchUpdate.SelectedIndex = -1;
                 txtMerchUpdate.Clear();
                 RechargeAllCboS();
@@ -104,7 +104,7 @@ namespace GVFT_FoodTrucks.Pages
             {
                 string city = cboLocation.SelectedValue.ToString();
                 MerLogic.GetInstance().RegisterSupplier(txtNameSuppl.Text, txtAddrSuppl.Text, city, txtPhoneSuppl.Text);
-                MessageBoxRM.Show("Suplidor registrado correctamente!", "Registrado!", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
+                MessageBoxRM.Show("Suplidor registrado correctamente!", "Registro de Suplidor", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
                 txtNameSuppl.Clear();
                 txtAddrSuppl.Clear();
                 txtPhoneSuppl.Clear();
@@ -129,7 +129,10 @@ namespace GVFT_FoodTrucks.Pages
             cboMerchUpdate.DisplayMemberPath = "Name";
 
             DtGridMerch.ItemsSource = MerLogic.GetInstance().GerMerchList();
-            DtGridMerch.DisplayMemberPath = "Name";
+            //DtGridMerch.DisplayMemberPath = "Name";
+            
+
+            
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -137,6 +140,24 @@ namespace GVFT_FoodTrucks.Pages
             cboLocation.DisplayMemberPath = "Name";
 
             RechargeAllCboS();
+        }
+        private void itemMenuBuy_Click(object sender, RoutedEventArgs e)
+        {
+            tabControl1.SelectedIndex = 1;
+            object item = DtGridMerch.SelectedItem;
+            string Id = (DtGridMerch.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text;
+            int Id2 = Convert.ToInt32(Id) - 1;
+            cboMerch.SelectedIndex = Id2;
+            //MessageBox.Show(Id);
+        }
+
+        private void itemMenuEdit_Click(object sender, RoutedEventArgs e)
+        {
+            tabControl1.SelectedIndex = 2;
+            object item = DtGridMerch.SelectedItem;
+            string Id = (DtGridMerch.SelectedCells[0].Column.GetCellContent(item) as TextBlock).Text;
+            int Id2 = Convert.ToInt32(Id) - 1;
+            cboMerchUpdate.SelectedIndex = Id2;
         }
     }
 }

@@ -21,7 +21,7 @@
 
     <Grid>
         <!-- Poner la opcion MaxWidth en 1051 para trabajar en el espacion real y conveniente del programa para el contenido de los tabitems-->
-        <TabControl MinHeight="603" Margin="27,22,22,0" VerticalAlignment="Top" MinWidth="956" Background="{x:Null}" IsSynchronizedWithCurrentItem="True">
+        <TabControl x:Name="tabControl1" MinHeight="603" Margin="27,22,22,0" VerticalAlignment="Top" MinWidth="956" Background="{x:Null}" IsSynchronizedWithCurrentItem="True">
 
             <TabItem Header="Registro de Mercancías" Padding="0,1,0,0">
                 <Grid>
@@ -29,13 +29,40 @@
                     <Label Content="Nombre de mercancía:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,32,0,0" VerticalAlignment="Top"/>
 
                     <Button x:Name="btnRegMerch" Content="Registrar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,0" VerticalAlignment="Top" Width="217" Height="58" FontSize="22" TabIndex="9" Click="btnRegMerch_Click"/>
-                    <DataGrid x:Name="DtGridMerch" HorizontalAlignment="Left" Height="420" Margin="404,96,0,0" VerticalAlignment="Top" ColumnHeaderHeight="50" Width="434" FontSize="18" FontWeight="Bold" AutoGenerateColumns="False">
+                    <DataGrid x:Name="DtGridMerch" HorizontalAlignment="Left" IsReadOnly="True" MaxHeight="420" Height="420" Margin="547,91,0,0" VerticalAlignment="Top" ColumnHeaderHeight="40" Width="434" FontSize="24" Foreground="#FFFF8000" FontWeight="Bold" Background="{x:Null}" AutoGenerateColumns="False">
+                        
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+                                <Setter Property="Foreground" Value="{StaticResource PrimaryFont}" />
+                                <Setter Property="FontSize" Value="19"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id" IsReadOnly="True" Width="60"/>
-                            <DataGridTextColumn Header="Mercancia" IsReadOnly="True" Width="300"/>
-                            <DataGridTextColumn Header="Stock" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Width="60"/>
+                            <DataGridTextColumn Header="Mercancia" Binding="{Binding Name}" IsReadOnly="True" Width="300"/>
+                            <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" IsReadOnly="True"/>
                         </DataGrid.Columns>
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="itemMenuBuy" Header="Compra de mercancia" FontWeight="Bold" FontSize="14" Click="itemMenuBuy_Click"/>
+                                <MenuItem x:Name="itemMenuEdit" Header="Actualizar de mercancia" FontWeight="Bold" FontSize="14" Click="itemMenuEdit_Click"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
                     </DataGrid>
+                    <Separator HorizontalAlignment="Left" Height="100" Margin="266,240,0,0" VerticalAlignment="Top" Width="414" Background="White" RenderTransformOrigin="0.5,0.5">
+                        <Separator.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Separator.RenderTransform>
+                    </Separator>
+                    <Label Content="Mercancía registradas:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="547,32,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Compra de Mercancías" Padding="20,1,0,0">
@@ -75,6 +102,7 @@
                     <Label Content="Número de Teléfono:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="397,47,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
+
         </TabControl>
     </Grid>
 </Page>

@@ -16,6 +16,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ItemControl;
 using Serving_Table;
+using Data_GVFT.Business.BusinessLogic;
+using MessageBoxCustomRM;
+
 namespace GVFT_FoodTrucks
 {
   public  class Productos
@@ -39,9 +42,7 @@ namespace GVFT_FoodTrucks
     /// </summary>
     public partial class SalesFirst : Page
     {
-        ObservableCollection<Productos> col;
         ObservableCollection<ListaNumeros> listaNumeros;
-        ObservableCollection<DataRowView> col2;
         ListBox list = new ListBox();
         ListBox listBox;
         public SalesFirst()
@@ -105,9 +106,6 @@ namespace GVFT_FoodTrucks
             {
                 int numB = ((Productos)DtGridOrden.SelectedItem).Cantidad;
                 ((Productos)DtGridOrden.SelectedItem).Cantidad = numB - 1;
-                //DataRowView data = (DataRowView)DtGridOrden.SelectedItem;
-                //int numB = Convert.ToInt32(data["Cantidad"]);
-                //data["Cantidad"] = numB + 1;
                 CollectionViewSource.GetDefaultView(DtGridOrden.Items).Refresh();
                 CalculateTotal();
             }
@@ -123,9 +121,6 @@ namespace GVFT_FoodTrucks
             {
                 int numB = ((Productos)DtGridOrden.SelectedItem).Cantidad;
                 ((Productos)DtGridOrden.SelectedItem).Cantidad = numB + 1;
-                //DataRowView data = (DataRowView)DtGridOrden.SelectedItem;
-                //int numB = Convert.ToInt32(data["Cantidad"]);
-                //data["Cantidad"] = numB + 1;
                 CollectionViewSource.GetDefaultView(DtGridOrden.Items).Refresh();
                 var itemProduct = new Productos();
                 itemProduct = (Productos)DtGridOrden.Items[DtGridOrden.SelectedIndex];
@@ -141,37 +136,22 @@ namespace GVFT_FoodTrucks
 
         private void DtGridOrden_Loaded(object sender, RoutedEventArgs e)
         {
-            //DataTable dt = GetTable();
-
-            //dt.Rows.Add(1, 2, 3);
             
-            //DtGridOrden.ItemsSource = dt.AsDataView();
-            //CalculateTotal();
         }
 
         public void LoadMenuFood()
         {
-
-            List<Categorias> categorias = new List<Categorias>();
-            categorias.Add(new Categorias() { Nombre = "Comidas" });
-            categorias.Add(new Categorias() { Nombre = "Bebidas" });
-            categorias.Add(new Categorias() { Nombre = "Combos" });
-            List<MenuItem_UC> menuItems = new List<MenuItem_UC>();
-            menuItems.Add(new MenuItem_UC() { Nombre = "HotDog", Precio = 150, Categoria = "Comidas" });
-            menuItems.Add(new MenuItem_UC() { Nombre = "Hamburguesa", Precio = 250, Categoria = "Comidas" });
-            menuItems.Add(new MenuItem_UC() { Nombre = "Coca cola", Precio = 60, Categoria = "Bebidas" });
-            menuItems.Add(new MenuItem_UC() { Nombre = "Agua dasani", Precio = 35, Categoria = "Bebidas" });
-            menuItems.Add(new MenuItem_UC() { Nombre = "Cerveza Presidente Peq", Precio = 90, Categoria = "Bebidas" });
-            menuItems.Add(new MenuItem_UC() { Nombre = "Palitos de Mozzarella", Precio = 125, Categoria = "Comidas" });
-            menuItems.Add(new MenuItem_UC() { Nombre = "Papas + Refresco", Precio = 125, Categoria = "Combos" });
-            menuItems.Add(new MenuItem_UC() { Nombre = "Hotdog + papas", Precio = 125, Categoria = "Combos" });
+            
+            List<MenuBL.Categorias> categorias;
+            categorias = MenuBL.GetInstance().GetCategorias();
+            List<MenuItem_UC> menuItems;
+            menuItems = MenuBL.GetInstance().GetMenuItems();
             // var menuu = new MenuItem_UC();
-            var menuu2 = new MenuItem_UC();
+            //var menuu2 = new MenuItem_UC();
             //string search = categorias[1].Nombre;
 
             for (int i = 0; i < categorias.Count; i++)
             {
-                
                 listBox = addListBox(i);
                 TabMenu.Items.Add(new TabItem() { Header = categorias[i].Nombre, Cursor = Cursors.Hand, Content = listBox });
                 listBox.SelectionChanged += ListBox_SelectionChanged;
@@ -181,7 +161,6 @@ namespace GVFT_FoodTrucks
                     listBox.Items.Add(nombre);
                 }
             }
-
         }
 
         class Categorias
@@ -195,34 +174,39 @@ namespace GVFT_FoodTrucks
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            //var listado2 = new List<ListaNumeros>()
-            //{
-
-            //};
             LoadMenuFood();
-            //var listado = new List<ListaNumeros>();
-            //listado.Add(new ListaNumeros { Numeros = "01"});
-            //listado.Add(new ListaNumeros { Numeros = "02" });
-            //listado.Add(new ListaNumeros { Numeros = "03" });
-            //listado.Add(new ListaNumeros { Numeros = "04" });
-            //listado.Add(new ListaNumeros { Numeros = "05" });
-            //GetServTables.GetInstance().ObtenerMesas();
             CboListBox.ItemsSource = GetServTables.GetInstance().Tables;
-            //CboListBox.DataContext = new ListaNumeros();
-            //CboListBox.DisplayMemberPath = "Numeros";
-            //CboListBox.SelectedValuePath = "Numeros";
             CboListBox.SelectedIndex = 0;
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            bool exist = false;
             ListBox box = (ListBox)sender;
-            var item = new MenuItem_UC();
-            item = (MenuItem_UC)box.SelectedItem;
-            var item2 = new Productos(item.Nombre, 1, item.Precio);
-
-            DtGridOrden.Items.Add(item2);
-            CalculateTotal();
+            if (box.SelectedIndex > -1)
+            {
+                var item = new MenuItem_UC();
+                item = (MenuItem_UC)box.SelectedItem;
+                var itemProduct = new Productos();
+                for (int i = 0; i < DtGridOrden.Items.Count; i++)
+                {
+                    itemProduct = (Productos)DtGridOrden.Items[i];
+                    if (itemProduct.NombreProducto == item.Nombre)
+                    {
+                        MessageBoxRM.Show("Este Item ya ha sido agregado, utilize los botones\n(Agregar Cant.) y (Restar Cant.) para aumentar o disminuir cantidad.\n\nOJO: " +
+                            "debe seleccionar el producto antes de utilizar los botones indicados", "Item existente", MessageBoxButtonRM.OK, MessageBoxIconRM.Warning);
+                        exist = true;
+                        box.SelectedIndex = -1;
+                    }
+                }
+                if (!exist)
+                {
+                    var item2 = new Productos(item.Nombre, 1, item.Precio);
+                    DtGridOrden.Items.Add(item2);
+                    CalculateTotal();
+                    box.SelectedIndex = -1;
+                }
+            }
         }
         /// <summary>
         /// Metodo para crear un ListBox dinamicamente
@@ -245,17 +229,7 @@ namespace GVFT_FoodTrucks
 
             return listB;
         }
-
-        private void List_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-            var item = new MenuItem_UC();
-            item = (MenuItem_UC)list.SelectedItem;
-            var item2 = new Productos(item.Nombre, 1, item.Precio);
-
-            DtGridOrden.Items.Add(item2);
-            CalculateTotal();
-        }
+        
 
         public void CalculateTotal()
         {
@@ -333,5 +307,6 @@ namespace GVFT_FoodTrucks
             CboPopup.IsOpen = false;
             MyCbo.Text = CboListBox.SelectedValue.ToString();
         }
+        
     }
 }

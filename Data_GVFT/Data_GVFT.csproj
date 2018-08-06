@@ -149,6 +149,7 @@
       <DependentUpon>GVFTEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Business\BusinessLogic\LoginBL.cs" />
+    <Compile Include="Business\BusinessLogic\MenuBL.cs" />
     <Compile Include="Business\BusinessLogic\MerLogic.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -178,6 +179,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ItemControl\ItemControl.csproj">
+      <Project>{2a9f7675-6640-4f60-a499-b041ae70c506}</Project>
+      <Name>ItemControl</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

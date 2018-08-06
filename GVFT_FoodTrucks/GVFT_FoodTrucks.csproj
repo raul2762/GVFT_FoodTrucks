@@ -92,6 +92,9 @@
     <Compile Include="Pages\RegProduct.xaml.cs">
       <DependentUpon>RegProduct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ReportsConsult.xaml.cs">
+      <DependentUpon>ReportsConsult.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SignUp.xaml.cs">
       <DependentUpon>SignUp.xaml</DependentUpon>
     </Compile>
@@ -167,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RegProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ReportsConsult.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

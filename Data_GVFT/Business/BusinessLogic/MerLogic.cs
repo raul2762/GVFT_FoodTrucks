@@ -101,12 +101,12 @@ namespace Data_GVFT.Business.BusinessLogic
             public string Name { get; set; }
             public int Stock { get; set; }
         }
-        public List<Merchandise> GerMerchList()
+        public List<GetMerch> GerMerchList()
         {
             using (var en = new DB_SystemFoodTrucksEntities())
             {
                 var query = from p in en.Merchandise
-                            select new Merchandise() { Id = p.Id, Name = p.Name, Stock = p.Stock };
+                            select new GetMerch() { Id = p.Id, Name = p.Name, Stock = p.Stock };
                 return query.ToList();
             }
         }

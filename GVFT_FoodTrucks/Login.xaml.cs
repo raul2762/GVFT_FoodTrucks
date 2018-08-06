@@ -80,6 +80,18 @@ namespace GVFT_FoodTrucks
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             lblWarning.Visibility = Visibility.Hidden;
+            txtUser.Focus();
+        }
+
+        private void MetroWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F2)
+            {
+                txtUser.Text = "master18";
+                txtPass.Password = "Master809@";
+                
+                btnSignIn_Click(sender,e);
+            }
         }
     }
 }

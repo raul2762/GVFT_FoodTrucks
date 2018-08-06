@@ -40,7 +40,7 @@
                 <Button Width="300" Height="50" FontSize="16" BorderThickness="0" Background="{x:Null}" Focusable="False" Canvas.Top="250" Cursor="Hand">
                     <StackPanel Orientation="Horizontal" Width="290">
                         <Image Source="img/file-chart.png" Height="35" Width="69" VerticalAlignment="Top"/>
-                        <TextBlock VerticalAlignment="Center" Margin="15,0,0,0" Text="Reportes"/>
+                        <TextBlock VerticalAlignment="Center" Margin="15,0,0,0" Text="Reportes y Consultas"/>
                     </StackPanel>
                 </Button>
                 <Button x:Name="btnAdminUser" Width="300" Height="50" FontSize="16" BorderThickness="0" Background="{x:Null}" Focusable="False" Canvas.Top="305" Cursor="Hand" Click="btnAdminUser_Click">
