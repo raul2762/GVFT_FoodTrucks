@@ -97,6 +97,19 @@ namespace Data_GVFT.Business.BusinessLogic
                 return passCorrect;
             }
         }
+        public bool chackIsActive(Login_FT login_FT)
+        {
+            bool isActive = false;
+            using (var en = new DB_SystemFoodTrucksEntities())
+            {
+                var query = en.Login_FT.FirstOrDefault(x => x.Login_name == login_FT.Login_name);
+                if (query.IsActive == 1)
+                {
+                    isActive = true;
+                }
+                return isActive;
+            }
+        }
         public class GetUsername
         {
             public string userName { get; set; }
@@ -178,6 +191,16 @@ namespace Data_GVFT.Business.BusinessLogic
                 var query = from p in en.Status_Account
                             select new GetStatusAcc() { StatusName = p.Status };
                 return query.ToList();
+            }
+        }
+
+        public Login_FT GetLoginsDetail(Login_FT login_FT)
+        {
+            using (var en = new DB_SystemFoodTrucksEntities())
+            {
+                var query = en.Login_FT.FirstOrDefault(x => x.Id == login_FT.Id);
+
+                return query;
             }
         }
     }

@@ -38,7 +38,8 @@ namespace GVFT_FoodTrucks
 
         private void btnRegProduct_Click(object sender, RoutedEventArgs e)
         {
-            frameView.Navigate(new RegProduct());
+            RegProduct product = new RegProduct();
+            frameView.Navigate(product);
         }
 
         private void btnRegMerchandise_Click(object sender, RoutedEventArgs e)

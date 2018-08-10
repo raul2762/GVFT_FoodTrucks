@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DB_SystemFoodTrucksModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Busy_tables">
+          <Key>
+            <PropertyRef Name="Table_busy" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Table_busy" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -103,7 +110,7 @@
           <Property Name="Login_name" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Login_pass" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Roles" Type="int" Nullable="false" />
-          <Property Name="IsActive" Type="int" />
+          <Property Name="IsActive" Type="int" Nullable="false" />
           <Property Name="Registration_date" Type="datetime" />
           <Property Name="Id_employee" Type="int" Nullable="false" />
           <Property Name="Question" Type="varchar" MaxLength="50" Nullable="false" />
@@ -439,6 +446,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Pending_Orders_IdTable">
+          <End Role="Busy_tables" Type="Self.Busy_tables" Multiplicity="0..1" />
+          <End Role="Pending_Orders" Type="Self.Pending_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Busy_tables">
+              <PropertyRef Name="Table_busy" />
+            </Principal>
+            <Dependent Role="Pending_Orders">
+              <PropertyRef Name="Id_table" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Pending_Orders_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="Pending_Orders" Type="Self.Pending_Orders" Multiplicity="*" />
@@ -464,7 +483,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_STATUS_ACC">
-          <End Role="Status_Account" Type="Self.Status_Account" Multiplicity="0..1" />
+          <End Role="Status_Account" Type="Self.Status_Account" Multiplicity="1" />
           <End Role="Login_FT" Type="Self.Login_FT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Status_Account">
@@ -617,6 +636,7 @@
           <Parameter Name="PayMode" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="DB_SystemFoodTrucksModelStoreContainer">
+          <EntitySet Name="Busy_tables" EntityType="Self.Busy_tables" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Credits" EntityType="Self.Credits" Schema="dbo" store:Type="Tables" />
@@ -708,6 +728,10 @@
           <AssociationSet Name="FK_PaysheetModePay_Paysheet" Association="Self.FK_PaysheetModePay_Paysheet">
             <End Role="PaysheetModePay" EntitySet="PaysheetModePay" />
             <End Role="PaysheetModePay1" EntitySet="PaysheetModePay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pending_Orders_IdTable" Association="Self.FK_Pending_Orders_IdTable">
+            <End Role="Busy_tables" EntitySet="Busy_tables" />
+            <End Role="Pending_Orders" EntitySet="Pending_Orders" />
           </AssociationSet>
           <AssociationSet Name="FK_Pending_Orders_Product" Association="Self.FK_Pending_Orders_Product">
             <End Role="Product" EntitySet="Product" />
@@ -843,7 +867,7 @@
           <Property Name="Login_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Login_pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Roles" Type="Int32" Nullable="false" />
-          <Property Name="IsActive" Type="Int32" />
+          <Property Name="IsActive" Type="Int32" Nullable="false" />
           <Property Name="Registration_date" Type="DateTime" Precision="3" />
           <Property Name="Id_employee" Type="Int32" Nullable="false" />
           <Property Name="Question" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -854,7 +878,7 @@
           <NavigationProperty Name="Log" Relationship="Self.FK_ID_USER" FromRole="Login_FT" ToRole="Log" />
           <NavigationProperty Name="purchase_of_merchandise" Relationship="Self.FK_ID_USERPURCHASE" FromRole="Login_FT" ToRole="purchase_of_merchandise" />
           <NavigationProperty Name="Roles_Account" Relationship="Self.FK_ROLES" FromRole="Login_FT" ToRole="Roles_Account" />
-          <NavigationProperty Name="Status_Account" Relationship="Self.FK_STATUS_ACC" FromRole="Login_FT" ToRole="Status_Account" />
+          <NavigationProperty Name="Status_Account" Relationship="DB_SystemFoodTrucksModel.FK_STATUS_ACC" FromRole="Login_FT" ToRole="Status_Account" />
         </EntityType>
         <EntityType Name="Merchandise">
           <Key>
@@ -929,7 +953,8 @@
           <Property Name="Id_table" Type="Int32" />
           <Property Name="unitPrice" Type="Decimal" Precision="6" Scale="2" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Pending_Orders_Product" FromRole="Pending_Orders" ToRole="Product" />
-        </EntityType>
+          <NavigationProperty Name="Busy_tables" Relationship="DB_SystemFoodTrucksModel.FK_Pending_Orders_IdTable" FromRole="Pending_Orders" ToRole="Busy_tables" />
+          </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
@@ -1184,7 +1209,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_STATUS_ACC">
-          <End Role="Status_Account" Type="Self.Status_Account" Multiplicity="0..1" />
+          <End Role="Status_Account" Type="Self.Status_Account" Multiplicity="1" />
           <End Role="Login_FT" Type="Self.Login_FT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Status_Account">
@@ -1501,7 +1526,12 @@
             <End Role="Credits" EntitySet="Credits" />
           </AssociationSet>
           <EntitySet Name="Location" EntityType="DB_SystemFoodTrucksModel.Location" />
-        </EntityContainer>
+          <EntitySet Name="Busy_tables" EntityType="DB_SystemFoodTrucksModel.Busy_tables" />
+          <AssociationSet Name="FK_Pending_Orders_IdTable" Association="DB_SystemFoodTrucksModel.FK_Pending_Orders_IdTable">
+            <End Role="Busy_tables" EntitySet="Busy_tables" />
+            <End Role="Pending_Orders" EntitySet="Pending_Orders" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagrams_Result">
           <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
@@ -1528,7 +1558,27 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nameLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-      </Schema>
+        <EntityType Name="Busy_tables">
+          <Key>
+            <PropertyRef Name="Table_busy" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Table_busy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pending_Orders" Relationship="DB_SystemFoodTrucksModel.FK_Pending_Orders_IdTable" FromRole="Busy_tables" ToRole="Pending_Orders" />
+        </EntityType>
+        <Association Name="FK_Pending_Orders_IdTable">
+          <End Type="DB_SystemFoodTrucksModel.Busy_tables" Role="Busy_tables" Multiplicity="0..1" />
+          <End Type="DB_SystemFoodTrucksModel.Pending_Orders" Role="Pending_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Busy_tables">
+              <PropertyRef Name="Table_busy" />
+            </Principal>
+            <Dependent Role="Pending_Orders">
+              <PropertyRef Name="Id_table" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1816,6 +1866,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Busy_tables">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Busy_tables">
+              <MappingFragment StoreEntitySet="Busy_tables">
+                <ScalarProperty Name="Table_busy" ColumnName="Table_busy" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1830,7 +1888,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

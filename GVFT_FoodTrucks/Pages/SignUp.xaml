@@ -7,7 +7,7 @@
       MinHeight="684"
       MinWidth="1100"
       Title="SignUp" Loaded="Page_Loaded">
-    <!--<Page.Resources>
+    <Page.Resources>
         <ControlTemplate TargetType="{x:Type Button}" x:Key="PlantillaBtn">
             <Border x:Name="bdr_main" CornerRadius="5" Margin="4" BorderThickness="1" BorderBrush="{x:Null}" Background="#FFFF8000">
                 <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,6,8,6" ContentSource="Content" />
@@ -21,8 +21,27 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
-    </Page.Resources>-->
+        
+        <Storyboard x:Key="efectValidationbdr">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.Opacity)" RepeatBehavior="Forever" Storyboard.TargetName="bdrValidation">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.3"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="bdrValidation">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-16"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="16"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
 
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource efectValidationbdr}"/>
+        </EventTrigger>
+    </Page.Triggers>
+    
     <Grid>
         <TabControl MinHeight="603" Margin="27,22,22,0" VerticalAlignment="Top" MinWidth="956" Background="{x:Null}">
             <TabItem Header="Registrar Usuario" Padding="0,1,0,0">
@@ -50,33 +69,40 @@
             <TabItem Header="Editar usuario" Padding="20,1,0,0">
                 <Grid>
                     <Label Content="Seleccione un usuario:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="30,32,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cboUser" HorizontalAlignment="Left" Margin="30,79,0,0" VerticalAlignment="Top" Width="261" Foreground="#FFFF8000" Height="42" TabIndex="6"/>
+                    <ComboBox x:Name="cboUser" HorizontalAlignment="Left" SelectedValuePath="userName" Margin="30,79,0,0" VerticalAlignment="Top" Width="261" Foreground="#FFFF8000" Height="42" TabIndex="6" SelectionChanged="cboUser_SelectionChanged" FontSize="20" FontWeight="Bold"/>
                     <TextBox x:Name="txtUserUpdate" HorizontalAlignment="Left" Height="42" Margin="30,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" IsReadOnly="True" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Nombre de Usuario:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="30,143,0,0" VerticalAlignment="Top"/>
                     <Label Content="Contraseña:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="30,247,0,0" VerticalAlignment="Top"/>
                     <Label Content="Confirmar contraseña:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="30,354,0,0" VerticalAlignment="Top"/>
                     <PasswordBox x:Name="txtPassUpdate" HorizontalAlignment="Left" Margin="30,294,0,0" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderBrush="#FFFF8000" Foreground="#FFFF8000" BorderThickness="0,0,0,1" Height="40" FontSize="24" TabIndex="2"/>
-                    <PasswordBox x:Name="txtPass2Update" HorizontalAlignment="Left" Margin="30,401,0,0" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderBrush="#FFFF8000" Foreground="#FFFF8000" BorderThickness="0,0,0,1" Height="42" FontSize="24" TabIndex="3"/>
-                    <Label Content="Tipo de usuario:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="383,143,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Estado de cuenta:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="383,32,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cboRolesUpdate" HorizontalAlignment="Left" Margin="383,192,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="6"/>
-                    <ComboBox x:Name="cboStatusAccUpdate" HorizontalAlignment="Left" Margin="383,81,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="40" TabIndex="7"/>
-                    <TextBox x:Name="txtQuestUpdate" HorizontalAlignment="Left" Height="42" Margin="383,299,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="4" MaxLines="1" MaxLength="50"/>
-                    <Label Content="Pregunta de seguridad:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="383,250,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Respuesta de seguridad:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="383,354,0,0" VerticalAlignment="Top"/>
-                    <PasswordBox x:Name="txtAmwserUpdate" HorizontalAlignment="Left" Margin="383,401,0,0" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderBrush="#FFFF8000" Foreground="#FFFF8000" BorderThickness="0,0,0,1" Height="42" FontSize="24" TabIndex="5"/>
-                    <Button x:Name="btnUpdateUser" Content="Actualizar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="30,469,0,0" VerticalAlignment="Top" Width="217" Height="57" FontSize="22" TabIndex="9"/>
+                    <PasswordBox x:Name="txtPass2Update" HorizontalAlignment="Left" Margin="30,401,0,0" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderBrush="#FFFF8000" Foreground="#FFFF8000" BorderThickness="0,0,0,1" Height="42" FontSize="24" TabIndex="3" PasswordChanged="txtPass2Update_PasswordChanged"/>
+                    <Label Content="Tipo de usuario:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="417,143,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Estado de cuenta:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="417,32,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cboRolesUpdate" HorizontalAlignment="Left" Margin="417,192,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="6" FontSize="20" FontWeight="Bold"/>
+                    <ComboBox x:Name="cboStatusAccUpdate" HorizontalAlignment="Left" Margin="417,81,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="40" TabIndex="7" FontSize="20" FontWeight="Bold"/>
+                    <TextBox x:Name="txtQuestUpdate" HorizontalAlignment="Left" Height="42" Margin="417,299,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="4" MaxLines="1" MaxLength="50"/>
+                    <Label Content="Pregunta de seguridad:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="417,250,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Respuesta de seguridad:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="417,354,0,0" VerticalAlignment="Top"/>
+                    <PasswordBox x:Name="txtAmwserUpdate" HorizontalAlignment="Left" Margin="417,401,0,0" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderBrush="#FFFF8000" Foreground="#FFFF8000" BorderThickness="0,0,0,1" Height="42" FontSize="24" TabIndex="5"/>
+                    <Button x:Name="btnUpdateUser" Content="Actualizar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="30,469,0,0" VerticalAlignment="Top" Width="217" Height="57" FontSize="22" TabIndex="9" Click="btnUpdateUser_Click"/>
+                    <Border x:Name="bdrValidation" Height="40" Width="40" Background="Red" CornerRadius="30,30,30,30" RenderTransformOrigin="0.5,0.5" Margin="339,401,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                        <Border.Effect>
+                            <DropShadowEffect Color="Red" Direction="0" BlurRadius="30" Opacity="0.3" ShadowDepth="0"/>
+                        </Border.Effect>
+                        <TextBlock Text="!" FontSize="35" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
 
                 </Grid>
             </TabItem>
         </TabControl>
 
     </Grid>
-    <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ButtonStyleRM.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Page.Resources>
 </Page>

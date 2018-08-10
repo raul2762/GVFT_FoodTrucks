@@ -51,6 +51,7 @@ namespace Data_GVFT.Business.BusinessEntities
         public virtual DbSet<Trans_type> Trans_type { get; set; }
         public virtual DbSet<Type_Credits> Type_Credits { get; set; }
         public virtual DbSet<Location> Location { get; set; }
+        public virtual DbSet<Busy_tables> Busy_tables { get; set; }
     
         public virtual int RegisterLogin(string username, string loginPass, Nullable<int> rol, Nullable<int> statusAcc, Nullable<System.DateTime> regDate, Nullable<int> idEmployee, string quest, string amswer)
         {

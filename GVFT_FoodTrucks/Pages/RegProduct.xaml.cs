@@ -29,6 +29,7 @@ namespace GVFT_FoodTrucks.Pages
         Storyboard storyboard;
         bool _started;
         bdrValidationIcon validationIcon;
+        public string Mensajito { get; set; }
         public RegProduct()
         {
             InitializeComponent();
@@ -51,7 +52,7 @@ namespace GVFT_FoodTrucks.Pages
             storyboard = this.TryFindResource("efectValidationbdr") as Storyboard;
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
-            
+            MessageBoxRM.Show(Mensajito);
         }
 
         private void Timer_Tick(object sender, EventArgs e)

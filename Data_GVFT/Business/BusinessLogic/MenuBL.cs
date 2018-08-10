@@ -98,7 +98,7 @@ namespace Data_GVFT.Business.BusinessLogic
             {
                 var query = from p in en.Product
                             join c in en.Category on p.Id_category equals c.Id
-                            select new MenuItem_UC() { Nombre = p.Name_product, Precio = (int)p.unitPrice, Categoria = c.Name };
+                            select new MenuItem_UC() { Id = p.Id, Nombre = p.Name_product, Precio = (int)p.unitPrice, Categoria = c.Name };
 
                 return query.ToList();
             }

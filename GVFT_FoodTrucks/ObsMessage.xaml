@@ -1,0 +1,24 @@
+﻿<Controls:MetroWindow x:Class="GVFT_FoodTrucks.ObsMessage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GVFT_FoodTrucks"
+        mc:Ignorable="d"
+        Title="ObsMessage" Height="220.233" Width="395.763" TitleCharacterCasing="Normal" ShowMaxRestoreButton="False" ShowMinButton="False">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ButtonStyleRM.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="132,10,0,0" TextWrapping="Wrap" Text="Observación" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
+        <TextBox x:Name="txtObs" HorizontalAlignment="Left" Height="89" Margin="91,44,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="210" Background="{x:Null}" Foreground="#FFFF8000" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="btnCancel" Content="Cancelar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="177,138,0,0" VerticalAlignment="Top" Width="98" Height="41" FontSize="14" Click="btnCancel_Click"/>
+        <Button x:Name="btnAdd" Content="Agregar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="280,138,0,0" VerticalAlignment="Top" Width="98" Height="41" FontSize="14" Click="btnAdd_Click"/>
+
+    </Grid>
+</Controls:MetroWindow>

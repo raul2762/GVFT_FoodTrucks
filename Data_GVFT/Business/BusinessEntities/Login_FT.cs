@@ -26,7 +26,7 @@ namespace Data_GVFT.Business.BusinessEntities
         public string Login_name { get; set; }
         public string Login_pass { get; set; }
         public int Roles { get; set; }
-        public Nullable<int> IsActive { get; set; }
+        public int IsActive { get; set; }
         public Nullable<System.DateTime> Registration_date { get; set; }
         public int Id_employee { get; set; }
         public string Question { get; set; }

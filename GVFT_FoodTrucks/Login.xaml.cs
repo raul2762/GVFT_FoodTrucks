@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using Data_GVFT.Business.BusinessEntities;
 using Data_GVFT.Business.BusinessLogic;
+using MessageBoxCustomRM;
+using System.Threading;
 
 namespace GVFT_FoodTrucks
 {
@@ -22,17 +24,40 @@ namespace GVFT_FoodTrucks
     /// </summary>
     public partial class Login : MetroWindow
     {
+        
         public Login()
         {
             InitializeComponent();
+            
         }
 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            bool userExist, passCorrect;
-            string user = txtUser.Text;
+            //delegado pgr = RunPgrBar;
+            //delegado2 pgr2 = RunLogin;
+            //pgr.Invoke();
+            //pgr2.Invoke();
+            new Thread(RunPgrBar).Start();
+            new Thread(RunLogin).Start();
+            
+        }
+
+        public void RunPgrBar()
+        {
+            this.Dispatcher.BeginInvoke(new Action(() => 
+            {
+                pgrBar.Visibility = Visibility.Visible;
+            }));
+        }
+        public void RunLogin()
+        {
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                bool userExist, passCorrect, checkIsActive;
+                string user = txtUser.Text;
             string pass = txtPass.Password;
 
+                
             var queryUserN = new Login_FT
             {
                 Login_name = user,
@@ -43,43 +68,87 @@ namespace GVFT_FoodTrucks
 
             if (userExist == false)
             {
-                lblWarning.Content = "Este usuario no existe";
-                lblWarning.Visibility = Visibility.Visible;
+                //this.Dispatcher.BeginInvoke(new Action(() =>
+                //{
+                    lblWarning.Content = "Este usuario no existe";
+                    lblWarning.Visibility = Visibility.Visible;
+                    pgrBar.Visibility = Visibility.Hidden;
+                //}));
+                
             }
             else
             {
-                lblWarning.Visibility = Visibility.Hidden;
+                //this.Dispatcher.BeginInvoke(new Action(() =>
+                //{
+                    lblWarning.Visibility = Visibility.Hidden;
+                //}));
+                
                 passCorrect = LoginBL.GetInstance().checkPassword(queryUserN);
                 var pss = new LoginBL.getPass();
                 if (passCorrect == false)
                 {
-                    lblWarning.Content = "Contraseña incorrecta";
-                    lblWarning.Visibility = Visibility.Visible;
+                    //this.Dispatcher.BeginInvoke(new Action(() =>
+                    //{
+                        lblWarning.Content = "Este usuario no existe";
+                        lblWarning.Visibility = Visibility.Visible;
+                        pgrBar.Visibility = Visibility.Hidden;
+                    //}));
                 }
                 else
                 {
-                    lblWarning.Visibility = Visibility.Hidden;
+                    checkIsActive = LoginBL.GetInstance().chackIsActive(queryUserN);
+                    //this.Dispatcher.BeginInvoke(new Action(() =>
+                    //{
+                        lblWarning.Visibility = Visibility.Hidden;
+                    //}));
                     if (ChkSale.IsChecked == true)
                     {
-                        Sales show = new Sales();
-                        show.Show();
-                        this.Close();
+                        if (checkIsActive)
+                        {
+
+                            Sales show = new Sales();
+                            show.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBoxRM.Show("Este usuario esta deshabilitado.\nPongase en contacto con el administrador para mas informacion", "Usuario Deshabilitado", MessageBoxButtonRM.OK, MessageBoxIconRM.Warning);
+                            //this.Dispatcher.BeginInvoke(new Action(() =>
+                            //{
+                                pgrBar.Visibility = Visibility.Hidden;
+                            //}));
+                        }
+
                     }
-                    else if(ChkAdmin.IsChecked == true)
+                    else if (ChkAdmin.IsChecked == true)
                     {
-                        wAdmin_area show = new wAdmin_area();
-                        show.IdUser = LoginBL.GetInstance().IdUser;
-                        show.Show();
-                        this.Close();
+                        if (checkIsActive)
+                        {
+                            wAdmin_area show = new wAdmin_area();
+                            show.IdUser = LoginBL.GetInstance().IdUser;
+                            show.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBoxRM.Show("Este usuario esta deshabilitado.\nPongase en contacto con el administrador para mas informacion", "Usuario Deshabilitado", MessageBoxButtonRM.OK, MessageBoxIconRM.Warning);
+                            //this.Dispatcher.BeginInvoke(new Action(() =>
+                            //{
+                                pgrBar.Visibility = Visibility.Hidden;
+                            //}));
+                        }
+
                     }
                 }
             }
-
+            }));
         }
-
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            lblWarning.Visibility = Visibility.Hidden;
+            this.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                lblWarning.Visibility = Visibility.Hidden;
+            }));
             txtUser.Focus();
         }
 

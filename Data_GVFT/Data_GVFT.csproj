@@ -58,6 +58,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\BusinessEntities\Busy_tables.cs">
+      <DependentUpon>GVFTEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Business\BusinessEntities\Category.cs">
       <DependentUpon>GVFTEntities.tt</DependentUpon>
     </Compile>

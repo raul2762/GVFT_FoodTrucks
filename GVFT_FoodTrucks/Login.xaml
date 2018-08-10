@@ -11,6 +11,7 @@
         TitleCaps="False"
         Title="Login" Height="321.824" Width="603.586" WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded" KeyDown="MetroWindow_KeyDown">
     <Grid Background="#FF2F2F2F">
+        <Controls:MetroProgressBar x:Name="pgrBar" IsIndeterminate="True" Foreground="{DynamicResource AccentColorBrush}" Margin="0,0,0,284" Visibility="Hidden"/>
         <Button x:Name="btnSignIn" Template="{DynamicResource PlantillaBtn}" Content="Iniciar Sesion" Click="btnSignIn_Click" HorizontalAlignment="Left" Margin="305,231,0,0" VerticalAlignment="Top" Width="242" Controls:ControlsHelper.ContentCharacterCasing="Normal" Foreground="White" TabIndex="5" FontSize="16" Background="#FFFF8000" BorderBrush="{x:Null}" Focusable="False"/>
         <TextBox x:Name="txtUser" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.Watermark="Usuario" HorizontalAlignment="Left" Height="28" Margin="305,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="242" Background="{x:Null}" BorderThickness="0,0,0,1" FontWeight="Bold" FontSize="16" TabIndex="1" Foreground="#FFFF8000" BorderBrush="#FFFF8000" MaxLines="1" MaxLength="20"/>
         <RadioButton x:Name="ChkSale" Content="Area de Ventas" HorizontalAlignment="Left" Margin="305,181,0,0" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" TabIndex="3" Focusable="False" Controls:ControlsHelper.FocusBorderBrush="#FFFF8000" IsChecked="True"/>
@@ -29,6 +30,7 @@
         </Separator>
         <Image HorizontalAlignment="Left" Height="231" Margin="18,24,0,0" VerticalAlignment="Top" Width="211" Source="pack://siteoforigin:,,,/img/LogoEdit2.png" Stretch="Fill"/>
         <Label x:Name="lblWarning" Content="no existe este usuario" HorizontalAlignment="Left" Margin="305,152,0,0" VerticalAlignment="Top" Foreground="#FFFF8000" FontSize="14" FontWeight="Bold" Width="242" HorizontalContentAlignment="Center" Background="{x:Null}"/>
+        
 
     </Grid>
     <Window.Resources>

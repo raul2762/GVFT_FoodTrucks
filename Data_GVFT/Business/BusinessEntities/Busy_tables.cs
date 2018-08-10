@@ -12,15 +12,18 @@ namespace Data_GVFT.Business.BusinessEntities
     using System;
     using System.Collections.Generic;
     
-    public partial class Pending_Orders
+    public partial class Busy_tables
     {
-        public int Id { get; set; }
-        public Nullable<int> Id_product { get; set; }
-        public Nullable<int> Qty { get; set; }
-        public Nullable<int> Id_table { get; set; }
-        public Nullable<decimal> unitPrice { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Busy_tables()
+        {
+            this.Pending_Orders = new HashSet<Pending_Orders>();
+        }
     
-        public virtual Product Product { get; set; }
-        public virtual Busy_tables Busy_tables { get; set; }
+        public int Id { get; set; }
+        public int Table_busy { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pending_Orders> Pending_Orders { get; set; }
     }
 }

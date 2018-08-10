@@ -23,14 +23,16 @@ namespace GVFT_FoodTrucks
 {
   public  class Productos
     {
+        public int Id { get; set; }
         public string NombreProducto { get; set; }
         public int Cantidad { get; set; }
         public int Precio { get; set; }
 
         public Productos()
         { }
-        public Productos(string NomP, int Cant, int Precioo)
+        public Productos(int IdP,string NomP, int Cant, int Precioo)
         {
+            this.Id = IdP;
             this.NombreProducto = NomP;
             this.Cantidad = Cant;
             this.Precio = Precioo;
@@ -45,6 +47,7 @@ namespace GVFT_FoodTrucks
         ObservableCollection<ListaNumeros> listaNumeros;
         ListBox list = new ListBox();
         ListBox listBox;
+        public static string GetObsMessage;
         public SalesFirst()
         {
             InitializeComponent();
@@ -111,7 +114,7 @@ namespace GVFT_FoodTrucks
             }
             else
             {
-                //Aqui va un MessageBox
+                MessageBoxRM.Show("Selecciona un producto de la orden de arriba para disminuir su cantidad", "Aumentar Cantidad", MessageBoxButtonRM.OK, MessageBoxIconRM.Warning);
             }
         }
 
@@ -129,7 +132,7 @@ namespace GVFT_FoodTrucks
             }
             else
             {
-                //Aqui va un MessageBox
+                MessageBoxRM.Show("Selecciona un producto de la orden de arriba para aumentar su cantidad", "Aumentar Cantidad", MessageBoxButtonRM.OK, MessageBoxIconRM.Warning);
             }
 
         }
@@ -146,9 +149,6 @@ namespace GVFT_FoodTrucks
             categorias = MenuBL.GetInstance().GetCategorias();
             List<MenuItem_UC> menuItems;
             menuItems = MenuBL.GetInstance().GetMenuItems();
-            // var menuu = new MenuItem_UC();
-            //var menuu2 = new MenuItem_UC();
-            //string search = categorias[1].Nombre;
 
             for (int i = 0; i < categorias.Count; i++)
             {
@@ -161,6 +161,7 @@ namespace GVFT_FoodTrucks
                     listBox.Items.Add(nombre);
                 }
             }
+           
         }
 
         class Categorias
@@ -177,11 +178,14 @@ namespace GVFT_FoodTrucks
             LoadMenuFood();
             CboListBox.ItemsSource = GetServTables.GetInstance().Tables;
             CboListBox.SelectedIndex = 0;
+            NtfIcon.Visibility = Visibility.Hidden;
+            
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             bool exist = false;
+            bool exist2 = false;
             ListBox box = (ListBox)sender;
             if (box.SelectedIndex > -1)
             {
@@ -191,20 +195,46 @@ namespace GVFT_FoodTrucks
                 for (int i = 0; i < DtGridOrden.Items.Count; i++)
                 {
                     itemProduct = (Productos)DtGridOrden.Items[i];
-                    if (itemProduct.NombreProducto == item.Nombre)
+                    if (itemProduct.NombreProducto == item.Nombre && TabMenu.SelectedIndex != 1)
                     {
                         MessageBoxRM.Show("Este Item ya ha sido agregado, utilize los botones\n(Agregar Cant.) y (Restar Cant.) para aumentar o disminuir cantidad.\n\nOJO: " +
-                            "debe seleccionar el producto antes de utilizar los botones indicados", "Item existente", MessageBoxButtonRM.OK, MessageBoxIconRM.Warning);
+                            "debe seleccionar el producto antes de utilizar los botones indicados", $"Item #{item.Id} existente", MessageBoxButtonRM.OK, MessageBoxIconRM.Warning);
                         exist = true;
                         box.SelectedIndex = -1;
                     }
                 }
                 if (!exist)
                 {
-                    var item2 = new Productos(item.Nombre, 1, item.Precio);
-                    DtGridOrden.Items.Add(item2);
-                    CalculateTotal();
-                    box.SelectedIndex = -1;
+                    if (TabMenu.SelectedIndex == 1)
+                    {
+                        string nameProduct = ((Productos)DtGridOrden.SelectedItem).NombreProducto;
+                        var item2 = new Productos(item.Id, item.Nombre, 1, item.Precio);
+                        ((Productos)DtGridOrden.SelectedItem).NombreProducto = nameProduct + " - " + item.Nombre;
+                        for (int i = 0; i < DtGridOrden.Items.Count; i++)
+                        {
+                            itemProduct = (Productos)DtGridOrden.Items[i];
+                            if (itemProduct.NombreProducto == item.Nombre)
+                            {
+                                int numB = ((Productos)DtGridOrden.Items[i]).Cantidad;
+                                ((Productos)DtGridOrden.Items[i]).Cantidad = numB + 1;
+                                exist2 = true;
+                            }
+                        }
+                        if (!exist2)
+                        {
+                            DtGridOrden.Items.Add(item2);
+                        }
+                        CollectionViewSource.GetDefaultView(DtGridOrden.Items).Refresh();
+                        CalculateTotal();
+                        box.SelectedIndex = -1;
+                    }
+                    else
+                    {
+                        var item2 = new Productos(item.Id, item.Nombre, 1, item.Precio);
+                        DtGridOrden.Items.Add(item2);
+                        CalculateTotal();
+                        box.SelectedIndex = -1;
+                    }
                 }
             }
         }
@@ -230,7 +260,38 @@ namespace GVFT_FoodTrucks
             return listB;
         }
         
-
+        public string ProcesarText()
+        {
+            int final = DtGridOrden.Items.Count - 1;
+            var itemProduct = new Productos();
+            string ordenList = "";
+            for (int i = 0; i < DtGridOrden.Items.Count; i++)
+            {
+                itemProduct = (Productos)DtGridOrden.Items[i];
+                if (i != final)
+                {
+                    if (ordenList == "")
+                    {
+                        ordenList = itemProduct.Id + ",";
+                        ordenList += itemProduct.Cantidad + ",";
+                        ordenList += itemProduct.Precio + "|" + Environment.NewLine;
+                }
+                else
+                {
+                        ordenList += itemProduct.Id + ",";
+                        ordenList += itemProduct.Cantidad + ",";
+                        ordenList += itemProduct.Precio + "|" + Environment.NewLine;
+                }
+            }
+                else
+                {
+                    ordenList += itemProduct.Id + ",";
+                    ordenList += itemProduct.Cantidad + ",";
+                    ordenList += itemProduct.Precio + "|";
+                }
+            }
+            return ordenList;
+        }
         public void CalculateTotal()
         {
             int Cant = 0, Precio = 0, total1 = 0, total2 = 0;
@@ -307,6 +368,45 @@ namespace GVFT_FoodTrucks
             CboPopup.IsOpen = false;
             MyCbo.Text = CboListBox.SelectedValue.ToString();
         }
-        
+        int ord;
+        private void BtnInic_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            
+           string ordenStr = ProcesarText();
+            MessageBoxRM.Show(ordenStr);
+            if (NtfIcon.Visibility == Visibility.Hidden)
+            {
+                NtfIcon.Visibility = Visibility.Visible;
+            }
+            ord++;
+            NtfIcon.Badge = ord;
+        }
+
+        private void itemMenuObs_Click(object sender, RoutedEventArgs e)
+        {
+            
+            object item = DtGridOrden.SelectedItem;
+            string nameProduct = ((Productos)DtGridOrden.SelectedItem).NombreProducto;
+            ObsMessage obs = new ObsMessage();
+            obs.ShowDialog();
+            
+            if (obs.BtnAddState == true)
+            {
+                ((Productos)DtGridOrden.SelectedItem).NombreProducto = nameProduct + " - " + obs.txtObs.Text;
+                CollectionViewSource.GetDefaultView(DtGridOrden.Items).Refresh();
+            }
+            
+        }
+
+        private void itemMenuTpp_Click(object sender, RoutedEventArgs e)
+        {
+            TabMenu.SelectedIndex = 1;
+        }
+
+        private void TabMenu_Loaded(object sender, RoutedEventArgs e)
+        {
+            var tab = (TabItem)TabMenu.Items[1];
+            tab.IsEnabled = false;
+        }
     }
 }

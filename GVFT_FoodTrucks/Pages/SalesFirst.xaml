@@ -28,8 +28,14 @@
                 <Controls:DataGridNumericUpDownColumn Header="Cant" Binding="{Binding Cantidad}" IsReadOnly="True" FontSize="24" Minimum="0"/>
                 <Controls:DataGridNumericUpDownColumn Header="Precio" Binding="{Binding Precio}" FontSize="24" IsReadOnly="True" Width="120" Minimum="0" StringFormat="C"/>
             </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="itemMenuObs" Header="Agregar observacion" FontWeight="Bold" FontSize="16" Click="itemMenuObs_Click"/>
+                    <MenuItem x:Name="itemMenuTpp" Header="Agregar Topping" FontWeight="Bold" FontSize="16" Click="itemMenuTpp_Click"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
-        <TabControl x:Name="TabMenu" Margin="577,147,84,170"  MinHeight="367" Height="Auto" MinWidth="763" MaxWidth="1289" Width="Auto" Background="{x:Null}" >
+        <TabControl x:Name="TabMenu" Margin="577,147,84,170"  MinHeight="367" Height="Auto" MinWidth="763" MaxWidth="1289" Width="Auto" Background="{x:Null}" Loaded="TabMenu_Loaded" >
             <!--<TabItem x:Name="TabPage1" Header="Page 1" Background="{x:Null}" Cursor="Hand">
                 
                     <ListBox x:Name="dockP" Template="{DynamicResource ModeloT}" ItemContainerStyle="{DynamicResource EstiloT}"  HorizontalAlignment="Left"  VerticalAlignment="Top" Width="765" Height="322" SelectionChanged="dockP_SelectionChanged" Background="{x:Null}">
@@ -122,7 +128,7 @@
                     </TransformGroup>
                 </Separator.RenderTransform>
             </Separator>
-            <Border x:Name="BtnInic" BorderThickness="1" Style="{DynamicResource BtnInic}" Height="111" Canvas.Left="602" Canvas.Top="29" Width="137" CornerRadius="10,10,20,20" Background="#FF1ABC9C" PreviewMouseLeftButtonDown="BtnInic_PreviewMouseLeftButtonDown" Cursor="Hand">
+            <Border x:Name="BtnInic" BorderThickness="1" Style="{DynamicResource BtnInic}" Height="111" Canvas.Left="602" Canvas.Top="29" Width="137" CornerRadius="10,10,20,20" Background="#FF1ABC9C" PreviewMouseLeftButtonDown="BtnInic_PreviewMouseLeftButtonDown" Cursor="Hand" MouseLeftButtonDown="BtnInic_MouseLeftButtonDown">
                 <Grid>
                     <Border BorderThickness="1" Height="31" Canvas.Left="602" Canvas.Top="29" Width="137" CornerRadius="10,10,0,0" Background="#FF16A085" Cursor="Hand" PreviewMouseLeftButtonDown="BtnInic_PreviewMouseLeftButtonDown" Margin="-1,-1,-1,79">
                         <TextBlock TextWrapping="Wrap" Text="Iniciar orden" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
@@ -150,7 +156,7 @@
                         <Image Margin="52,32,45,5" Source="/GVFT_FoodTrucks;component/img/update.png"/>
                     </Grid>
                 </Border>
-            <Controls:Badged x:Name="NtfIcon" Badge="5" BadgePlacementMode="TopRight" Canvas.Left="1092" Canvas.Top="29" FontSize="24" FontWeight="Bold" Style="{StaticResource BadgedStyle1}">
+            <Controls:Badged x:Name="NtfIcon" Badge="0" BadgePlacementMode="TopRight" Canvas.Left="1092" Canvas.Top="29" FontSize="24" FontWeight="Bold" Style="{StaticResource BadgedStyle1}">
                 <Border Height="111" Width="180" Canvas.Top="29" Canvas.Left="1092"/>
             </Controls:Badged>
 
