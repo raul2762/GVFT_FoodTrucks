@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using MahApps.Metro.Controls;
 
 namespace GVFT_FoodTrucks
@@ -20,9 +21,29 @@ namespace GVFT_FoodTrucks
     /// </summary>
     public partial class Sales : MetroWindow
     {
+        DispatcherTimer timer = new DispatcherTimer();
+        public static bool CloseSalesW = false;
+        public static bool isActive = false;
         public Sales()
         {
             InitializeComponent();
+        }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            timer.Interval = TimeSpan.FromMilliseconds(100);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+            isActive = true;
+            CloseSalesW = false;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (CloseSalesW)
+            {
+                this.Close();
+            }
         }
     }
 }

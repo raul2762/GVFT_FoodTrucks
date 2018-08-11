@@ -18,6 +18,7 @@ using ItemControl;
 using Serving_Table;
 using Data_GVFT.Business.BusinessLogic;
 using MessageBoxCustomRM;
+using ItemCardOrders;
 
 namespace GVFT_FoodTrucks
 {
@@ -48,6 +49,8 @@ namespace GVFT_FoodTrucks
         ListBox list = new ListBox();
         ListBox listBox;
         public static string GetObsMessage;
+        public static bool sendOrder { get; set; }
+        public static CardItemOrd GetOrdens;
         public SalesFirst()
         {
             InitializeComponent();
@@ -104,7 +107,6 @@ namespace GVFT_FoodTrucks
 
         private void BtnRest_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
             if (DtGridOrden.SelectedIndex >= 0)
             {
                 int numB = ((Productos)DtGridOrden.SelectedItem).Cantidad;
@@ -373,7 +375,12 @@ namespace GVFT_FoodTrucks
         {
             
            string ordenStr = ProcesarText();
-            MessageBoxRM.Show(ordenStr);
+            //MessageBoxRM.Show(ordenStr);
+            var card = new CardItemOrd();
+            card.Nombre = "Raul Master";
+            card.Orden = "Pruebita!";
+            GetOrdens = card;
+            sendOrder = true;
             if (NtfIcon.Visibility == Visibility.Hidden)
             {
                 NtfIcon.Visibility = Visibility.Visible;
@@ -407,6 +414,18 @@ namespace GVFT_FoodTrucks
         {
             var tab = (TabItem)TabMenu.Items[1];
             tab.IsEnabled = false;
+        }
+
+        private void btnImgLogout_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+        }
+
+        private void btnImgOpenW_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            OrdersProduction orders = new OrdersProduction();
+            orders.Show();
         }
     }
 }

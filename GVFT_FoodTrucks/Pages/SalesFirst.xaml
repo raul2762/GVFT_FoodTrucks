@@ -146,22 +146,24 @@
                     <Image Margin="17,34,15,9" Source="/GVFT_FoodTrucks;component/img/printer.png"/>
                 </Grid>
             </Border>
-            
+
 
             <Border x:Name="BtnPendiente" BorderThickness="1" Style="{DynamicResource BtnPendiente}"   Height="111" Canvas.Left="1092" Canvas.Top="29" Width="180" CornerRadius="10,10,20,20" Background="#FF34495E" PreviewMouseLeftButtonDown="BtnPendiente_PreviewMouseLeftButtonDown"  Cursor="Hand">
-                    <Grid>
-                        <Border BorderThickness="1" Height="31" Canvas.Left="1092" Canvas.Top="29" Width="180" CornerRadius="10,10,0,0" Background="#FF2C3E50" Cursor="Hand" PreviewMouseLeftButtonDown="BtnPendiente_PreviewMouseLeftButtonDown" Margin="-1,-1,-1,79">
-                            <TextBlock TextWrapping="Wrap" Text="Ordenes Pendientes" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
-                        </Border>
-                        <Image Margin="52,32,45,5" Source="/GVFT_FoodTrucks;component/img/update.png"/>
-                    </Grid>
-                </Border>
+                <Grid>
+                    <Border BorderThickness="1" Height="31" Canvas.Left="1092" Canvas.Top="29" Width="180" CornerRadius="10,10,0,0" Background="#FF2C3E50" Cursor="Hand" PreviewMouseLeftButtonDown="BtnPendiente_PreviewMouseLeftButtonDown" Margin="-1,-1,-1,79">
+                        <TextBlock TextWrapping="Wrap" Text="Ordenes Pendientes" FontSize="18" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
+                    </Border>
+                    <Image Margin="52,32,45,5" Source="/GVFT_FoodTrucks;component/img/update.png"/>
+                </Grid>
+            </Border>
             <Controls:Badged x:Name="NtfIcon" Badge="0" BadgePlacementMode="TopRight" Canvas.Left="1092" Canvas.Top="29" FontSize="24" FontWeight="Bold" Style="{StaticResource BadgedStyle1}">
                 <Border Height="111" Width="180" Canvas.Top="29" Canvas.Left="1092"/>
             </Controls:Badged>
 
 
         </Canvas>
+        <Image x:Name="btnImgLogout" Height="80" Margin="0,52,40,0" VerticalAlignment="Top" Source="/GVFT_FoodTrucks;component/img/logout.png" HorizontalAlignment="Right" Width="80" ToolTip="Cerrar Sesión" Cursor="Hand" MouseLeftButtonDown="btnImgLogout_MouseLeftButtonDown"/>
+        <Image x:Name="btnImgOpenW" Height="80" Margin="0,52,125,0" VerticalAlignment="Top" Source="/GVFT_FoodTrucks;component/img/open-in-app.png" HorizontalAlignment="Right" Width="80" ToolTip="Abrir ventana de Ordenes en Producción" Cursor="Hand" MouseLeftButtonDown="btnImgOpenW_MouseLeftButtonDown"/>
 
     </Grid>
     <Page.Resources>

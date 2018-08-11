@@ -80,6 +80,9 @@
     <Compile Include="ObsMessage.xaml.cs">
       <DependentUpon>ObsMessage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OrdersProduction.xaml.cs">
+      <DependentUpon>OrdersProduction.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -118,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ObsMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OrdersProduction.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -267,6 +274,10 @@
       <Project>{9eeb1b22-8f95-4f5c-a86e-41f1476be70d}</Project>
       <Name>Data_GVFT</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ItemCardOrders\ItemCardOrders.csproj">
+      <Project>{f99b0199-6fa2-48da-aa04-8df611e9e7a7}</Project>
+      <Name>ItemCardOrders</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ItemControl\ItemControl.csproj">
       <Project>{2a9f7675-6640-4f60-a499-b041ae70c506}</Project>
       <Name>ItemControl</Name>
@@ -311,6 +322,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\cash-usd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\logout.png" />
+    <Resource Include="img\open-in-app.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

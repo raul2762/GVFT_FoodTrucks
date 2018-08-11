@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:GVFT_FoodTrucks"
         mc:Ignorable="d"
         TitleCaps="False"
-        Title="Sales" Height="790" Width="1488" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Sales" Height="790" Width="1488" WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="MetroWindow_Loaded">
     <Grid Background="#FF2F2F2F">
 
         <Frame MinHeight="759" MinWidth="1480" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Source="/GVFT_FoodTrucks;component/Pages/SalesFirst.xaml" NavigationUIVisibility="Hidden"/>

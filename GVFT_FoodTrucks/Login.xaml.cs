@@ -149,6 +149,10 @@ namespace GVFT_FoodTrucks
             {
                 lblWarning.Visibility = Visibility.Hidden;
             }));
+            if (Sales.isActive)
+            {
+                Sales.CloseSalesW = true;
+            }
             txtUser.Focus();
         }
 
