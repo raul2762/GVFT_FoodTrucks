@@ -19,6 +19,7 @@ using Serving_Table;
 using Data_GVFT.Business.BusinessLogic;
 using MessageBoxCustomRM;
 using ItemCardOrders;
+using GVFT_FoodTrucks.Pages;
 
 namespace GVFT_FoodTrucks
 {
@@ -50,7 +51,7 @@ namespace GVFT_FoodTrucks
         ListBox listBox;
         public static string GetObsMessage;
         public static bool sendOrder { get; set; }
-        public static CardItemOrd GetOrdens;
+        public static CardItemOrd GetOrdens { get; set; }
         public SalesFirst()
         {
             InitializeComponent();
@@ -64,8 +65,7 @@ namespace GVFT_FoodTrucks
         }
         private void BtnPendiente_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show(NtfIcon.Badge.ToString());
-            
+            NavigationService.Navigate(new PendingOrdersW());
         }
 
         private void BtnImp_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -77,12 +77,7 @@ namespace GVFT_FoodTrucks
         {
 
         }
-
-        private void BtnInic_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
+        
         private void BtnCancelar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             
@@ -261,7 +256,33 @@ namespace GVFT_FoodTrucks
 
             return listB;
         }
-        
+
+        public string SendToProduction()
+        {
+            int final = DtGridOrden.Items.Count - 1;
+            var itemProduct = new Productos();
+            string ordenList = "";
+            for (int i = 0; i < DtGridOrden.Items.Count; i++)
+            {
+                itemProduct = (Productos)DtGridOrden.Items[i];
+                if (i != final)
+                {
+                    if (ordenList == "")
+                    {
+                        ordenList = "-" + itemProduct.NombreProducto + "\n" + "*-----------------*\n";
+                    }
+                    else
+                    {
+                        ordenList += "-" + itemProduct.NombreProducto + "\n" + "*-----------------*\n";
+                    }
+                }
+                else
+                {
+                    ordenList += "-" + itemProduct.NombreProducto + "\n" + "*-----------------*\n";
+                }
+            }
+            return ordenList;
+        }
         public string ProcesarText()
         {
             int final = DtGridOrden.Items.Count - 1;
@@ -274,22 +295,22 @@ namespace GVFT_FoodTrucks
                 {
                     if (ordenList == "")
                     {
-                        ordenList = itemProduct.Id + ",";
-                        ordenList += itemProduct.Cantidad + ",";
-                        ordenList += itemProduct.Precio + "|" + Environment.NewLine;
+                        ordenList = itemProduct.NombreProducto + ",";
+                        //ordenList += itemProduct.Cantidad + ",";
+                        //ordenList += itemProduct.Precio + "|" + Environment.NewLine;
                 }
                 else
                 {
-                        ordenList += itemProduct.Id + ",";
-                        ordenList += itemProduct.Cantidad + ",";
-                        ordenList += itemProduct.Precio + "|" + Environment.NewLine;
+                        ordenList += itemProduct.NombreProducto + ",";
+                        //ordenList += itemProduct.Cantidad + ",";
+                        //ordenList += itemProduct.Precio + "|" + Environment.NewLine;
                 }
             }
                 else
                 {
-                    ordenList += itemProduct.Id + ",";
-                    ordenList += itemProduct.Cantidad + ",";
-                    ordenList += itemProduct.Precio + "|";
+                    ordenList += itemProduct.NombreProducto + ",";
+                    //ordenList += itemProduct.Cantidad + ",";
+                    //ordenList += itemProduct.Precio + "|";
                 }
             }
             return ordenList;
@@ -374,11 +395,12 @@ namespace GVFT_FoodTrucks
         private void BtnInic_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             
-           string ordenStr = ProcesarText();
+           string ordenStr = SendToProduction();
             //MessageBoxRM.Show(ordenStr);
             var card = new CardItemOrd();
-            card.Nombre = "Raul Master";
-            card.Orden = "Pruebita!";
+            card.Nombre = "Mesa #4";
+            card.Orden = ordenStr;
+            
             GetOrdens = card;
             sendOrder = true;
             if (NtfIcon.Visibility == Visibility.Hidden)
@@ -425,7 +447,20 @@ namespace GVFT_FoodTrucks
         private void btnImgOpenW_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             OrdersProduction orders = new OrdersProduction();
-            orders.Show();
+            var s2 = System.Windows.Forms.Screen.AllScreens;
+            if (s2.Length > 1)
+            {
+              var s3 = System.Windows.Forms.Screen.AllScreens[1];
+              System.Drawing.Rectangle r2 = s3.WorkingArea;
+                orders.Top = r2.Top;
+                orders.Left = r2.Left;
+                orders.Show();
+            }
+            else
+            {
+                orders.Show();
+            }
+            
         }
     }
 }

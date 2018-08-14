@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using MahApps.Metro.Controls;
+using MessageBoxCustomRM;
 
 namespace GVFT_FoodTrucks
 {
@@ -28,7 +29,7 @@ namespace GVFT_FoodTrucks
         {
             InitializeComponent();
         }
-
+        
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             timer.Interval = TimeSpan.FromMilliseconds(100);
@@ -43,6 +44,21 @@ namespace GVFT_FoodTrucks
             if (CloseSalesW)
             {
                 this.Close();
+            }
+        }
+        
+
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (OrdersProduction._open)
+            {
+                MessageBoxRM.Show("La ventana Orden en Produccion esta abierta cierrela primero antes de cerrar esta", "Ventana OrdenProduccion Abierta", MessageBoxButtonRM.OK, MessageBoxIconRM.Error);
+                e.Cancel = true;
+            }
+            else
+            {
+                //Application.Current.Shutdown();
+                CloseSalesW = true;
             }
         }
     }

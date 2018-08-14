@@ -53,6 +53,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -85,6 +86,9 @@
     </Compile>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PendingOrdersW.xaml.cs">
+      <DependentUpon>PendingOrdersW.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegCredits.xaml.cs">
       <DependentUpon>RegCredits.xaml</DependentUpon>
@@ -164,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PendingOrdersW.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -326,6 +334,12 @@
   <ItemGroup>
     <Resource Include="img\logout.png" />
     <Resource Include="img\open-in-app.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\logoNuevo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\arrow-left-bold-circle-outline.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -27,6 +27,7 @@ namespace GVFT_FoodTrucks
         DispatcherTimer timer3 = new DispatcherTimer();
         int count1 = 0,count2 = 0;
         bool _initiated = false;
+        public static bool _open;
         public OrdersProduction()
         {
             InitializeComponent();
@@ -44,6 +45,7 @@ namespace GVFT_FoodTrucks
             timer3.Tick += Timer3_Tick;
             timer3.Start();
 
+            _open = true;
             this.WindowState = WindowState.Maximized;
             this.WindowStyle = WindowStyle.ToolWindow;
         }
@@ -52,11 +54,19 @@ namespace GVFT_FoodTrucks
         {
             if (SalesFirst.sendOrder == true)
             {
-                dockP.Items.Add(SalesFirst.GetOrdens);
+                
+                var Ordens = new CardItemOrd();
+                Ordens = SalesFirst.GetOrdens;
+                var itemLbx = (ListBoxItem)dockP.ItemContainerGenerator.ContainerFromItem(Ordens);
+                dockP.Items.Add(Ordens);
+
                 int index = dockP.Items.Count;
+                //index--;
+                //itemLbx = (ListBoxItem)dockP.Items[index];
+                //MessageBox.Show(itemLbx.Height.ToString());
                 if (_initiated == false)
                 {
-                    timer.Start();
+                    //timer.Start();
                 }
                 SalesFirst.sendOrder = false;
             }
@@ -110,6 +120,11 @@ namespace GVFT_FoodTrucks
                 timer.Start();
                 timer2.Start();
             }
+        }
+
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            _open = false;
         }
 
         private void Timer_Tick(object sender, EventArgs e)

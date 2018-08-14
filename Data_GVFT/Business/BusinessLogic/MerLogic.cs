@@ -20,19 +20,23 @@ namespace Data_GVFT.Business.BusinessLogic
             return instance;
         }
 
-        public void RegisterMerch(String nameMerch, int stock)
+        public void RegisterMerch(Merchandise merchandise)
         {
             using (var en = new DB_SystemFoodTrucksEntities())
             {
-                en.SP_AddMerchandise(nameMerch, stock);
+                //en.SP_AddMerchandise(nameMerch, stock);
+                en.Merchandise.Add(merchandise);
+                en.SaveChanges();
             }
         }
 
-        public void RegisterPofMerch(String detail, int amount, DateTime datePurchase, int qty, int idMerch, int idSuppl, int idUser)
+        public void RegisterPofMerch(purchase_of_merchandise purchase)
         {
             using (var en = new DB_SystemFoodTrucksEntities())
             {
-                en.SP_PurchaseMerchandise(detail, amount, datePurchase, qty, idMerch, idSuppl,idUser);
+                //en.SP_PurchaseMerchandise(detail, amount, datePurchase, qty, idMerch, idSuppl,idUser);
+                en.purchase_of_merchandise.Add(purchase);
+                en.SaveChanges();
             }
         }
         public void RegisterSupplier(String nameSuppl, String addrs, String city,String phone)
@@ -80,6 +84,19 @@ namespace Data_GVFT.Business.BusinessLogic
                 return query.ToList();
             }
         }
+        public int GetIdSuppl(Supplier supplName)
+        {
+            int id = 0;
+            using (var en = new DB_SystemFoodTrucksEntities())
+            {
+                var query = en.Supplier.FirstOrDefault(s => s.Supplier1 == supplName.Supplier1);
+                if (query != null)
+                {
+                    id = query.Id;
+                }
+                return id;
+            }
+        }
 
         public class GetLocation
         {
@@ -108,6 +125,19 @@ namespace Data_GVFT.Business.BusinessLogic
                 var query = from p in en.Merchandise
                             select new GetMerch() { Id = p.Id, Name = p.Name, Stock = p.Stock };
                 return query.ToList();
+            }
+        }
+        public int GetMerchId(Merchandise nameMerch)
+        {
+            int id = 0;
+            using (var en = new DB_SystemFoodTrucksEntities())
+            {
+                var query = en.Merchandise.FirstOrDefault(m => m.Name == nameMerch.Name);
+                if (query != null)
+                {
+                    id = query.Id;
+                }
+                return id;
             }
         }
     }

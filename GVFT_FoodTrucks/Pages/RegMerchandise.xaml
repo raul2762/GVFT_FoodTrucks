@@ -73,9 +73,9 @@
                     <TextBox x:Name="txtCant" HorizontalAlignment="Left" Height="42" Margin="34,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Cantidad:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,274,0,0" VerticalAlignment="Top"/>
                     <Label Content="Mercancía:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,27,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cboMerch" HorizontalAlignment="Left" Margin="34,74,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8" FontSize="20" FontWeight="Bold"/>
+                    <ComboBox x:Name="cboMerch" SelectedValuePath="Name" HorizontalAlignment="Left" Margin="34,74,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8" FontSize="20" FontWeight="Bold"/>
                     <Label Content="Suplidor:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,145,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cboSuppl" HorizontalAlignment="Left" Margin="34,192,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8" FontSize="20" FontWeight="Bold"/>
+                    <ComboBox x:Name="cboSuppl" SelectedValuePath="Name" HorizontalAlignment="Left" Margin="34,192,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8" FontSize="20" FontWeight="Bold"/>
                     <TextBox x:Name="txtCostPur" HorizontalAlignment="Left" Height="42" Margin="396,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Costo de compra:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="396,274,0,0" VerticalAlignment="Top"/>
                 </Grid>

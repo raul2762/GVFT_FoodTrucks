@@ -1,15 +1,15 @@
-﻿<UserControl x:Class="ItemCardOrders.CardItemOrd"
+﻿<UserControl x:Name="CardForm" x:Class="ItemCardOrders.CardItemOrd"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             Height="241.62" Width="205.539">
+             Height="241.62" Width="237.539" Loaded="UserControl_Loaded">
     <Grid x:Name="MyGrid" Background="#FF3A3A3A">
-        <Rectangle Fill="#FF636363" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" Width="206"/>
+        <Rectangle Fill="#FF636363" HorizontalAlignment="Left" Height="35" Stroke="Black" VerticalAlignment="Top" Width="238"/>
         <TextBlock x:Name="lblNombre" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold" MaxWidth="186"/>
-        <TextBlock x:Name="lblOrden" HorizontalAlignment="Left" Margin="10,40,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="White" FontSize="18" MaxWidth="186"/>
-        <TextBlock x:Name="lblOrden_Codigo" HorizontalAlignment="Left" Margin="21,208,0,0" TextWrapping="Wrap" Text="Codigo:" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
-        <TextBlock x:Name="lblCodigo" HorizontalAlignment="Left" Margin="88,208,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
+        <TextBlock x:Name="lblOrden" HorizontalAlignment="Left" Margin="10,40,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Foreground="White" FontSize="24" MaxWidth="218" FontWeight="Bold" Loaded="lblOrden_Loaded" SizeChanged="lblOrden_SizeChanged"/>
+        <TextBlock x:Name="lblOrden_Codigo" HorizontalAlignment="Left" Margin="21,208,0,0" TextWrapping="Wrap" Text="Codigo:" VerticalAlignment="Top" Foreground="White" FontSize="18" Visibility="Hidden"/>
+        <TextBlock x:Name="lblCodigo" HorizontalAlignment="Left" Margin="88,208,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Foreground="White" FontSize="18" Visibility="Hidden"/>
     </Grid>
 </UserControl>

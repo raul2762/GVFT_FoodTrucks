@@ -33,7 +33,12 @@ namespace GVFT_FoodTrucks.Pages
         {
             try
             {
-                MerLogic.GetInstance().RegisterMerch(txtMerch.Text, 0);
+                var merch = new Merchandise
+                {
+                    Name = txtMerch.Text,
+                    Stock = 0
+                };
+                MerLogic.GetInstance().RegisterMerch(merch);
                 MessageBoxRM.Show("Mercancia registrada correctamente!", "Registro de Mercancia", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
                 txtMerch.Clear();
                 RechargeAllCboS();
@@ -48,12 +53,30 @@ namespace GVFT_FoodTrucks.Pages
         {
             try
             {
-                int IdMerch = cboMerch.SelectedIndex + 1;
-                int IdSuppl = cboSuppl.SelectedIndex + 1;
-                int Amount = Convert.ToInt32(txtCostPur.Text);
+                var supplQuery = new Supplier
+                {
+                    Supplier1 = cboSuppl.SelectedValue.ToString()
+                };
+                var merchQuery = new Merchandise
+                {
+                    Name = cboMerch.SelectedValue.ToString()
+                };
+                int IdMerch = MerLogic.GetInstance().GetMerchId(merchQuery);
+                int IdSuppl = MerLogic.GetInstance().GetIdSuppl(supplQuery);
+                int AmountP = Convert.ToInt32(txtCostPur.Text);
                 int Qty = Convert.ToInt32(txtCant.Text);
                 int IdUser = LoginBL.GetInstance().IdUser;
-                MerLogic.GetInstance().RegisterPofMerch(txtDetail.Text, Amount, DateTime.Now.Date, Qty, IdMerch, IdSuppl, IdUser);
+                var purchase = new purchase_of_merchandise
+                {
+                    Detail = txtDetail.Text,
+                    Amount = AmountP,
+                    Date_purchase = DateTime.Now,
+                    Quantity = Qty,
+                    Id_merchandise = IdMerch,
+                    Id_supplier = IdSuppl,
+                    Id_user = IdUser
+                };
+                MerLogic.GetInstance().RegisterPofMerch(purchase);
                 MessageBoxRM.Show("Compra registrada correctamente!", "Registro de compras", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
                 txtDetail.Clear();
                 txtCant.Clear();
@@ -64,7 +87,7 @@ namespace GVFT_FoodTrucks.Pages
             }
             catch (Exception ex)
             {
-                MessageBoxRM.Show(ex.InnerException.Message, "Ha ocurrido un error :(", MessageBoxButtonRM.OK, MessageBoxIconRM.Error);
+                MessageBoxRM.Show(ex.Message, "Ha ocurrido un error :(", MessageBoxButtonRM.OK, MessageBoxIconRM.Error);
             }
         }
 
@@ -72,20 +95,38 @@ namespace GVFT_FoodTrucks.Pages
         {
             try
             {
-                var updateMerch = new Merchandise
+                var merchQuery = new Merchandise
                 {
-                    Id = cboMerchUpdate.SelectedIndex + 1,
+                    Name = cboMerchUpdate.SelectedValue.ToString()
+                };
+                int IdMerch = MerLogic.GetInstance().GetMerchId(merchQuery);
+                var merchCheck = new Merchandise
+                {
                     Name = txtMerchUpdate.Text
                 };
-                MerLogic.GetInstance().UpdateMerch(updateMerch);
-                MessageBoxRM.Show("Mercancia actualizada correctamente!", "Actualizacion de Mercancia", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
-                cboMerchUpdate.SelectedIndex = -1;
-                txtMerchUpdate.Clear();
-                RechargeAllCboS();
+                int IdMerch2 = MerLogic.GetInstance().GetMerchId(merchCheck);
+                if (IdMerch2 == 0)
+                {
+                    var updateMerch = new Merchandise
+                    {
+                        Id = IdMerch,
+                        Name = txtMerchUpdate.Text
+                    };
+                    MerLogic.GetInstance().UpdateMerch(updateMerch);
+                    MessageBoxRM.Show("Mercancia actualizada correctamente!", "Actualizacion de Mercancia", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
+                    cboMerchUpdate.SelectedIndex = -1;
+                    txtMerchUpdate.Clear();
+                    RechargeAllCboS();
+                }
+                else
+                {
+                    MessageBoxRM.Show("Este nombre ya esta en uso", "Nobre de mercancia en uso", MessageBoxButtonRM.OK, MessageBoxIconRM.Error);
+                }
+                
             }
             catch (Exception ex)
             {
-                MessageBoxRM.Show(ex.InnerException.Message, "Ha ocurrido un error :(", MessageBoxButtonRM.OK, MessageBoxIconRM.Error);
+                MessageBoxRM.Show(ex.Message, "Ha ocurrido un error :(", MessageBoxButtonRM.OK, MessageBoxIconRM.Error);
             }
         }
 

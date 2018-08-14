@@ -6,9 +6,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GVFT_FoodTrucks"
         mc:Ignorable="d"
-        Title="OrdersProduction" ResizeMode="NoResize" IgnoreTaskbarOnMaximize="True" WindowStyle="ToolWindow"  Loaded="MetroWindow_Loaded">
+        Title="OrdersProduction" ResizeMode="NoResize" IgnoreTaskbarOnMaximize="True" WindowStyle="ToolWindow"  Loaded="MetroWindow_Loaded" Closing="MetroWindow_Closing">
     <Grid>
-        <ListBox x:Name="dockP" Margin="10,42,10,10" SelectionChanged="dockP_SelectionChanged">
+        <ListBox x:Name="dockP" Margin="10,42,10,10" SelectionChanged="dockP_SelectionChanged" VerticalContentAlignment="Top">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Padding" Value="1"/>
@@ -16,7 +16,9 @@
             </ListBox.ItemContainerStyle>
             <ListBox.Template>
                 <ControlTemplate>
-                    <WrapPanel IsItemsHost="True"/>
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+                        <WrapPanel IsItemsHost="True" Orientation="Horizontal"/>
+                    </ScrollViewer>
                 </ControlTemplate>
             </ListBox.Template>
         </ListBox>

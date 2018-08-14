@@ -28,7 +28,7 @@
                 </TransformGroup>
             </Separator.RenderTransform>
         </Separator>
-        <Image HorizontalAlignment="Left" Height="231" Margin="18,24,0,0" VerticalAlignment="Top" Width="211" Source="pack://siteoforigin:,,,/img/LogoEdit2.png" Stretch="Fill"/>
+        <Image HorizontalAlignment="Left" Height="231" Margin="18,24,0,0" VerticalAlignment="Top" Width="211" Source="img/logoNuevo.png" Stretch="Fill"/>
         <Label x:Name="lblWarning" Content="no existe este usuario" HorizontalAlignment="Left" Margin="305,152,0,0" VerticalAlignment="Top" Foreground="#FFFF8000" FontSize="14" FontWeight="Bold" Width="242" HorizontalContentAlignment="Center" Background="{x:Null}"/>
         
 

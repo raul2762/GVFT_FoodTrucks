@@ -39,5 +39,10 @@ namespace GVFT_FoodTrucks
             BtnCancelState = true;
             this.Close();
         }
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtObs.Focus();
+        }
     }
 }

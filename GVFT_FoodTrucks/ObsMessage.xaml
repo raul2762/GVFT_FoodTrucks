@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GVFT_FoodTrucks"
         mc:Ignorable="d"
-        Title="ObsMessage" Height="220.233" Width="395.763" TitleCharacterCasing="Normal" ShowMaxRestoreButton="False" ShowMinButton="False">
+        Title="ObsMessage" Height="220.233" Width="395.763" TitleCharacterCasing="Normal" ShowMaxRestoreButton="False" ShowMinButton="False" Loaded="MetroWindow_Loaded">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,7 +16,7 @@
     </Window.Resources>
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="132,10,0,0" TextWrapping="Wrap" Text="Observación" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
-        <TextBox x:Name="txtObs" HorizontalAlignment="Left" Height="89" Margin="91,44,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="210" Background="{x:Null}" Foreground="#FFFF8000" FontSize="16" FontWeight="Bold"/>
+        <TextBox x:Name="txtObs" HorizontalAlignment="Left" Height="89" Margin="91,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Background="{x:Null}" Foreground="#FFFF8000" FontSize="16" FontWeight="Bold"/>
         <Button x:Name="btnCancel" Content="Cancelar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="177,138,0,0" VerticalAlignment="Top" Width="98" Height="41" FontSize="14" Click="btnCancel_Click"/>
         <Button x:Name="btnAdd" Content="Agregar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="280,138,0,0" VerticalAlignment="Top" Width="98" Height="41" FontSize="14" Click="btnAdd_Click"/>
 

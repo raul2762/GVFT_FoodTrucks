@@ -32,5 +32,33 @@ namespace ItemCardOrders
         {
             InitializeComponent();
         }
+
+        public void Redimensionar()
+        {
+            double alto = lblOrden.RenderSize.Height;
+            //MessageBox.Show(alto.ToString());
+            if (alto > 192)
+            {
+                CardForm.Height = alto + 80;
+            }
+            else
+            {
+                CardForm.Height = 241.62;
+            }
+        }
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void lblOrden_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void lblOrden_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            Redimensionar();
+        }
     }
 }

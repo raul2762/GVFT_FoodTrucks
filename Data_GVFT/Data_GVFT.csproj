@@ -154,6 +154,7 @@
     <Compile Include="Business\BusinessLogic\LoginBL.cs" />
     <Compile Include="Business\BusinessLogic\MenuBL.cs" />
     <Compile Include="Business\BusinessLogic\MerLogic.cs" />
+    <Compile Include="Business\BusinessLogic\OrderBL.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

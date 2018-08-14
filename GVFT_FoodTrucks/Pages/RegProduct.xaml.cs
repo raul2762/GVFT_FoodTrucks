@@ -52,7 +52,6 @@ namespace GVFT_FoodTrucks.Pages
             storyboard = this.TryFindResource("efectValidationbdr") as Storyboard;
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
-            MessageBoxRM.Show(Mensajito);
         }
 
         private void Timer_Tick(object sender, EventArgs e)
