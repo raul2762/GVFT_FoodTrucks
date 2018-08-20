@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using System.Windows.Threading;
 using ItemCardOrders;
+using MessageBoxCustomRM;
 
 namespace GVFT_FoodTrucks
 {
@@ -25,9 +26,16 @@ namespace GVFT_FoodTrucks
         DispatcherTimer timer = new DispatcherTimer();
         DispatcherTimer timer2 = new DispatcherTimer();
         DispatcherTimer timer3 = new DispatcherTimer();
+        DispatcherTimer timer4 = new DispatcherTimer();
+        DispatcherTimer timer5 = new DispatcherTimer();
+        DispatcherTimer timer6 = new DispatcherTimer();
         int count1 = 0,count2 = 0;
         bool _initiated = false;
         public static bool _open;
+        public static bool CloseWOrdr;
+        public static string MessageClose { get; set; }
+        public static int OrdrIncomplete { get; set; }
+        public static bool RemoveItem;
         public OrdersProduction()
         {
             InitializeComponent();
@@ -45,9 +53,52 @@ namespace GVFT_FoodTrucks
             timer3.Tick += Timer3_Tick;
             timer3.Start();
 
+            timer4.Interval = TimeSpan.FromMilliseconds(100);
+            timer4.Tick += Timer4_Tick;
+            timer4.Start();
+
+            timer5.Interval = TimeSpan.FromMilliseconds(100);
+            timer5.Tick += Timer5_Tick;
+            timer5.Start();
+
+            timer6.Interval = TimeSpan.FromMilliseconds(100);
+            timer6.Tick += Timer6_Tick;
+            timer6.Start();
+
             _open = true;
+            CloseWOrdr = false;
+            RemoveItem = false;
+            MessageClose = "";
             this.WindowState = WindowState.Maximized;
             this.WindowStyle = WindowStyle.ToolWindow;
+        }
+
+        private void Timer6_Tick(object sender, EventArgs e)
+        {
+            OrdrIncomplete = dockP.Items.Count;
+        }
+
+        private void Timer5_Tick(object sender, EventArgs e)
+        {
+            if (RemoveItem)
+            {
+                dockP.Items.Clear();
+            }
+        }
+
+        private void Timer4_Tick(object sender, EventArgs e)
+        {
+            if (CloseWOrdr)
+            {
+                if (dockP.Items.Count > 0)
+                {
+                    MessageClose = "No se puede cerrar esta ventana, hay ordenes sin completar";
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
         }
 
         private void Timer3_Tick(object sender, EventArgs e)
@@ -66,12 +117,11 @@ namespace GVFT_FoodTrucks
                 //MessageBox.Show(itemLbx.Height.ToString());
                 if (_initiated == false)
                 {
-                    //timer.Start();
+                    timer.Start();
                 }
                 SalesFirst.sendOrder = false;
             }
         }
-
         private void Timer2_Tick(object sender, EventArgs e)
         {
             _initiated = true;
@@ -85,6 +135,8 @@ namespace GVFT_FoodTrucks
                     card = (CardItemOrd)dockP.Items[i];
                     if (card.backGrdMyGrid == Brushes.LimeGreen)
                     {
+                        SalesFirst.tableN = card.Nombre;
+                        SalesFirst.ordrDone = true;
                         dockP.Items.RemoveAt(i);
                         timer2.Stop();
                     }
@@ -106,10 +158,14 @@ namespace GVFT_FoodTrucks
                 card = (CardItemOrd)dockP.SelectedValue;
                 if (card.backGrdMyGrid == Brushes.LimeGreen)
                 {
+                    SalesFirst.tableN = card.Nombre;
+                    SalesFirst.ordrDone = true;
                     dockP.Items.RemoveAt(index);
                 }
                 else
                 {
+                    SalesFirst.tableN = card.Nombre;
+                    SalesFirst.ordrDone = true;
                     dockP.Items.RemoveAt(index);
                     card.backGrdMyGrid = Brushes.LimeGreen;
                     card.backFgrdO = (Brush)bc.ConvertFrom("#000000");

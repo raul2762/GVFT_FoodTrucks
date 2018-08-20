@@ -151,6 +151,7 @@
     <Compile Include="Business\BusinessEntities\Type_Credits.cs">
       <DependentUpon>GVFTEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Business\BusinessLogic\CreditBL.cs" />
     <Compile Include="Business\BusinessLogic\LoginBL.cs" />
     <Compile Include="Business\BusinessLogic\MenuBL.cs" />
     <Compile Include="Business\BusinessLogic\MerLogic.cs" />

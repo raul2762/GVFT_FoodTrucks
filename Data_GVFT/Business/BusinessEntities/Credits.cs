@@ -25,8 +25,9 @@ namespace Data_GVFT.Business.BusinessEntities
         public Nullable<int> Amount { get; set; }
         public Nullable<System.DateTime> Expire_date { get; set; }
         public int Type_credit { get; set; }
-        public int Cant { get; set; }
+        public Nullable<int> Cant { get; set; }
         public int Expiry_mode { get; set; }
+        public Nullable<int> Qty_sold { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Client> Client { get; set; }

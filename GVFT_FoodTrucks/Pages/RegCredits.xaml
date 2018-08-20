@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       MinHeight="684"
       MinWidth="1100"
-      Title="RegCredits">
+      Title="RegCredits" Loaded="Page_Loaded">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -19,16 +19,16 @@
         <TabControl MinHeight="603" Margin="27,22,22,57" MinWidth="956" Background="{x:Null}">
             <TabItem Header="Crear Código Promo" Padding="0,1,0,0">
                 <Grid>
-                    <Button Content="Registrar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,47" Width="217" FontSize="22" TabIndex="9" VerticalAlignment="Top" Height="58"/>
-                    <TextBox HorizontalAlignment="Left" Height="42" Margin="34,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <Button x:Name="btnRegCredit" Content="Registrar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,47" Width="217" FontSize="22" TabIndex="9" VerticalAlignment="Top" Height="58" Click="btnRegCredit_Click"/>
+                    <TextBox x:Name="txtCode" HorizontalAlignment="Left" Height="42" Margin="34,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Codigo Promo:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,41,0,0" VerticalAlignment="Top"/>
                     <Label Content="Modo Expiración:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,296,0,0" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="34,342,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8"/>
-                    <TextBox HorizontalAlignment="Left" Height="42" Margin="34,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <ComboBox x:Name="cboModeExp" SelectedValuePath="Type_trans" HorizontalAlignment="Left" Margin="34,342,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8" FontSize="20" FontWeight="Bold" SelectionChanged="cboModeExp_SelectionChanged"/>
+                    <TextBox x:Name="txtMonto" HorizontalAlignment="Left" Height="42" Margin="34,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Monto:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,169,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="42" Margin="393,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <TextBox x:Name="txtCant" HorizontalAlignment="Left" Height="42" Margin="393,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50" IsEnabled="False"/>
                     <Label Content="Cantidad:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="393,41,0,0" VerticalAlignment="Top"/>
-                    <DatePicker HorizontalAlignment="Left" Margin="393,215,0,0" VerticalAlignment="Top" Height="42" Width="304" FontSize="22" Foreground="#FFFF8000"/>
+                    <DatePicker x:Name="DateT" HorizontalAlignment="Left" Margin="393,215,0,0" VerticalAlignment="Top" Height="42" Width="304" FontSize="22" Foreground="#FFFF8000" IsEnabled="False"/>
                     <Label Content="Caducidad:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="393,168,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
@@ -38,7 +38,7 @@
                     <Label Content="Empleado:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,41,0,0" VerticalAlignment="Top"/>
                     <TextBox HorizontalAlignment="Left" Height="42" Margin="34,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Monto:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,169,0,0" VerticalAlignment="Top"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="34,88,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8"/>
+                    <ComboBox x:Name="cboEmployee" HorizontalAlignment="Left" Margin="34,88,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8" FontWeight="Bold" FontSize="20"/>
                 </Grid>
             </TabItem>
         </TabControl>

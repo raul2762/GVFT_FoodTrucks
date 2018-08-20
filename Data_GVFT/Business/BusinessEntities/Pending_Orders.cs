@@ -19,6 +19,7 @@ namespace Data_GVFT.Business.BusinessEntities
         public Nullable<int> Qty { get; set; }
         public Nullable<int> Id_table { get; set; }
         public Nullable<decimal> unitPrice { get; set; }
+        public string NameProduct { get; set; }
     
         public virtual Product Product { get; set; }
         public virtual Busy_tables Busy_tables { get; set; }

@@ -47,6 +47,9 @@ namespace GVFT_FoodTrucks.Pages
         {
             CboPopup.IsOpen = false;
             MyCbo.Text = CboListBox.SelectedValue.ToString();
+
+            int idTable = Convert.ToInt32(MyCbo.Text);
+            DtGridOrden.ItemsSource = OrderBL.GetInstance().GetDetailOrder(idTable);
         }
 
         private void btnImgBack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -61,6 +64,8 @@ namespace GVFT_FoodTrucks.Pages
         {
             CboListBox.ItemsSource = GetServTables.GetInstance().Tables;
             CboListBox.SelectedIndex = 0;
+
+            DtGridOrden.ItemsSource = OrderBL.GetInstance().GetDetailOrder(1);
         }
     }
 }

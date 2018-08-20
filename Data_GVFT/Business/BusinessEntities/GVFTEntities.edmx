@@ -38,8 +38,9 @@
           <Property Name="Amount" Type="int" />
           <Property Name="Expire_date" Type="datetime" />
           <Property Name="Type_credit" Type="int" Nullable="false" />
-          <Property Name="Cant" Type="int" Nullable="false" />
+          <Property Name="Cant" Type="int" />
           <Property Name="Expiry_mode" Type="int" Nullable="false" />
+          <Property Name="Qty_sold" Type="int" />
         </EntityType>
         <EntityType Name="Departments">
           <Key>
@@ -179,6 +180,7 @@
           <Property Name="Qty" Type="int" />
           <Property Name="Id_table" Type="int" />
           <Property Name="unitPrice" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="NameProduct" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -787,10 +789,11 @@
           <Property Name="Amount" Type="Int32" />
           <Property Name="Expire_date" Type="DateTime" Precision="3" />
           <Property Name="Type_credit" Type="Int32" Nullable="false" />
-          <Property Name="Cant" Type="Int32" Nullable="false" />
+          <Property Name="Cant" Type="Int32" />
           <Property Name="Expiry_mode" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="Self.FK_ID_CREDIT" FromRole="Credits" ToRole="Client" />
           <NavigationProperty Name="Type_Credits" Relationship="DB_SystemFoodTrucksModel.FK_TYPECREDIT" FromRole="Credits" ToRole="Type_Credits" />
+          <Property Name="Qty_sold" Type="Int32" />
         </EntityType>
         <EntityType Name="Departments">
           <Key>
@@ -954,6 +957,7 @@
           <Property Name="unitPrice" Type="Decimal" Precision="6" Scale="2" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Pending_Orders_Product" FromRole="Pending_Orders" ToRole="Product" />
           <NavigationProperty Name="Busy_tables" Relationship="DB_SystemFoodTrucksModel.FK_Pending_Orders_IdTable" FromRole="Pending_Orders" ToRole="Busy_tables" />
+          <Property Name="NameProduct" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -1606,6 +1610,7 @@
           <EntitySetMapping Name="Credits">
             <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Credits">
               <MappingFragment StoreEntitySet="Credits">
+                <ScalarProperty Name="Qty_sold" ColumnName="Qty_sold" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Code_credits" ColumnName="Code_credits" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -1753,6 +1758,7 @@
           <EntitySetMapping Name="Pending_Orders">
             <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Pending_Orders">
               <MappingFragment StoreEntitySet="Pending_Orders">
+                <ScalarProperty Name="NameProduct" ColumnName="NameProduct" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Id_product" ColumnName="Id_product" />
                 <ScalarProperty Name="Qty" ColumnName="Qty" />

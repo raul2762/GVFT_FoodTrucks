@@ -17,9 +17,12 @@ using System.Windows.Shapes;
 using ItemControl;
 using Serving_Table;
 using Data_GVFT.Business.BusinessLogic;
+using Data_GVFT.Business.BusinessEntities;
 using MessageBoxCustomRM;
 using ItemCardOrders;
 using GVFT_FoodTrucks.Pages;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace GVFT_FoodTrucks
 {
@@ -46,23 +49,26 @@ namespace GVFT_FoodTrucks
     /// </summary>
     public partial class SalesFirst : Page
     {
-        ObservableCollection<ListaNumeros> listaNumeros;
+        
         ListBox list = new ListBox();
         ListBox listBox;
+        int countOrdrDone = 0;
         public static string GetObsMessage;
         public static bool sendOrder { get; set; }
+        public static bool ordrDone { get; set; }
+        public static string tableN { get; set; }
         public static CardItemOrd GetOrdens { get; set; }
+        Storyboard storyboard;
+        Storyboard storyboard2;
+        DispatcherTimer timer = new DispatcherTimer();
+        DispatcherTimer timer2 = new DispatcherTimer();
         public SalesFirst()
         {
             InitializeComponent();
             DataContext = this;
-            this.listaNumeros = new ObservableCollection<ListaNumeros>();
+            
         }
-
-        public void llenarLista()
-        {
-            listaNumeros.Add(new ListaNumeros {Numeros = "1" });
-        }
+        
         private void BtnPendiente_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             NavigationService.Navigate(new PendingOrdersW());
@@ -160,23 +166,56 @@ namespace GVFT_FoodTrucks
             }
            
         }
-
-        class Categorias
-        {
-            public string Nombre { get; set; }
-        }
-        class ListaNumeros
-        {
-            public string  Numeros { get; set; }
         
-        }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadMenuFood();
             CboListBox.ItemsSource = GetServTables.GetInstance().Tables;
             CboListBox.SelectedIndex = 0;
-            NtfIcon.Visibility = Visibility.Hidden;
-            
+            storyboard = this.TryFindResource("AlertOrdDone") as Storyboard;
+            storyboard2 = this.TryFindResource("AlertOrdrDoneOut") as Storyboard;
+            textBlock.Visibility = Visibility.Hidden;
+            if (OrderBL.GetInstance().NofPOrder() > 0)
+            {
+                NtfIcon.Visibility = Visibility.Visible;
+                NtfIcon.Badge = OrderBL.GetInstance().NofPOrder();
+            }
+            else
+            {
+                NtfIcon.Visibility = Visibility.Hidden;
+            }
+            ordrDone = false;
+            timer.Interval = TimeSpan.FromMilliseconds(100);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+
+            timer2.Interval = TimeSpan.FromSeconds(1);
+            timer2.Tick += Timer2_Tick;
+        }
+
+        private void Timer2_Tick(object sender, EventArgs e)
+        {
+            if (countOrdrDone == 4)
+            {
+                countOrdrDone = 0;
+                timer2.Stop();
+                storyboard2.Begin(textBlock);
+            }
+            countOrdrDone++;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (ordrDone)
+            {
+                timer.Stop();
+                textBlock.Visibility = Visibility.Visible;
+                textBlock.Text = $"Orden {tableN} Lista!";
+                ordrDone = false;
+                storyboard.Begin(textBlock);
+                timer.Start();
+                timer2.Start();
+            }
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -282,6 +321,26 @@ namespace GVFT_FoodTrucks
                 }
             }
             return ordenList;
+        }
+
+        public List<Pending_Orders> SaveOrdrTemp()
+        {
+            int tableid = Convert.ToInt32(CboListBox.SelectedValue.ToString());
+            List<Pending_Orders> itemP = new List<Pending_Orders>();
+            var itemProduct = new Productos();
+            for (int i = 0; i < DtGridOrden.Items.Count; i++)
+            {
+                itemProduct = (Productos)DtGridOrden.Items[i];
+                itemP.Add(new Pending_Orders
+                {
+                    Id_product = itemProduct.Id,
+                    Qty = itemProduct.Cantidad,
+                    Id_table = tableid,
+                    unitPrice = itemProduct.Precio,
+                    NameProduct = itemProduct.NombreProducto
+                });
+            }
+            return itemP;
         }
         public string ProcesarText()
         {
@@ -391,24 +450,66 @@ namespace GVFT_FoodTrucks
             CboPopup.IsOpen = false;
             MyCbo.Text = CboListBox.SelectedValue.ToString();
         }
-        int ord;
+        
         private void BtnInic_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            
-           string ordenStr = SendToProduction();
-            //MessageBoxRM.Show(ordenStr);
-            var card = new CardItemOrd();
-            card.Nombre = "Mesa #4";
-            card.Orden = ordenStr;
-            
-            GetOrdens = card;
-            sendOrder = true;
-            if (NtfIcon.Visibility == Visibility.Hidden)
+            try
             {
-                NtfIcon.Visibility = Visibility.Visible;
+                bool isBusyTable;
+                MessageBoxResult boxResult;
+                string ordenStr = SendToProduction();
+                int tableid = Convert.ToInt32(CboListBox.SelectedValue.ToString());
+                var itemProduct = new List<Pending_Orders>();
+                itemProduct = SaveOrdrTemp();
+                var setIdTable = new Busy_tables
+                {
+                    Table_busy = tableid
+                };
+                isBusyTable = OrderBL.GetInstance().VerifyTable(setIdTable);
+                if (isBusyTable)
+                {
+                    boxResult =  MessageBoxRM.Show("Esta mesa está ocupada, desea agregar otro producto a esta mesa?", "Mesa ocupada", MessageBoxButtonRM.YesNo, MessageBoxIconRM.Question);
+                    if (boxResult == MessageBoxResult.OK)
+                    {
+                        OrderBL.GetInstance().RegisterPendingOrdr2(itemProduct);
+                        var card = new CardItemOrd();
+                        card.Nombre = $"Mesa #{tableid}";
+                        card.Orden = ordenStr;
+                        GetOrdens = card;
+                        sendOrder = true;
+                        if (NtfIcon.Visibility == Visibility.Hidden)
+                        {
+                            NtfIcon.Visibility = Visibility.Visible;
+                        }
+                        NtfIcon.Badge = OrderBL.GetInstance().NofPOrder();
+                        DtGridOrden.Items.Clear();
+                        CalculateTotal();
+                    }
+                }
+                else
+                {
+                    OrderBL.GetInstance().RegisterPendingOrdr(setIdTable, itemProduct);
+                    //MessageBoxRM.Show(ordenStr);
+                    var card = new CardItemOrd();
+                    card.Nombre = $"Mesa #{tableid}";
+                    card.Orden = ordenStr;
+                    GetOrdens = card;
+                    sendOrder = true;
+                    if (NtfIcon.Visibility == Visibility.Hidden)
+                    {
+                        NtfIcon.Visibility = Visibility.Visible;
+                    }
+                    NtfIcon.Badge = OrderBL.GetInstance().NofPOrder();
+                    DtGridOrden.Items.Clear();
+                    CalculateTotal();
+                }
+                
             }
-            ord++;
-            NtfIcon.Badge = ord;
+            catch (Exception ex)
+            {
+                MessageBoxRM.Show(ex.Message, "Error al iniciar orden", MessageBoxButtonRM.OK, MessageBoxIconRM.Error);
+            }
+            
         }
 
         private void itemMenuObs_Click(object sender, RoutedEventArgs e)
@@ -440,8 +541,17 @@ namespace GVFT_FoodTrucks
 
         private void btnImgLogout_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Login login = new Login();
-            login.Show();
+            
+            if (OrdersProduction._open)
+            {
+                MessageBoxRM.Show("La ventana de Produccion se encuentra abierta", "Ventana OrdenProduccion Abierta", MessageBoxButtonRM.OK, MessageBoxIconRM.Error);
+            }
+            else
+            {
+                Login login = new Login();
+                login.Show();
+            }
+            
         }
 
         private void btnImgOpenW_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -459,6 +569,22 @@ namespace GVFT_FoodTrucks
             else
             {
                 orders.Show();
+            }
+            
+        }
+
+        private void itemMenuCloseWOrdr_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult boxResult;
+            OrdersProduction.CloseWOrdr = true;
+            if (OrdersProduction.OrdrIncomplete > 0)
+            {
+                boxResult = MessageBoxRM.Show("No se puede cerrar esta ventana, hay ordenes sin completar.\n\ndesea cerrarla de todos modos?", "Ordenes sin completar", MessageBoxButtonRM.YesNo, MessageBoxIconRM.Warning);
+                if (boxResult == MessageBoxResult.OK)
+                {
+                    OrdersProduction.RemoveItem = true;
+                    OrdersProduction.CloseWOrdr = true;
+                }
             }
             
         }

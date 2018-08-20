@@ -65,7 +65,7 @@
                 </Grid>
             </Border>
         </Canvas>
-        
+
         <Canvas Height="155" Margin="8,0,40,10" VerticalAlignment="Bottom">
             <Border x:Name="BtnRemove" BorderThickness="1" Style="{DynamicResource BtnRemove}" Height="111" Canvas.Left="286" Canvas.Top="29" Width="134" CornerRadius="10,10,20,20" Background="#FFE67E22" PreviewMouseLeftButtonDown="BtnRemove_PreviewMouseLeftButtonDown" Cursor="Hand">
                 <Grid>
@@ -160,8 +160,24 @@
 
 
         </Canvas>
-        <Image x:Name="btnImgLogout" Height="80" Margin="0,52,40,0" VerticalAlignment="Top" Source="/GVFT_FoodTrucks;component/img/logout.png" HorizontalAlignment="Right" Width="80" ToolTip="Cerrar Sesión" Cursor="Hand" MouseLeftButtonDown="btnImgLogout_MouseLeftButtonDown"/>
-        <Image x:Name="btnImgOpenW" Height="80" Margin="0,52,125,0" VerticalAlignment="Top" Source="/GVFT_FoodTrucks;component/img/open-in-app.png" HorizontalAlignment="Right" Width="80" ToolTip="Abrir ventana de Ordenes en Producción" Cursor="Hand" MouseLeftButtonDown="btnImgOpenW_MouseLeftButtonDown"/>
+        <Image x:Name="btnImgLogout" Height="52" Margin="0,14,10,0" VerticalAlignment="Top" Source="/GVFT_FoodTrucks;component/img/logout.png" HorizontalAlignment="Right" Width="57" ToolTip="Cerrar Sesión" Cursor="Hand" MouseLeftButtonDown="btnImgLogout_MouseLeftButtonDown" Stretch="Fill"/>
+        <Image x:Name="btnImgOpenW" Height="60" Margin="0,10,72,0" VerticalAlignment="Top" Source="/GVFT_FoodTrucks;component/img/open-in-app.png" HorizontalAlignment="Right" Width="59" ToolTip="Abrir ventana de Ordenes en Producción" Cursor="Hand" MouseLeftButtonDown="btnImgOpenW_MouseLeftButtonDown">
+            <Image.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="itemMenuCloseWOrdr" Header="Cerrar ventana Orden en Produccion" FontWeight="Bold" FontSize="16" Click="itemMenuCloseWOrdr_Click"/>
+                </ContextMenu>
+            </Image.ContextMenu>
+        </Image>
+        <TextBlock x:Name="textBlock" Margin="0,63,10,0" TextWrapping="Wrap" Text="Orden Mesa #5 Lista!" VerticalAlignment="Top" Foreground="#FF07B938" FontSize="36" HorizontalAlignment="Right" Width="337" Opacity="0" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
 
     </Grid>
     <Page.Resources>
@@ -170,6 +186,42 @@
                 <ResourceDictionary Source="ButtonStyleSales.xaml"/>
                 <ResourceDictionary Source="Prueba.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <Storyboard x:Key="AlertOrdDone">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textBlock">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1">
+                        <EasingDoubleKeyFrame.EasingFunction>
+                            <CubicEase EasingMode="EaseInOut"/>
+                        </EasingDoubleKeyFrame.EasingFunction>
+                    </EasingDoubleKeyFrame>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="AlertOrdrDoneOut">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textBlock">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="textBlock">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="3"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2" Value="30"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="textBlock">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1.5"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+                <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="textBlock">
+                    <EasingThicknessKeyFrame KeyTime="0:0:2" Value="0,64.5,10,0"/>
+                    <EasingThicknessKeyFrame KeyTime="0:0:3" Value="0,63,10,0"/>
+                </ThicknessAnimationUsingKeyFrames>
+            </Storyboard>
         </ResourceDictionary>
     </Page.Resources>
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <!--<BeginStoryboard Storyboard="{StaticResource AlertOrdDone}"/>
+            <BeginStoryboard Storyboard="{StaticResource AlertOrdrDoneOut}"/>-->
+        </EventTrigger>
+    </Page.Triggers>
 </Page>

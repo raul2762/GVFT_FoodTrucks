@@ -25,9 +25,9 @@
                 </Style>
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Descripcion" IsReadOnly="True" Width="352"/>
-                <Controls:DataGridNumericUpDownColumn Header="Cant" IsReadOnly="True" FontSize="24" Minimum="0"/>
-                <Controls:DataGridNumericUpDownColumn Header="Precio" FontSize="24" IsReadOnly="True" Width="120" Minimum="0" StringFormat="C"/>
+                <DataGridTextColumn Header="Descripcion" Binding="{Binding NameProd}" IsReadOnly="True" Width="352"/>
+                <Controls:DataGridNumericUpDownColumn Header="Cant" Binding="{Binding Qty}" IsReadOnly="True" FontSize="24" Minimum="0"/>
+                <Controls:DataGridNumericUpDownColumn Header="Precio" Binding="{Binding Price}" FontSize="24" IsReadOnly="True" Width="120" Minimum="0" StringFormat="C"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
@@ -52,7 +52,7 @@
                 </Grid>
             </Border>
         </Canvas>
-        <Image x:Name="btnImgBack" HorizontalAlignment="Left" Height="77" Margin="21,26,0,0" VerticalAlignment="Top" Width="82" Source="/GVFT_FoodTrucks;component/img/arrow-left-bold-circle-outline.png" MouseLeftButtonDown="btnImgBack_MouseLeftButtonDown"/>
+        <Image x:Name="btnImgBack" HorizontalAlignment="Left" ToolTip="Volver al area de ventas" Height="77" Margin="21,26,0,0" VerticalAlignment="Top" Width="82" Source="/GVFT_FoodTrucks;component/img/arrow-left-bold-circle-outline.png" MouseLeftButtonDown="btnImgBack_MouseLeftButtonDown" Cursor="Hand"/>
         
     </Grid>
 </Page>
