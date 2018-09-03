@@ -18,7 +18,6 @@ namespace Data_GVFT.Business.BusinessEntities
         public Employees()
         {
             this.Paysheet = new HashSet<Paysheet>();
-            this.Mov_CxC_Employees = new HashSet<Mov_CxC_Employees>();
             this.Login_FT = new HashSet<Login_FT>();
         }
     
@@ -30,15 +29,11 @@ namespace Data_GVFT.Business.BusinessEntities
         public int Salary { get; set; }
         public Nullable<System.DateTime> Entry_date { get; set; }
         public string Phone { get; set; }
-        public Nullable<int> CxC_employee { get; set; }
-        public Nullable<int> CxC_discountmode { get; set; }
         public int Pay_mode { get; set; }
     
         public virtual Departments Departments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Paysheet> Paysheet { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mov_CxC_Employees> Mov_CxC_Employees { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Login_FT> Login_FT { get; set; }
         public virtual PaysheetModePay PaysheetModePay { get; set; }

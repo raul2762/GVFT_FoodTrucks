@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Data_GVFT.Business.BusinessEntities;
 using System.Data.Entity;
+using MessageBoxCustomRM;
 
 namespace Data_GVFT.Business.BusinessLogic
 {
@@ -30,13 +31,30 @@ namespace Data_GVFT.Business.BusinessLogic
             }
         }
 
-        public void RegisterPofMerch(purchase_of_merchandise purchase)
+        public void RegisterPofMerch(purchase_of_merchandise purchase, Merchandise merchandise)
         {
             using (var en = new DB_SystemFoodTrucksEntities())
             {
+                using (DbContextTransaction transaction = en.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var merch_bd = en.Merchandise.First(x => x.Id == merchandise.Id);
+                        merch_bd.Stock = merchandise.Stock;
+                        en.SaveChanges();
+
+                        en.purchase_of_merchandise.Add(purchase);
+                        en.SaveChanges();
+
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                    }
+                }
                 //en.SP_PurchaseMerchandise(detail, amount, datePurchase, qty, idMerch, idSuppl,idUser);
-                en.purchase_of_merchandise.Add(purchase);
-                en.SaveChanges();
+
             }
         }
         public void RegisterSupplier(String nameSuppl, String addrs, String city,String phone)

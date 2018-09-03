@@ -28,6 +28,7 @@ namespace Data_GVFT.Business.BusinessEntities
         public Nullable<int> Cant { get; set; }
         public int Expiry_mode { get; set; }
         public Nullable<int> Qty_sold { get; set; }
+        public System.DateTime Creation_date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Client> Client { get; set; }

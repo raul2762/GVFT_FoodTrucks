@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Data_GVFT.Business.BusinessEntities;
+using MessageBoxCustomRM;
 
 namespace Data_GVFT.Business.BusinessLogic
 {
@@ -19,11 +21,11 @@ namespace Data_GVFT.Business.BusinessLogic
             return instance;
         }
 
-        public List<Trans_type> GetTrans_Types()
+        public List<Expiry_of_mode> GetTypeCredit()
         {
             using (var en = new DB_SystemFoodTrucksEntities())
             {
-                var query = from t in en.Trans_type
+                var query = from t in en.Expiry_of_mode
                             select t;
                 return query.ToList();
             }
@@ -33,17 +35,33 @@ namespace Data_GVFT.Business.BusinessLogic
         {
             using (var en = new DB_SystemFoodTrucksEntities())
             {
-                en.Credits.Add(credits);
-                en.SaveChanges();
+                try
+                {
+                    en.Credits.Add(credits);
+                    en.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    string errorMessage = "";
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            errorMessage += "Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage;
+                        }
+                    }
+                    MessageBoxRM.Show(errorMessage);
+                }
+                
             }
         }
 
-        public int GetIdTransType(Trans_type trans_Type)
+        public int GetIdTypeCredit(Expiry_of_mode  expiry)
         {
             int id = 0;
             using (var en = new DB_SystemFoodTrucksEntities())
             {
-                var query = en.Trans_type.FirstOrDefault(t => t.Type_trans == trans_Type.Type_trans);
+                var query = en.Expiry_of_mode.FirstOrDefault(t => t.ModeName == expiry.ModeName);
                 if (query.Id != 0)
                 {
                     id = query.Id;

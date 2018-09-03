@@ -12,14 +12,9 @@ namespace Data_GVFT.Business.BusinessEntities
     using System;
     using System.Collections.Generic;
     
-    public partial class Paysheet
+    public partial class Expiry_of_mode
     {
         public int Id { get; set; }
-        public int Id_employee { get; set; }
-        public int Amount { get; set; }
-        public System.DateTime Payment_date { get; set; }
-        public string Note { get; set; }
-    
-        public virtual Employees Employees { get; set; }
+        public string ModeName { get; set; }
     }
 }

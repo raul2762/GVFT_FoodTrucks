@@ -20,11 +20,12 @@ namespace Data_GVFT.Business.BusinessLogic
             }
             return instance;
         }
-        public void RegisterEmployee(String name, String lastName,String cedula, int departament,int salary,DateTime entryDate, String phone, int payMode)
+        public void RegisterEmployee(Employees employees)
         {
             using (var en = new DB_SystemFoodTrucksEntities())
             {
-                en.SP_RegisterEmployees(name, lastName, cedula, departament, salary, entryDate, phone, payMode);
+                en.Employees.Add(employees);
+                en.SaveChanges();
             }
         }
 
@@ -127,13 +128,14 @@ namespace Data_GVFT.Business.BusinessLogic
         public class GetEmployeeName
         {
             public string Name { get; set; }
+            public int IdEmployee { get; set; }
         }
-        public List<GetEmployeeName> GetEmployeeList()
+        public List<Employees> GetEmployeeList()
         {
             using (var en = new DB_SystemFoodTrucksEntities())
             {
                 var query = from p in en.Employees
-                            select new GetEmployeeName() { Name = p.Name };
+                            select p;
                 return query.ToList();
             }
         }

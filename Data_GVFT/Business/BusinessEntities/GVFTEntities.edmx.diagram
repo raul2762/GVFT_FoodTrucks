@@ -47,13 +47,14 @@
         <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_MERCHANDISE" ManuallyRouted="false" />
         <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_METHODPAY" ManuallyRouted="false" />
         <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_TYPE_TRANS" ManuallyRouted="false" />
-        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_PaysheetModePay_Paysheet" ManuallyRouted="false" />
         <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_Pending_Orders_Product" ManuallyRouted="false" />
         <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_ID_SUPPLIER_BUY" ManuallyRouted="false" />
         <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_TYPECREDIT" />
         <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Location" Width="1.5" PointX="8.375" PointY="0.75" />
         <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Busy_tables" Width="1.5" PointX="10.375" PointY="0.875" />
         <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_Pending_Orders_IdTable" />
+        <EntityTypeShape EntityType="DB_SystemFoodTrucksModel.Expiry_of_mode" Width="1.5" PointX="10.375" PointY="3.75" />
+        <AssociationConnector Association="DB_SystemFoodTrucksModel.FK_PaysheetModePay_Paysheet" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -20,10 +20,10 @@
             <TabItem Header="Crear Código Promo" Padding="0,1,0,0">
                 <Grid>
                     <Button x:Name="btnRegCredit" Content="Registrar" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,458,0,47" Width="217" FontSize="22" TabIndex="9" VerticalAlignment="Top" Height="58" Click="btnRegCredit_Click"/>
-                    <TextBox x:Name="txtCode" HorizontalAlignment="Left" Height="42" Margin="34,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
+                    <TextBox x:Name="txtCode" CharacterCasing="Upper" HorizontalAlignment="Left" Height="42" Margin="34,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="10"/>
                     <Label Content="Codigo Promo:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,41,0,0" VerticalAlignment="Top"/>
                     <Label Content="Modo Expiración:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,296,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cboModeExp" SelectedValuePath="Type_trans" HorizontalAlignment="Left" Margin="34,342,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8" FontSize="20" FontWeight="Bold" SelectionChanged="cboModeExp_SelectionChanged"/>
+                    <ComboBox x:Name="cboModeExp" SelectedValuePath="ModeName" HorizontalAlignment="Left" Margin="34,342,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8" FontSize="20" FontWeight="Bold" SelectionChanged="cboModeExp_SelectionChanged"/>
                     <TextBox x:Name="txtMonto" HorizontalAlignment="Left" Height="42" Margin="34,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
                     <Label Content="Monto:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,169,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="txtCant" HorizontalAlignment="Left" Height="42" Margin="393,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50" IsEnabled="False"/>
@@ -32,15 +32,7 @@
                     <Label Content="Caducidad:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="393,168,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Prestamo Empleados" Padding="20,1,0,0">
-                <Grid>
-                    <Button Content="Registrar Prestamo" Template="{DynamicResource PlantillaBtn}" HorizontalAlignment="Left" Margin="34,0,0,10" VerticalAlignment="Bottom" Width="230" Height="58" FontSize="22" TabIndex="9"/>
-                    <Label Content="Empleado:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,41,0,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="42" Margin="34,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" Background="{x:Null}" BorderThickness="0,0,0,1" BorderBrush="#FFFF8000" Foreground="#FFFF8000" FontSize="24" TabIndex="1" MaxLines="1" MaxLength="50"/>
-                    <Label Content="Monto:" FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" Margin="34,169,0,0" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="cboEmployee" HorizontalAlignment="Left" Margin="34,88,0,0" VerticalAlignment="Top" Width="304" Foreground="#FFFF8000" Height="42" TabIndex="8" FontWeight="Bold" FontSize="20"/>
-                </Grid>
-            </TabItem>
+            
         </TabControl>
 
     </Grid>

@@ -19,6 +19,11 @@ namespace Data_GVFT.Business.BusinessEntities
         public int Amount_charged { get; set; }
         public System.DateTime Transaction_date { get; set; }
         public int Transaction_type { get; set; }
+        public Nullable<int> Loan_Amount { get; set; }
+        public Nullable<int> Fee_Amount { get; set; }
+        public Nullable<int> Fee { get; set; }
+        public Nullable<int> FeeRest { get; set; }
+        public Nullable<int> Amount_rest { get; set; }
     
         public virtual Employees Employees { get; set; }
         public virtual Trans_type Trans_type { get; set; }

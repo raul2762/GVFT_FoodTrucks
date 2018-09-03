@@ -34,13 +34,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Code_credits" Type="varchar" MaxLength="5" />
+          <Property Name="Code_credits" Type="varchar" MaxLength="10" />
           <Property Name="Amount" Type="int" />
           <Property Name="Expire_date" Type="datetime" />
           <Property Name="Type_credit" Type="int" Nullable="false" />
           <Property Name="Cant" Type="int" />
           <Property Name="Expiry_mode" Type="int" Nullable="false" />
           <Property Name="Qty_sold" Type="int" />
+          <Property Name="Creation_date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Departments">
           <Key>
@@ -71,9 +72,14 @@
           <Property Name="Salary" Type="int" Nullable="false" />
           <Property Name="Entry_date" Type="datetime" />
           <Property Name="Phone" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="CxC_employee" Type="int" />
-          <Property Name="CxC_discountmode" Type="int" />
           <Property Name="Pay_mode" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Expiry_of_mode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModeName" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Invoice">
           <Key>
@@ -142,6 +148,11 @@
           <Property Name="Amount_charged" Type="int" Nullable="false" />
           <Property Name="Transaction_date" Type="datetime" Nullable="false" />
           <Property Name="Transaction_type" Type="int" Nullable="false" />
+          <Property Name="Loan_Amount" Type="int" />
+          <Property Name="Fee_Amount" Type="int" />
+          <Property Name="Fee" Type="int" />
+          <Property Name="FeeRest" Type="int" />
+          <Property Name="Amount_rest" Type="int" />
         </EntityType>
         <EntityType Name="Paid_orders">
           <Key>
@@ -163,6 +174,7 @@
           <Property Name="Id_employee" Type="int" Nullable="false" />
           <Property Name="Amount" Type="int" Nullable="false" />
           <Property Name="Payment_date" Type="datetime" Nullable="false" />
+          <Property Name="Note" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="PaysheetModePay">
           <Key>
@@ -645,6 +657,7 @@
           <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Detail_invoice" EntityType="Self.Detail_invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Expiry_of_mode" EntityType="Self.Expiry_of_mode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
@@ -785,7 +798,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code_credits" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Code_credits" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Amount" Type="Int32" />
           <Property Name="Expire_date" Type="DateTime" Precision="3" />
           <Property Name="Type_credit" Type="Int32" Nullable="false" />
@@ -794,6 +807,7 @@
           <NavigationProperty Name="Client" Relationship="Self.FK_ID_CREDIT" FromRole="Credits" ToRole="Client" />
           <NavigationProperty Name="Type_Credits" Relationship="DB_SystemFoodTrucksModel.FK_TYPECREDIT" FromRole="Credits" ToRole="Type_Credits" />
           <Property Name="Qty_sold" Type="Int32" />
+          <Property Name="Creation_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Departments">
           <Key>
@@ -827,12 +841,9 @@
           <Property Name="Salary" Type="Int32" Nullable="false" />
           <Property Name="Entry_date" Type="DateTime" Precision="3" />
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CxC_employee" Type="Int32" />
-          <Property Name="CxC_discountmode" Type="Int32" />
           <Property Name="Pay_mode" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Departments" Relationship="Self.FK_DEPARTAMENT" FromRole="Employees" ToRole="Departments" />
           <NavigationProperty Name="Paysheet" Relationship="Self.FK_ID_EMPLOYEE" FromRole="Employees" ToRole="Paysheet" />
-          <NavigationProperty Name="Mov_CxC_Employees" Relationship="Self.FK_ID_EMPLOYEE_CXC" FromRole="Employees" ToRole="Mov_CxC_Employees" />
           <NavigationProperty Name="Login_FT" Relationship="Self.FK_Login_ID_EMPLOYEE" FromRole="Employees" ToRole="Login_FT" />
           <NavigationProperty Name="PaysheetModePay" Relationship="Self.FK_PaysheetMode" FromRole="Employees" ToRole="PaysheetModePay" />
         </EntityType>
@@ -911,6 +922,11 @@
           <Property Name="Transaction_type" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="Self.FK_ID_EMPLOYEE_CXC" FromRole="Mov_CxC_Employees" ToRole="Employees" />
           <NavigationProperty Name="Trans_type" Relationship="Self.FK_TYPE_TRANS" FromRole="Mov_CxC_Employees" ToRole="Trans_type" />
+          <Property Name="Loan_Amount" Type="Int32" />
+          <Property Name="Fee_Amount" Type="Int32" />
+          <Property Name="Fee" Type="Int32" />
+          <Property Name="FeeRest" Type="Int32" />
+          <Property Name="Amount_rest" Type="Int32" />
         </EntityType>
         <EntityType Name="Paid_orders">
           <Key>
@@ -935,6 +951,7 @@
           <Property Name="Amount" Type="Int32" Nullable="false" />
           <Property Name="Payment_date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Employees" Relationship="Self.FK_ID_EMPLOYEE" FromRole="Paysheet" ToRole="Employees" />
+          <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PaysheetModePay">
           <Key>
@@ -943,9 +960,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PayMode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="Self.FK_PaysheetMode" FromRole="PaysheetModePay" ToRole="Employees" />
-          <NavigationProperty Name="PaysheetModePay1" Relationship="Self.FK_PaysheetModePay_Paysheet" FromRole="PaysheetModePay" ToRole="PaysheetModePay1" />
-          <NavigationProperty Name="PaysheetModePay2" Relationship="Self.FK_PaysheetModePay_Paysheet" FromRole="PaysheetModePay1" ToRole="PaysheetModePay" />
-        </EntityType>
+          <NavigationProperty Name="PaysheetModePay1" Relationship="DB_SystemFoodTrucksModel.FK_PaysheetModePay_Paysheet" FromRole="PaysheetModePay" ToRole="PaysheetModePay1" />
+          <NavigationProperty Name="PaysheetModePay2" Relationship="DB_SystemFoodTrucksModel.FK_PaysheetModePay_Paysheet" FromRole="PaysheetModePay1" ToRole="PaysheetModePay" />
+          </EntityType>
         <EntityType Name="Pending_Orders">
           <Key>
             <PropertyRef Name="Id" />
@@ -1260,18 +1277,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PaysheetModePay_Paysheet">
-          <End Role="PaysheetModePay" Type="Self.PaysheetModePay" Multiplicity="1" />
-          <End Role="PaysheetModePay1" Type="Self.PaysheetModePay" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="PaysheetModePay">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PaysheetModePay1">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Pending_Orders_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="Pending_Orders" Type="Self.Pending_Orders" Multiplicity="*" />
@@ -1395,10 +1400,6 @@
           <AssociationSet Name="FK_TYPE_TRANS" Association="Self.FK_TYPE_TRANS">
             <End Role="Trans_type" EntitySet="Trans_type" />
             <End Role="Mov_CxC_Employees" EntitySet="Mov_CxC_Employees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PaysheetModePay_Paysheet" Association="Self.FK_PaysheetModePay_Paysheet">
-            <End Role="PaysheetModePay" EntitySet="PaysheetModePay" />
-            <End Role="PaysheetModePay1" EntitySet="PaysheetModePay" />
           </AssociationSet>
           <AssociationSet Name="FK_Pending_Orders_Product" Association="Self.FK_Pending_Orders_Product">
             <End Role="Product" EntitySet="Product" />
@@ -1535,6 +1536,11 @@
             <End Role="Busy_tables" EntitySet="Busy_tables" />
             <End Role="Pending_Orders" EntitySet="Pending_Orders" />
           </AssociationSet>
+          <EntitySet Name="Expiry_of_mode" EntityType="DB_SystemFoodTrucksModel.Expiry_of_mode" />
+          <AssociationSet Name="FK_PaysheetModePay_Paysheet" Association="DB_SystemFoodTrucksModel.FK_PaysheetModePay_Paysheet">
+            <End Role="PaysheetModePay" EntitySet="PaysheetModePay" />
+            <End Role="PaysheetModePay1" EntitySet="PaysheetModePay" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagrams_Result">
           <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
@@ -1582,6 +1588,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Expiry_of_mode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModeName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_PaysheetModePay_Paysheet">
+          <End Type="DB_SystemFoodTrucksModel.PaysheetModePay" Role="PaysheetModePay" Multiplicity="1" />
+          <End Type="DB_SystemFoodTrucksModel.PaysheetModePay" Role="PaysheetModePay1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PaysheetModePay">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaysheetModePay1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1610,6 +1635,7 @@
           <EntitySetMapping Name="Credits">
             <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Credits">
               <MappingFragment StoreEntitySet="Credits">
+                <ScalarProperty Name="Creation_date" ColumnName="Creation_date" />
                 <ScalarProperty Name="Qty_sold" ColumnName="Qty_sold" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Code_credits" ColumnName="Code_credits" />
@@ -1651,8 +1677,6 @@
                 <ScalarProperty Name="Salary" ColumnName="Salary" />
                 <ScalarProperty Name="Entry_date" ColumnName="Entry_date" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="CxC_employee" ColumnName="CxC_employee" />
-                <ScalarProperty Name="CxC_discountmode" ColumnName="CxC_discountmode" />
                 <ScalarProperty Name="Pay_mode" ColumnName="Pay_mode" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1716,6 +1740,11 @@
           <EntitySetMapping Name="Mov_CxC_Employees">
             <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Mov_CxC_Employees">
               <MappingFragment StoreEntitySet="Mov_CxC_Employees">
+                <ScalarProperty Name="Amount_rest" ColumnName="Amount_rest" />
+                <ScalarProperty Name="FeeRest" ColumnName="FeeRest" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="Fee_Amount" ColumnName="Fee_Amount" />
+                <ScalarProperty Name="Loan_Amount" ColumnName="Loan_Amount" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Id_employee" ColumnName="Id_employee" />
                 <ScalarProperty Name="Amount_charged" ColumnName="Amount_charged" />
@@ -1740,6 +1769,7 @@
           <EntitySetMapping Name="Paysheet">
             <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Paysheet">
               <MappingFragment StoreEntitySet="Paysheet">
+                <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Id_employee" ColumnName="Id_employee" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -1876,6 +1906,14 @@
             <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Busy_tables">
               <MappingFragment StoreEntitySet="Busy_tables">
                 <ScalarProperty Name="Table_busy" ColumnName="Table_busy" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Expiry_of_mode">
+            <EntityTypeMapping TypeName="DB_SystemFoodTrucksModel.Expiry_of_mode">
+              <MappingFragment StoreEntitySet="Expiry_of_mode">
+                <ScalarProperty Name="ModeName" ColumnName="ModeName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -76,7 +76,13 @@ namespace GVFT_FoodTrucks.Pages
                     Id_supplier = IdSuppl,
                     Id_user = IdUser
                 };
-                MerLogic.GetInstance().RegisterPofMerch(purchase);
+                var updateMerch = new Merchandise()
+                {
+                    Id = IdMerch,
+                    Stock = Qty,
+                    Name = cboMerch.SelectedValue.ToString()
+                };
+                MerLogic.GetInstance().RegisterPofMerch(purchase,updateMerch);
                 MessageBoxRM.Show("Compra registrada correctamente!", "Registro de compras", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
                 txtDetail.Clear();
                 txtCant.Clear();

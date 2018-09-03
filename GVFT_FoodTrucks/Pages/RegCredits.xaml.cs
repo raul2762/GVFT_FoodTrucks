@@ -35,81 +35,101 @@ namespace GVFT_FoodTrucks.Pages
 
         public void RechargeAllCbo()
         {
-            cboModeExp.ItemsSource = CreditBL.GetInstance().GetTrans_Types();
-            cboModeExp.DisplayMemberPath = "Type_trans";
-
-            cboEmployee.ItemsSource = LoginBL.GetInstance().GetEmployeeList();
-            cboEmployee.DisplayMemberPath = "Name";
+            cboModeExp.ItemsSource = CreditBL.GetInstance().GetTypeCredit();
+            cboModeExp.DisplayMemberPath = "ModeName";
         }
 
         private void cboModeExp_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string expMode = cboModeExp.SelectedValue.ToString();
-            if (expMode == "Cantidad")
+            if (cboModeExp.SelectedIndex > -1)
             {
-                txtCant.IsEnabled = true;
-                DateT.IsEnabled = false;
+                string expMode = cboModeExp.SelectedValue.ToString();
+                if (expMode == "Cantidad")
+                {
+                    txtCant.IsEnabled = true;
+                    DateT.IsEnabled = false;
+                }
+                else if (expMode == "Fecha")
+                {
+                    DateT.IsEnabled = true;
+                    txtCant.IsEnabled = false;
+                }
             }
-            else if (expMode == "Fecha")
-            {
-                DateT.IsEnabled = true;
-                txtCant.IsEnabled = false;
-            }
+            
         }
 
         private void btnRegCredit_Click(object sender, RoutedEventArgs e)
         {
             int idTrnsT;
-            var idTransType = new Trans_type()
+            var idTransType = new Expiry_of_mode()
             {
-                Type_trans = cboModeExp.SelectedValue.ToString()
+                 ModeName = cboModeExp.SelectedValue.ToString()
             };
-            idTrnsT = CreditBL.GetInstance().GetIdTransType(idTransType);
+            idTrnsT = CreditBL.GetInstance().GetIdTypeCredit(idTransType);
             string expMode = cboModeExp.SelectedValue.ToString();
             if (txtCode.Text != "" && txtMonto.Text != "" && cboModeExp.SelectedIndex > -1)
             {
-
                 if (expMode == "Cantidad")
                 {
-                    var newCredit = new Credits()
+                    if (txtCant.Text != "")
                     {
-                        Code_credits = txtCode.Text,
-                        Amount = Convert.ToInt32(txtMonto.Text),
-                        Type_credit = 1,
-                        Cant = Convert.ToInt32(txtCant.Text),
-                        Expiry_mode = idTrnsT,
-                        Qty_sold = 0
-                    };
-                    CreditBL.GetInstance().RegisterCreditCode(newCredit);
-                    MessageBoxRM.Show("Codigo registrado exitosamente", "Registro de codigo credito", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
-                    txtCode.Clear();
-                    txtMonto.Clear();
-                    txtCant.Clear();
-                    cboModeExp.SelectedIndex = -1;
-                    DateT.Text = "";
-
+                        var newCredit = new Credits()
+                        {
+                            Code_credits = txtCode.Text,
+                            Amount = Convert.ToInt32(txtMonto.Text),
+                            Type_credit = 1,
+                            Cant = Convert.ToInt32(txtCant.Text),
+                            Expiry_mode = idTrnsT,
+                            Qty_sold = 0,
+                            Creation_date = DateTime.Now
+                        };
+                        CreditBL.GetInstance().RegisterCreditCode(newCredit);
+                        MessageBoxRM.Show("Codigo registrado exitosamente", "Registro de codigo credito", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
+                        txtCode.Clear();
+                        txtMonto.Clear();
+                        txtCant.Clear();
+                        cboModeExp.SelectedIndex = -1;
+                        txtCant.IsEnabled = false;
+                        DateT.Text = "";
+                    }
+                    else
+                    {
+                        MessageBoxRM.Show("El campo cantidad se encuentra vacio", "Campos sin llenar", MessageBoxButtonRM.OK, MessageBoxIconRM.Warning);
+                    }
                 }
                 else if (expMode == "Fecha")
                 {
-
-                    var newCredit = new Credits()
+                    if (DateT.Text != "")
                     {
-                        Code_credits = txtCode.Text,
-                        Amount = Convert.ToInt32(txtMonto.Text),
-                        Type_credit = 1,
-                        Expire_date = DateT.SelectedDate,
-                        Cant = 0,
-                        Expiry_mode = idTrnsT,
-                        Qty_sold = 0
-                    };
-                    CreditBL.GetInstance().RegisterCreditCode(newCredit);
-                    MessageBoxRM.Show("Codigo registrado exitosamente", "Registro de codigo credito", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
-                    txtCode.Clear();
-                    txtMonto.Clear();
-                    txtCant.Clear();
-                    cboModeExp.SelectedIndex = -1;
-                    DateT.Text = "";
+                        var newCredit = new Credits()
+                        {
+                            Code_credits = txtCode.Text,
+                            Amount = Convert.ToInt32(txtMonto.Text),
+                            Type_credit = 1,
+                            Expire_date = DateT.SelectedDate,
+                            Cant = 0,
+                            Expiry_mode = idTrnsT,
+                            Qty_sold = 0,
+                            Creation_date = DateTime.Now
+                        };
+                        CreditBL.GetInstance().RegisterCreditCode(newCredit);
+                        MessageBoxRM.Show("Codigo registrado exitosamente", "Registro de codigo credito", MessageBoxButtonRM.OK, MessageBoxIconRM.Information);
+                        txtCode.Clear();
+                        txtMonto.Clear();
+                        txtCant.Clear();
+                        cboModeExp.SelectedIndex = -1;
+                        DateT.IsEnabled = false;
+                        DateT.Text = "";
+                    }
+                    else
+                    {
+                        MessageBoxRM.Show("No se ha seleccionado una fecha", "Campos sin llenar", MessageBoxButtonRM.OK, MessageBoxIconRM.Warning);
+                    }
                 }   
+            }
+            else
+            {
+                MessageBoxRM.Show("Algun campo se encuentra vacio", "Campos sin llenar", MessageBoxButtonRM.OK, MessageBoxIconRM.Warning);
             }
         }
     }
